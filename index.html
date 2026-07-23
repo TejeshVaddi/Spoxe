@@ -749,7 +749,14 @@ kbd{
   width:15px;height:15px;border:2px solid #c8d8ee;border-top-color:#3A5FA0;
   border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;
 }
-.debate-paper-content{font-size:.92rem;color:#1e3a6e;line-height:1.75;white-space:pre-wrap;font-family:'EB Garamond',serif;}
+.debate-paper-meta{margin-bottom:20px;padding-bottom:16px;border-bottom:1.5px solid #c8d8ee;}
+.debate-paper-committee{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#3A5FA0;margin-bottom:6px;}
+.debate-paper-topic{font-family:'EB Garamond',serif;font-size:1.5rem;font-weight:700;color:#1e3a6e;line-height:1.25;}
+.debate-paper-sponsors{font-size:.8rem;color:var(--sub);margin-top:6px;}
+.debate-paper-body{font-size:.92rem;color:#1e3a6e;line-height:1.75;white-space:pre-wrap;font-family:'EB Garamond',serif;transition:filter .3s;}
+.debate-paper-body.blurred{filter:blur(5px);user-select:none;pointer-events:none;}
+.debate-blur-hint{text-align:center;font-size:.8rem;color:#5a7a95;margin-top:10px;display:none;}
+.debate-blur-hint.visible{display:block;}
 
 /* Timer */
 .debate-timer{
@@ -986,7 +993,13 @@ kbd{
       <div class="debate-paper-loading" id="debate-paper-loading">
         <div class="debate-paper-spinner"></div> Generating working paper…
       </div>
-      <div class="debate-paper-content" id="debate-paper-content"></div>
+      <div class="debate-paper-meta" id="debate-paper-meta" style="display:none;">
+        <div class="debate-paper-committee" id="debate-paper-committee"></div>
+        <div class="debate-paper-topic" id="debate-paper-topic"></div>
+        <div class="debate-paper-sponsors" id="debate-paper-sponsors"></div>
+      </div>
+      <div class="debate-paper-body blurred" id="debate-paper-content"></div>
+      <div class="debate-blur-hint visible" id="debate-blur-hint">Press ▶ Start Reading to reveal the working paper</div>
     </div>
 
     <!-- Speaker track (hidden until speaking phase) -->
@@ -2854,10 +2867,13 @@ async function debateNewPaper(){
   const content = document.getElementById('debate-paper-content');
   loading.classList.add('visible');
   content.textContent = '';
+  content.classList.remove('blurred');
+  document.getElementById('debate-paper-meta').style.display = 'none';
+  document.getElementById('debate-blur-hint').classList.remove('visible');
 
   const prompt = `Generate a Model UN working paper on a real, current global policy topic.
 
-Format it exactly like a real MUN working paper:
+Format it EXACTLY like this — line breaks and commas matter:
 
 WORKING PAPER [WP-1]
 Committee: [appropriate UN committee name]
@@ -2867,21 +2883,33 @@ Signatories: [4-5 more country names]
 
 THE [COMMITTEE NAME],
 
-[3-4 preambulatory clauses using standard MUN language: NOTING, RECOGNIZING, DEEPLY CONCERNED BY, RECALLING, AWARE OF, etc. — each ending with a comma],
+NOTING [preambulatory clause text],
+
+RECOGNIZING [preambulatory clause text],
+
+DEEPLY CONCERNED BY [preambulatory clause text],
+
+RECALLING [preambulatory clause text],
+
+AWARE OF [preambulatory clause text],
 
 HEREBY:
 
-1. [Operative clause using standard verb: CALLS UPON / URGES / ENCOURAGES / REQUESTS / RECOMMENDS / SUPPORTS / etc.] [specific action, 1-2 sentences];
+1. CALLS UPON [specific action, 1-2 sentences];
 
-2. [Another operative clause with specific action];
+2. URGES [specific action];
 
-3. [Another operative clause with specific action];
+3. ENCOURAGES [specific action];
 
-4. [Another operative clause with specific action];
+4. REQUESTS [specific action];
 
-5. [Another operative clause with specific action].
+5. RECOMMENDS [specific action].
 
-Use realistic UN language. The topic must be genuinely debatable — reasonable people could support or oppose this working paper. Return only the working paper text, no extra commentary.`;
+Rules:
+- Each preambulatory clause MUST be on its own line, ending with a comma
+- Use realistic UN language
+- Topic must be genuinely debatable
+- Return only the working paper text, no commentary`;
 
   try {
     const resp = await fetch('/api/generate', {
@@ -2921,7 +2949,32 @@ HEREBY:
   }
 
   loading.classList.remove('visible');
-  content.textContent = debateState.paper;
+
+  // Parse committee, topic, sponsors from header lines
+  const lines = debateState.paper.split('\n');
+  let committee = '', topic = '', sponsors = '', bodyStart = 0;
+  for(let i = 0; i < lines.length; i++){
+    const l = lines[i];
+    if(l.startsWith('Committee:')) committee = l.replace('Committee:','').trim();
+    else if(l.startsWith('Topic:')) topic = l.replace('Topic:','').trim();
+    else if(l.startsWith('Sponsors:')) sponsors = l.replace('Sponsors:','').trim();
+    else if(l.startsWith('THE ') && l.endsWith(',')){
+      bodyStart = i; break;
+    }
+  }
+  const bodyText = lines.slice(bodyStart).join('\n').trim();
+
+  // Populate meta header
+  if(committee || topic){
+    document.getElementById('debate-paper-committee').textContent = committee || 'UN Committee';
+    document.getElementById('debate-paper-topic').textContent = topic || debateState.paper.split('\n')[0];
+    document.getElementById('debate-paper-sponsors').textContent = sponsors ? 'Sponsors: ' + sponsors : '';
+    document.getElementById('debate-paper-meta').style.display = '';
+  }
+  content.textContent = bodyText || debateState.paper;
+  content.classList.add('blurred');
+  document.getElementById('debate-blur-hint').classList.add('visible');
+
   debateState.generating = false;
   document.getElementById('debate-start-btn').disabled = false;
 }
@@ -2931,6 +2984,8 @@ function debateStart(){
   if(debateState.phase === 'idle'){
     debateState.phase = 'reading';
     debateState.remaining = debateState.readTime * 60;
+    document.getElementById('debate-paper-content').classList.remove('blurred');
+    document.getElementById('debate-blur-hint').classList.remove('visible');
     document.getElementById('debate-timer').style.display = '';
     document.getElementById('debate-timer-label').style.display = '';
     document.getElementById('debate-timer-label').textContent = 'Reading time — study the working paper';
