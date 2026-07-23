@@ -52,26 +52,25 @@ body{font-family:'EB Garamond',serif;background:var(--bg);color:var(--text);min-
 }
 .mode-card:hover{filter:brightness(1.08);transform:translateY(-2px);}
 
-.mode-card.ga{background:#5B8DEA;}
-.mode-card.crisis{background:#93B8F2;}
-.mode-card.policy{background:#C9DDF8;}
+.mode-card.ga{background:#3A5FA0;}
+.mode-card.crisis{background:#4B75C8;}
+.mode-card.policy{background:#5B8DEA;}
+.mode-card.debate{background:#93B8F2;}
 
 .card-icon{
   width:48px;height:48px;border-radius:12px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.2);
 }
-.policy .card-icon{background:rgba(26,48,96,.1);}
+.policy .card-icon{background:rgba(255,255,255,.2);}
 
 .mode-card h2{
   font-family:'EB Garamond',serif;font-size:1.75rem;font-weight:700;margin-bottom:6px;
 }
-.ga h2,.crisis h2{color:#fff;}
-.policy h2{color:#1a3060;}
+.ga h2,.crisis h2,.policy h2,.debate h2{color:#fff;}
 
 .mode-card p{font-size:.95rem;line-height:1.5;margin:0;}
-.ga p,.crisis p{color:rgba(255,255,255,.82);}
-.policy p{color:#2c4a80;}
+.ga p,.crisis p,.policy p,.debate p{color:rgba(255,255,255,.82);}
 
 .mode-card-text{display:flex;flex-direction:column;}
 
@@ -690,6 +689,114 @@ kbd{
   color:#064e3b;margin-bottom:14px;
 }
 .policy-feedback-body{font-size:.92rem;color:#334e68;line-height:1.7;}
+
+/* ── DEBATE DRILL ── */
+#debate-drill{background:#f4f6fb;padding:0;}
+.debate-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 24px;border-bottom:1.5px solid #c8d8ee;background:#fff;
+}
+.debate-back{
+  background:none;border:none;cursor:pointer;font-family:inherit;
+  font-size:.9rem;color:var(--sub);padding:6px 10px;border-radius:8px;
+  transition:background .15s;
+}
+.debate-back:hover{background:#deeaf7;}
+.debate-badge{
+  display:flex;align-items:center;gap:8px;
+  font-family:'EB Garamond',serif;font-weight:700;font-size:.95rem;
+  letter-spacing:.03em;color:#1e3a6e;
+}
+.debate-badge-dot{width:8px;height:8px;border-radius:50%;background:#3A5FA0;}
+.debate-sub{font-size:.8rem;color:var(--sub);margin-left:4px;font-weight:400;}
+
+.debate-body{
+  display:flex;flex-direction:column;align-items:center;
+  padding:36px 20px 64px;gap:20px;max-width:720px;margin:0 auto;width:100%;
+}
+
+/* Controls row */
+.debate-controls{
+  display:flex;gap:16px;width:100%;flex-wrap:wrap;
+}
+.debate-control-block{display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px;}
+.debate-control-label{
+  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#3A5FA0;
+}
+.debate-seg{display:flex;border:1.5px solid #c8d8ee;border-radius:8px;overflow:hidden;background:#fff;}
+.debate-seg-btn{
+  flex:1;padding:8px 0;border:none;background:none;cursor:pointer;
+  font-size:.82rem;font-weight:600;font-family:inherit;color:var(--sub);
+  transition:background .15s,color .15s;
+}
+.debate-seg-btn.active{background:#3A5FA0;color:#fff;}
+
+/* Working paper card */
+.debate-paper-card{
+  background:#fff;border:1.5px solid #c8d8ee;border-left:4px solid #3A5FA0;
+  border-radius:var(--radius);padding:28px 30px;width:100%;
+  box-sizing:border-box;
+}
+.debate-paper-label{
+  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:#3A5FA0;margin-bottom:14px;
+}
+.debate-paper-loading{
+  display:none;align-items:center;gap:8px;color:#5a7a95;font-size:.875rem;padding:6px 0;
+}
+.debate-paper-loading.visible{display:flex;}
+.debate-paper-spinner{
+  width:15px;height:15px;border:2px solid #c8d8ee;border-top-color:#3A5FA0;
+  border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;
+}
+.debate-paper-content{font-size:.92rem;color:#1e3a6e;line-height:1.75;white-space:pre-wrap;font-family:'EB Garamond',serif;}
+
+/* Timer */
+.debate-timer{
+  font-family:'EB Garamond',serif;font-size:5.5rem;font-weight:800;
+  letter-spacing:-.04em;line-height:1;text-align:center;color:#3A5FA0;
+  transition:color .3s;
+}
+.debate-timer.warning{color:#f59e0b;}
+.debate-timer.done-time{color:#059669;}
+.debate-timer-label{
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:#5a7a95;text-align:center;margin-top:6px;
+}
+
+/* Speaker track */
+.debate-speaker-track{
+  display:flex;gap:8px;width:100%;
+}
+.debate-speaker-pip{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:10px 6px;border-radius:10px;border:1.5px solid #c8d8ee;
+  background:#fff;transition:all .2s;
+}
+.debate-speaker-pip.active{border-color:#3A5FA0;background:#eef3fb;}
+.debate-speaker-pip.done{background:#f0faf5;border-color:#6ee7b7;}
+.debate-pip-label{font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);}
+.debate-speaker-pip.active .debate-pip-label{color:#3A5FA0;}
+.debate-speaker-pip.done .debate-pip-label{color:#059669;}
+.debate-pip-name{font-size:.85rem;font-weight:700;color:#1e3a6e;text-align:center;line-height:1.2;}
+
+/* Action row */
+.debate-action-row{display:flex;gap:12px;width:100%;flex-wrap:wrap;}
+.debate-primary{
+  flex:1;padding:16px 24px;border-radius:var(--radius);border:none;cursor:pointer;
+  font-family:'EB Garamond',serif;font-weight:700;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:#3A5FA0;color:#fff;transition:all .15s;
+}
+.debate-primary:hover{background:#2d4e8a;}
+.debate-primary:disabled{background:#c8d8ee;color:#5a7a95;cursor:not-allowed;}
+.debate-secondary{
+  padding:16px 20px;border-radius:var(--radius);cursor:pointer;
+  font-family:inherit;font-weight:500;font-size:.875rem;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  background:#fff;border:1.5px solid #c8d8ee;color:#3A5FA0;transition:all .15s;
+}
+.debate-secondary:hover{border-color:#3A5FA0;background:#eef3fb;}
 </style>
 </head>
 <body>
@@ -739,11 +846,22 @@ kbd{
     <!-- Policy Defense Card -->
     <div class="mode-card policy" onclick="goPolicy()">
       <div class="card-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a3060" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </div>
       <div class="mode-card-text">
         <h2>Policy Defense</h2>
         <p>Pitch your solution in 60 seconds, then defend it.</p>
+      </div>
+    </div>
+
+    <!-- Policy Debate Card -->
+    <div class="mode-card debate" onclick="goDebate()">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="mode-card-text">
+        <h2>Policy Debate</h2>
+        <p>2-for-2-against structured debate on AI-generated working papers.</p>
       </div>
     </div>
   </div>
@@ -825,6 +943,82 @@ kbd{
         <button class="policy-primary" onclick="policyNewProblem()" style="flex:1;">↻ Try Another Problem</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ═══ POLICY DEBATE DRILL ═══ -->
+<div id="debate-drill" class="screen">
+  <div class="debate-header">
+    <button class="debate-back" onclick="goHome()">← Back</button>
+    <div class="debate-badge">
+      <span class="debate-badge-dot"></span>
+      POLICY DEBATE
+      <span class="debate-sub">· 2-for-2-against</span>
+    </div>
+  </div>
+
+  <div class="debate-body">
+
+    <!-- Time controls -->
+    <div class="debate-controls">
+      <div class="debate-control-block">
+        <div class="debate-control-label">Reading Time</div>
+        <div class="debate-seg" id="debate-read-seg">
+          <button class="debate-seg-btn" onclick="debateSetRead(2)">2 min</button>
+          <button class="debate-seg-btn active" onclick="debateSetRead(3)">3 min</button>
+          <button class="debate-seg-btn" onclick="debateSetRead(4)">4 min</button>
+          <button class="debate-seg-btn" onclick="debateSetRead(5)">5 min</button>
+        </div>
+      </div>
+      <div class="debate-control-block">
+        <div class="debate-control-label">Speaking Time</div>
+        <div class="debate-seg" id="debate-speak-seg">
+          <button class="debate-seg-btn" onclick="debateSetSpeak(30)">30 s</button>
+          <button class="debate-seg-btn active" onclick="debateSetSpeak(45)">45 s</button>
+          <button class="debate-seg-btn" onclick="debateSetSpeak(60)">1 min</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Working paper -->
+    <div class="debate-paper-card" id="debate-paper-card">
+      <div class="debate-paper-label">Working Paper</div>
+      <div class="debate-paper-loading" id="debate-paper-loading">
+        <div class="debate-paper-spinner"></div> Generating working paper…
+      </div>
+      <div class="debate-paper-content" id="debate-paper-content"></div>
+    </div>
+
+    <!-- Speaker track (hidden until speaking phase) -->
+    <div class="debate-speaker-track" id="debate-speaker-track" style="display:none;">
+      <div class="debate-speaker-pip" id="debate-pip-0">
+        <div class="debate-pip-label">1st For</div>
+        <div class="debate-pip-name">Speaker 1</div>
+      </div>
+      <div class="debate-speaker-pip" id="debate-pip-1">
+        <div class="debate-pip-label">1st Against</div>
+        <div class="debate-pip-name">Speaker 2</div>
+      </div>
+      <div class="debate-speaker-pip" id="debate-pip-2">
+        <div class="debate-pip-label">2nd For</div>
+        <div class="debate-pip-name">Speaker 3</div>
+      </div>
+      <div class="debate-speaker-pip" id="debate-pip-3">
+        <div class="debate-pip-label">2nd Against</div>
+        <div class="debate-pip-name">Speaker 4</div>
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="debate-timer" id="debate-timer" style="display:none;">3:00</div>
+    <div class="debate-timer-label" id="debate-timer-label" style="display:none;"></div>
+
+    <!-- Actions -->
+    <div class="debate-action-row">
+      <button class="debate-primary" id="debate-start-btn" onclick="debateStart()" disabled>▶ Start Reading</button>
+      <button class="debate-secondary" onclick="debateNewPaper()">↻ New Paper</button>
+    </div>
+
   </div>
 </div>
 
@@ -2240,11 +2434,13 @@ document.addEventListener('keydown',e=>{
     if(active==='ga-drill') gaStartStop();
     else if(active==='crisis-drill') crisisStartStop();
     else if(active==='policy-drill') policyToggleMic();
+    else if(active==='debate-drill') debateStart();
   }
   if(e.code==='Enter'&&e.target.tagName!=='INPUT'){
     if(active==='ga-drill') gaNewPrompt();
     else if(active==='crisis-drill') crisisGenerate();
     else if(active==='policy-drill') policyNewProblem();
+    else if(active==='debate-drill') debateNewPaper();
   }
   if(e.code==='Escape'){
     goHome();
@@ -2594,6 +2790,241 @@ function goPolicy(){
   showScreen('policy-drill');
   document.body.style.background = '#f0f6fc';
   policyInit();
+}
+
+// ── DEBATE STATE ──
+let debateState = {
+  readTime: 3, speakTime: 45,
+  phase: 'idle', // idle | reading | speaking | done
+  remaining: 0, interval: null,
+  speakerIndex: 0,
+  generating: false, topic: '', paper: ''
+};
+
+const DEBATE_SPEAKERS = [
+  {label:'1st For',    side:'for'},
+  {label:'1st Against',side:'against'},
+  {label:'2nd For',    side:'for'},
+  {label:'2nd Against',side:'against'}
+];
+
+function goDebate(){
+  showScreen('debate-drill');
+  document.body.style.background = '#f4f6fb';
+  debateInit();
+}
+
+function debateInit(){
+  debateNewPaper();
+}
+
+function debateSetRead(mins){
+  debateState.readTime = mins;
+  document.querySelectorAll('#debate-read-seg .debate-seg-btn').forEach((b,i)=>{
+    b.classList.toggle('active', [2,3,4,5][i] === mins);
+  });
+}
+
+function debateSetSpeak(secs){
+  debateState.speakTime = secs;
+  document.querySelectorAll('#debate-speak-seg .debate-seg-btn').forEach((b,i)=>{
+    b.classList.toggle('active', [30,45,60][i] === secs);
+  });
+}
+
+async function debateNewPaper(){
+  if(debateState.generating) return;
+  clearInterval(debateState.interval);
+  debateState.phase = 'idle';
+  debateState.speakerIndex = 0;
+
+  // Reset UI
+  document.getElementById('debate-start-btn').disabled = true;
+  document.getElementById('debate-start-btn').textContent = '▶ Start Reading';
+  document.getElementById('debate-timer').style.display = 'none';
+  document.getElementById('debate-timer-label').style.display = 'none';
+  document.getElementById('debate-speaker-track').style.display = 'none';
+  DEBATE_SPEAKERS.forEach((_,i)=>{
+    const pip = document.getElementById(`debate-pip-${i}`);
+    pip.classList.remove('active','done');
+  });
+
+  debateState.generating = true;
+  const loading = document.getElementById('debate-paper-loading');
+  const content = document.getElementById('debate-paper-content');
+  loading.classList.add('visible');
+  content.textContent = '';
+
+  const prompt = `Generate a Model UN working paper on a real, current global policy topic.
+
+Format it exactly like a real MUN working paper:
+
+WORKING PAPER [WP-1]
+Committee: [appropriate UN committee name]
+Topic: [topic title]
+Sponsors: [3-4 fictional but realistic country names]
+Signatories: [4-5 more country names]
+
+THE [COMMITTEE NAME],
+
+[3-4 preambulatory clauses using standard MUN language: NOTING, RECOGNIZING, DEEPLY CONCERNED BY, RECALLING, AWARE OF, etc. — each ending with a comma],
+
+HEREBY:
+
+1. [Operative clause using standard verb: CALLS UPON / URGES / ENCOURAGES / REQUESTS / RECOMMENDS / SUPPORTS / etc.] [specific action, 1-2 sentences];
+
+2. [Another operative clause with specific action];
+
+3. [Another operative clause with specific action];
+
+4. [Another operative clause with specific action];
+
+5. [Another operative clause with specific action].
+
+Use realistic UN language. The topic must be genuinely debatable — reasonable people could support or oppose this working paper. Return only the working paper text, no extra commentary.`;
+
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({prompt})
+    });
+    const data = await resp.json();
+    debateState.paper = (data.text || '').trim();
+  } catch(e) {
+    debateState.paper = `WORKING PAPER [WP-1]
+Committee: Special Committee on Global Economic Policy
+Topic: Addressing the Growing Debt Crisis in Developing Nations
+Sponsors: Brazil, South Africa, Indonesia, Mexico
+Signatories: Argentina, Nigeria, India, Philippines, Kenya
+
+THE SPECIAL COMMITTEE ON GLOBAL ECONOMIC POLICY,
+
+NOTING with concern that over 60% of low-income countries are in or at high risk of debt distress,
+
+RECOGNIZING that inequitable loan conditions from international creditors disproportionately burden developing economies,
+
+DEEPLY CONCERNED BY the reduction of public spending on healthcare and education resulting from debt servicing obligations,
+
+RECALLING General Assembly Resolution 69/319 on a multilateral legal framework for sovereign debt restructuring,
+
+HEREBY:
+
+1. CALLS UPON the International Monetary Fund and World Bank to implement automatic debt-service suspensions for countries experiencing climate-related disasters;
+
+2. URGES creditor nations to adopt transparent, standardized loan terms that prohibit punitive interest rate escalation clauses;
+
+3. ENCOURAGES the establishment of a UN-facilitated multilateral debt arbitration panel with equal representation from debtor and creditor nations;
+
+4. REQUESTS that the Secretary-General convene an annual Sovereign Debt Review Forum open to all member states;
+
+5. RECOMMENDS that member states explore debt-for-development swap agreements as an alternative to conventional debt restructuring.`;
+  }
+
+  loading.classList.remove('visible');
+  content.textContent = debateState.paper;
+  debateState.generating = false;
+  document.getElementById('debate-start-btn').disabled = false;
+}
+
+function debateStart(){
+  const btn = document.getElementById('debate-start-btn');
+  if(debateState.phase === 'idle'){
+    debateState.phase = 'reading';
+    debateState.remaining = debateState.readTime * 60;
+    document.getElementById('debate-timer').style.display = '';
+    document.getElementById('debate-timer-label').style.display = '';
+    document.getElementById('debate-timer-label').textContent = 'Reading time — study the working paper';
+    debateUpdateTimer();
+    btn.textContent = '⏸ Pause';
+    debateState.interval = setInterval(debateTick, 1000);
+  } else if(debateState.phase === 'reading'){
+    clearInterval(debateState.interval);
+    debateState.phase = 'paused-reading';
+    btn.textContent = '▶ Resume';
+  } else if(debateState.phase === 'paused-reading'){
+    debateState.phase = 'reading';
+    btn.textContent = '⏸ Pause';
+    debateState.interval = setInterval(debateTick, 1000);
+  } else if(debateState.phase === 'speaking'){
+    clearInterval(debateState.interval);
+    debateState.phase = 'paused-speaking';
+    btn.textContent = '▶ Resume';
+  } else if(debateState.phase === 'paused-speaking'){
+    debateState.phase = 'speaking';
+    btn.textContent = '⏸ Pause';
+    debateState.interval = setInterval(debateTick, 1000);
+  }
+}
+
+function debateTick(){
+  debateState.remaining--;
+  debateUpdateTimer();
+  if(debateState.remaining <= 0){
+    clearInterval(debateState.interval);
+    if(debateState.phase === 'reading'){
+      debateBeginSpeaking();
+    } else if(debateState.phase === 'speaking'){
+      debateNextSpeaker();
+    }
+  }
+}
+
+function debateUpdateTimer(){
+  const el = document.getElementById('debate-timer');
+  const m = Math.floor(debateState.remaining / 60);
+  const s = debateState.remaining % 60;
+  el.textContent = `${m}:${String(s).padStart(2,'0')}`;
+  const warn = debateState.phase === 'reading' ? debateState.readTime * 60 * .15 : debateState.speakTime * .2;
+  el.className = 'debate-timer' + (debateState.remaining <= 0 ? ' done-time' : debateState.remaining <= warn ? ' warning' : '');
+}
+
+function debateBeginSpeaking(){
+  debateState.phase = 'speaking';
+  debateState.speakerIndex = 0;
+  document.getElementById('debate-speaker-track').style.display = 'flex';
+  document.getElementById('debate-paper-card').style.display = 'none';
+  debateState.remaining = debateState.speakTime;
+  debateUpdateTimer();
+  debateHighlightSpeaker(0);
+  document.getElementById('debate-timer-label').textContent = `${DEBATE_SPEAKERS[0].label} — ${debateState.speakTime}s`;
+  document.getElementById('debate-start-btn').textContent = '⏸ Pause';
+  debateState.interval = setInterval(debateTick, 1000);
+}
+
+function debateNextSpeaker(){
+  document.getElementById(`debate-pip-${debateState.speakerIndex}`).classList.remove('active');
+  document.getElementById(`debate-pip-${debateState.speakerIndex}`).classList.add('done');
+  debateState.speakerIndex++;
+  if(debateState.speakerIndex >= DEBATE_SPEAKERS.length){
+    debateDone();
+    return;
+  }
+  debateState.remaining = debateState.speakTime;
+  debateUpdateTimer();
+  debateHighlightSpeaker(debateState.speakerIndex);
+  document.getElementById('debate-timer-label').textContent = `${DEBATE_SPEAKERS[debateState.speakerIndex].label} — ${debateState.speakTime}s`;
+  debateState.interval = setInterval(debateTick, 1000);
+}
+
+function debateHighlightSpeaker(i){
+  DEBATE_SPEAKERS.forEach((_,j)=>{
+    const pip = document.getElementById(`debate-pip-${j}`);
+    pip.classList.toggle('active', j === i);
+  });
+}
+
+function debateDone(){
+  debateState.phase = 'done';
+  document.getElementById('debate-timer').className = 'debate-timer done-time';
+  document.getElementById('debate-timer').textContent = '0:00';
+  document.getElementById('debate-timer-label').textContent = 'Debate complete';
+  document.getElementById('debate-start-btn').textContent = '↻ New Paper';
+  document.getElementById('debate-start-btn').disabled = false;
+  document.getElementById('debate-start-btn').onclick = () => {
+    document.getElementById('debate-paper-card').style.display = '';
+    document.getElementById('debate-start-btn').onclick = debateStart;
+    debateNewPaper();
+  };
 }
 
 function policyInit(){
