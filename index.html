@@ -1847,7 +1847,8 @@ let gaState = {
   committee: 'all', country: '', topic: '', topicDesc: '',
   prepTime: 10, speakTime: 60, blind: false, tab: 'stance',
   phase: 'idle', remaining: 0, interval: null,
-  difficulty: 'easy', generating: false
+  difficulty: 'easy', generating: false,
+  topicHistory: {}  // keyed by committee abbrev, stores last 10 titles
 };
 let crisisState = {
   committee: '', role: '', roleDesc: '', scenario: '', scenarioDesc: '',
@@ -1970,12 +1971,17 @@ async function gaNewPrompt(){
   const committeeFullNames = {"DISEC":"Disarmament and International Security Committee","ECOFIN":"Economic and Financial Committee","FAO":"Food and Agriculture Organization","HRC":"Human Rights Council","IAEA":"International Atomic Energy Agency","IMO":"International Maritime Organization","ITU":"International Telecommunication Union","Legal":"Sixth Committee (Legal)","SOCHUM":"Social, Humanitarian and Cultural Committee","UNESCO":"UN Educational, Scientific and Cultural Organization","UNEP":"UN Environment Programme","UNHCR":"UN High Commissioner for Refugees","UNICEF":"UN Children's Fund","UNCSW":"Commission on the Status of Women","UNIDO":"UN Industrial Development Organization","WFP":"World Food Programme","WHO":"World Health Organization"};
   const fullName = committeeFullNames[resolvedCommittee] || resolvedCommittee;
 
+  const recentTitles = (gaState.topicHistory[resolvedCommittee] || []);
+  const avoidClause = recentTitles.length
+    ? `\nDo NOT generate any of these recently used topics:\n${recentTitles.map(t=>`- ${t}`).join('\n')}\nPick a genuinely different angle, region, or issue.`
+    : '';
+
   try {
     const resp = await fetch('/api/generate', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({ prompt:
         `Generate a single unique MUN debate topic for the ${fullName} (${resolvedCommittee}).
-Difficulty: ${gaState.difficulty} — ${diffDesc}.
+Difficulty: ${gaState.difficulty} — ${diffDesc}.${avoidClause}
 Return ONLY valid JSON (no markdown, no extra text):
 {"title":"<concise topic title, 6-12 words>","description":"<1-2 sentence background explaining why this is a live UN issue, under 60 words>"}`
       })
@@ -1985,10 +1991,16 @@ Return ONLY valid JSON (no markdown, no extra text):
     const parsed = JSON.parse(text);
     gaState.topic = parsed.title;
     gaState.topicDesc = parsed.description;
+    // Record in history (cap at 10 per committee)
+    if(!gaState.topicHistory[resolvedCommittee]) gaState.topicHistory[resolvedCommittee] = [];
+    gaState.topicHistory[resolvedCommittee].push(parsed.title);
+    if(gaState.topicHistory[resolvedCommittee].length > 10) gaState.topicHistory[resolvedCommittee].shift();
   } catch(e) {
-    // Fallback to local bank
-    const pool = GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'];
-    const pick = pool[Math.floor(Math.random()*pool.length)];
+    // Fallback to local bank, avoiding recent titles
+    const pool = (GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
+      .filter(t => !recentTitles.includes(t[0]));
+    const pick = (pool.length ? pool : GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
+      [Math.floor(Math.random()*((pool.length ? pool : GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM']).length))];
     gaState.topic = pick[0];
     gaState.topicDesc = pick[1];
   }
