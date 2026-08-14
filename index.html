@@ -690,6 +690,123 @@ kbd{
 }
 .policy-feedback-body{font-size:.92rem;color:#334e68;line-height:1.7;}
 
+/* ── HOME AUTH / STATS ── */
+.home-top-row{display:flex;justify-content:flex-end;width:100%;max-width:800px;margin-bottom:-8px;}
+.home-auth-btn{
+  background:none;border:1.5px solid var(--border);border-radius:20px;
+  padding:6px 16px;font-family:inherit;font-size:.82rem;font-weight:600;
+  color:var(--sub);cursor:pointer;transition:all .15s;
+}
+.home-auth-btn:hover{border-color:var(--accent);color:var(--accent);}
+.home-auth-btn.signed-in{background:var(--accent);color:#fff;border-color:var(--accent);}
+.home-stats-bar{
+  font-size:.78rem;color:var(--sub);letter-spacing:.04em;
+  text-align:center;margin-top:12px;
+}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.45);z-index:1000;
+  align-items:center;justify-content:center;
+}
+.modal-overlay.open{display:flex;}
+.auth-card{
+  background:#fff;border-radius:16px;padding:32px 28px;width:100%;max-width:380px;
+  position:relative;box-shadow:0 8px 48px rgba(0,0,0,.18);
+  font-family:'EB Garamond',serif;
+}
+.auth-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:24px;}
+.auth-tab{
+  flex:1;padding:8px;background:none;border:none;cursor:pointer;
+  font-family:inherit;font-size:.95rem;font-weight:600;color:var(--sub);
+  border-bottom:2.5px solid transparent;margin-bottom:-1.5px;transition:all .15s;
+}
+.auth-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.auth-title{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.auth-subtitle{font-size:.88rem;color:var(--sub);margin-bottom:20px;}
+.auth-input{
+  display:block;width:100%;box-sizing:border-box;
+  padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:inherit;font-size:.95rem;color:var(--text);
+  margin-bottom:12px;outline:none;transition:border-color .15s;
+}
+.auth-input:focus{border-color:var(--accent);}
+.auth-submit{
+  width:100%;padding:12px;border:none;border-radius:8px;cursor:pointer;
+  background:var(--accent);color:#fff;font-family:inherit;
+  font-size:1rem;font-weight:700;margin-top:4px;transition:background .15s;
+}
+.auth-submit:hover{background:#2943c5;}
+.auth-error{font-size:.82rem;color:#c0392b;min-height:1.1em;margin-bottom:8px;}
+.auth-close{
+  position:absolute;top:14px;right:16px;background:none;border:none;
+  cursor:pointer;font-size:1.1rem;color:var(--sub);line-height:1;
+}
+
+/* ── PROFILE SCREEN ── */
+#profile-screen{background:#f4f6fb;padding:0;}
+.profile-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 24px;border-bottom:1.5px solid #c8d8ee;background:#fff;
+}
+.profile-back{
+  background:none;border:none;cursor:pointer;font-family:inherit;
+  font-size:.9rem;color:var(--sub);padding:6px 10px;border-radius:8px;
+  transition:background .15s;
+}
+.profile-back:hover{background:#e8eaf0;}
+.profile-signout{
+  background:none;border:1.5px solid var(--border);border-radius:8px;
+  padding:6px 14px;font-family:inherit;font-size:.82rem;color:var(--sub);
+  cursor:pointer;transition:all .15s;
+}
+.profile-signout:hover{border-color:#c0392b;color:#c0392b;}
+.profile-body{
+  max-width:680px;margin:0 auto;padding:36px 20px 60px;
+  display:flex;flex-direction:column;gap:20px;
+}
+.profile-user-card{
+  display:flex;align-items:center;gap:16px;
+  background:#fff;border:1.5px solid #c8d8ee;border-radius:var(--radius);
+  padding:22px 24px;
+}
+.profile-avatar{
+  width:52px;height:52px;border-radius:50%;background:#3A5FA0;
+  color:#fff;font-size:1.4rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.profile-name{font-size:1.2rem;font-weight:700;color:var(--text);}
+.profile-school{font-size:.85rem;color:var(--sub);margin-top:2px;}
+.profile-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.profile-stat-card{
+  background:#fff;border:1.5px solid #c8d8ee;border-radius:var(--radius);
+  padding:18px;text-align:center;
+}
+.profile-stat-num{
+  font-family:'EB Garamond',serif;font-size:2rem;font-weight:800;
+  color:#3A5FA0;line-height:1;
+}
+.profile-stat-label{font-size:.72rem;color:var(--sub);margin-top:4px;font-weight:600;letter-spacing:.04em;}
+.profile-section-title{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sub);
+}
+.profile-session-row{
+  display:flex;align-items:center;gap:8px;padding:10px 0;
+  border-bottom:1px solid var(--border);flex-wrap:wrap;
+}
+.profile-session-badge{
+  font-size:.7rem;font-weight:700;letter-spacing:.04em;
+  padding:3px 8px;border-radius:20px;color:#fff;flex-shrink:0;
+}
+.profile-session-committee{font-size:.8rem;color:var(--sub);flex:1;}
+.profile-session-date{font-size:.78rem;color:var(--sub);margin-left:auto;}
+.profile-session-score{
+  font-family:'EB Garamond',serif;font-size:1rem;font-weight:700;
+  color:#3A5FA0;min-width:36px;text-align:right;
+}
+
 /* ── DEBATE DRILL ── */
 #debate-drill{background:#f4f6fb;padding:0;}
 .debate-header{
@@ -805,6 +922,7 @@ kbd{
 }
 .debate-secondary:hover{border-color:#3A5FA0;background:#eef3fb;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body>
 
@@ -823,6 +941,9 @@ kbd{
 </div>
 
 <div id="home" class="screen active">
+  <div class="home-top-row">
+    <button id="auth-btn" class="home-auth-btn" onclick="showAuthModal()">Sign in</button>
+  </div>
   <div class="home-title">
     <h1>MUN Speech Drill</h1>
   </div>
@@ -872,7 +993,74 @@ kbd{
       </div>
     </div>
   </div>
+  <div id="home-stats-bar" class="home-stats-bar" style="display:none;"></div>
+</div>
 
+<!-- ═══ AUTH MODAL ═══ -->
+<div id="auth-modal" class="modal-overlay">
+  <div class="auth-card">
+    <button class="auth-close" onclick="hideAuthModal()">✕</button>
+    <div class="auth-tabs">
+      <button id="tab-signin" class="auth-tab active" onclick="switchAuthTab('signin')">Sign in</button>
+      <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">Create account</button>
+    </div>
+    <div id="auth-error" class="auth-error"></div>
+    <div id="auth-signin-form">
+      <input class="auth-input" id="signin-email" type="email" placeholder="Email" autocomplete="email">
+      <input class="auth-input" id="signin-password" type="password" placeholder="Password" autocomplete="current-password">
+      <button class="auth-submit" onclick="handleSignIn()">Sign in</button>
+    </div>
+    <div id="auth-signup-form" style="display:none;">
+      <input class="auth-input" id="signup-email" type="email" placeholder="Email" autocomplete="email">
+      <input class="auth-input" id="signup-password" type="password" placeholder="Password (min 6 chars)" autocomplete="new-password">
+      <button class="auth-submit" onclick="handleSignUp()">Create account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ONBOARDING MODAL ═══ -->
+<div id="onboarding-modal" class="modal-overlay">
+  <div class="auth-card">
+    <div class="auth-title">One more step</div>
+    <div class="auth-subtitle">Tell us about yourself so we can track your progress.</div>
+    <input class="auth-input" id="onboard-name" type="text" placeholder="Full name">
+    <input class="auth-input" id="onboard-school" type="text" placeholder="School or organization">
+    <div id="onboard-error" class="auth-error"></div>
+    <button class="auth-submit" onclick="submitOnboarding()">Let's go →</button>
+  </div>
+</div>
+
+<!-- ═══ PROFILE SCREEN ═══ -->
+<div id="profile-screen" class="screen">
+  <div class="profile-header">
+    <button class="profile-back" onclick="goHome()">← Back</button>
+    <button class="profile-signout" onclick="signOut()">Sign out</button>
+  </div>
+  <div class="profile-body">
+    <div class="profile-user-card">
+      <div class="profile-avatar" id="profile-avatar">?</div>
+      <div>
+        <div class="profile-name" id="profile-name">—</div>
+        <div class="profile-school" id="profile-school">—</div>
+      </div>
+    </div>
+    <div class="profile-stats-grid">
+      <div class="profile-stat-card">
+        <div class="profile-stat-num" id="profile-stat-drills">—</div>
+        <div class="profile-stat-label">Drills done</div>
+      </div>
+      <div class="profile-stat-card">
+        <div class="profile-stat-num" id="profile-stat-minutes">—</div>
+        <div class="profile-stat-label">Min practiced</div>
+      </div>
+      <div class="profile-stat-card">
+        <div class="profile-stat-num" id="profile-stat-avg">—</div>
+        <div class="profile-stat-label">Avg score</div>
+      </div>
+    </div>
+    <div class="profile-section-title">Recent Sessions</div>
+    <div id="profile-sessions-list"></div>
+  </div>
 </div>
 
 <!-- ═══ POLICY DEFENSE DRILL ═══ -->
@@ -1272,6 +1460,184 @@ kbd{
 </div>
 
 <script>
+// ══════════════════════════════════════════════
+//  SUPABASE CONFIG — replace with your project values
+//  Get these from: supabase.com → your project → Settings → API
+// ══════════════════════════════════════════════
+const _SB_URL  = 'YOUR_SUPABASE_URL';
+const _SB_ANON = 'YOUR_SUPABASE_ANON_KEY';
+const _sb = window.supabase?.createClient(_SB_URL, _SB_ANON);
+
+let authUser    = null;
+let authProfile = null;
+
+// ── Auth init (runs on page load) ──
+async function initAuth(){
+  if(!_sb) return;
+  const { data:{ session } } = await _sb.auth.getSession();
+  if(session){ authUser = session.user; await _loadProfile(); }
+  _updateAuthBtn();
+  loadGlobalStats();
+  _sb.auth.onAuthStateChange(async (_e, s) => {
+    authUser = s?.user || null;
+    if(authUser){ await _loadProfile(); } else { authProfile = null; }
+    _updateAuthBtn();
+  });
+}
+
+async function _loadProfile(){
+  if(!authUser || !_sb) return;
+  const { data } = await _sb.from('profiles').select('*').eq('id', authUser.id).single();
+  authProfile = data;
+}
+
+function _updateAuthBtn(){
+  const btn = document.getElementById('auth-btn');
+  if(!btn) return;
+  if(authUser && authProfile){
+    btn.textContent = authProfile.name.split(' ')[0];
+    btn.className = 'home-auth-btn signed-in';
+    btn.onclick = goProfile;
+  } else {
+    btn.textContent = 'Sign in';
+    btn.className = 'home-auth-btn';
+    btn.onclick = showAuthModal;
+  }
+}
+
+// ── Auth modal ──
+function showAuthModal(){ document.getElementById('auth-modal').classList.add('open'); switchAuthTab('signin'); }
+function hideAuthModal(){ document.getElementById('auth-modal').classList.remove('open'); document.getElementById('auth-error').textContent=''; }
+function switchAuthTab(t){
+  document.getElementById('auth-signin-form').style.display = t==='signin' ? '' : 'none';
+  document.getElementById('auth-signup-form').style.display = t==='signup' ? '' : 'none';
+  document.getElementById('tab-signin').classList.toggle('active', t==='signin');
+  document.getElementById('tab-signup').classList.toggle('active', t==='signup');
+  document.getElementById('auth-error').textContent = '';
+}
+
+async function handleSignIn(){
+  if(!_sb) return;
+  const email = document.getElementById('signin-email').value.trim();
+  const pw    = document.getElementById('signin-password').value;
+  const err   = document.getElementById('auth-error');
+  err.textContent = '';
+  const { error } = await _sb.auth.signInWithPassword({ email, password: pw });
+  if(error){ err.textContent = error.message; return; }
+  hideAuthModal();
+}
+
+async function handleSignUp(){
+  if(!_sb) return;
+  const email = document.getElementById('signup-email').value.trim();
+  const pw    = document.getElementById('signup-password').value;
+  const err   = document.getElementById('auth-error');
+  err.textContent = '';
+  if(pw.length < 6){ err.textContent = 'Password must be at least 6 characters.'; return; }
+  const { error } = await _sb.auth.signUp({ email, password: pw });
+  if(error){ err.textContent = error.message; return; }
+  hideAuthModal();
+  document.getElementById('onboarding-modal').classList.add('open');
+}
+
+async function submitOnboarding(){
+  if(!_sb || !authUser) return;
+  const name   = document.getElementById('onboard-name').value.trim();
+  const school = document.getElementById('onboard-school').value.trim();
+  const err    = document.getElementById('onboard-error');
+  if(!name || !school){ err.textContent = 'Please fill in both fields.'; return; }
+  const { error } = await _sb.from('profiles').upsert({ id: authUser.id, email: authUser.email, name, school });
+  if(error){ err.textContent = error.message; return; }
+  authProfile = { name, school, email: authUser.email };
+  document.getElementById('onboarding-modal').classList.remove('open');
+  _updateAuthBtn();
+}
+
+async function signOut(){
+  if(!_sb) return;
+  await _sb.auth.signOut();
+  authUser = null; authProfile = null;
+  goHome();
+}
+
+// ── Save a drill session ──
+async function saveSession(mode, data){
+  if(!_sb || !authUser) return;
+  await _sb.from('drill_sessions').insert({
+    user_id: authUser.id, mode,
+    committee:        data.committee || null,
+    difficulty:       data.difficulty || null,
+    duration_secs:    data.duration_secs || 0,
+    score_content:    data.score_content ?? null,
+    score_fillers:    data.score_fillers ?? null,
+    score_confidence: data.score_confidence ?? null,
+    score_hook:       data.score_hook ?? null,
+    overall_score:    data.overall_score ?? null,
+  });
+}
+
+// ── Global stats counter ──
+async function loadGlobalStats(){
+  if(!_sb) return;
+  try {
+    const { data } = await _sb.rpc('get_global_stats');
+    if(!data || !data.total_drills) return;
+    const el = document.getElementById('home-stats-bar');
+    if(el){
+      el.textContent = `${Number(data.total_drills).toLocaleString()} drills · ${Number(data.total_minutes).toLocaleString()} minutes · ${data.total_schools} schools`;
+      el.style.display = '';
+    }
+  } catch(e){}
+}
+
+// ── Profile screen ──
+function goProfile(){
+  showScreen('profile-screen');
+  document.body.style.background = '#f4f6fb';
+  _renderProfile();
+}
+
+async function _renderProfile(){
+  if(!authUser || !authProfile) return;
+  document.getElementById('profile-avatar').textContent = authProfile.name.charAt(0).toUpperCase();
+  document.getElementById('profile-name').textContent   = authProfile.name;
+  document.getElementById('profile-school').textContent = authProfile.school;
+
+  const { data: sessions } = await _sb.from('drill_sessions').select('*')
+    .eq('user_id', authUser.id).order('created_at', { ascending: false });
+
+  if(!sessions?.length){
+    document.getElementById('profile-sessions-list').innerHTML =
+      '<p style="color:var(--sub);font-size:.9rem;padding:16px 0;">No drills yet — start practicing!</p>';
+    document.getElementById('profile-stat-drills').textContent  = '0';
+    document.getElementById('profile-stat-minutes').textContent = '0';
+    document.getElementById('profile-stat-avg').textContent     = '—';
+    return;
+  }
+
+  const totalMins = Math.round(sessions.reduce((a,s) => a + (s.duration_secs||0), 0) / 60);
+  const scored    = sessions.filter(s => s.overall_score != null);
+  const avgScore  = scored.length
+    ? Math.round(scored.reduce((a,s) => a + s.overall_score, 0) / scored.length)
+    : null;
+
+  document.getElementById('profile-stat-drills').textContent  = sessions.length;
+  document.getElementById('profile-stat-minutes').textContent = totalMins;
+  document.getElementById('profile-stat-avg').textContent     = avgScore != null ? avgScore + '/100' : '—';
+
+  const modeLabels = { ga:'General Assembly', crisis:'Crisis', policy:'Policy Defense', debate:'Policy Debate' };
+  const modeColors = { ga:'#3A5FA0', crisis:'#4B75C8', policy:'#5B8DEA', debate:'#93B8F2' };
+  document.getElementById('profile-sessions-list').innerHTML = sessions.slice(0,15).map(s => {
+    const date  = new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    const score = s.overall_score != null ? `<span class="profile-session-score">${Math.round(s.overall_score)}</span>` : '';
+    return `<div class="profile-session-row">
+      <span class="profile-session-badge" style="background:${modeColors[s.mode]||'#5B8DEA'}">${modeLabels[s.mode]||s.mode}</span>
+      ${s.committee ? `<span class="profile-session-committee">${s.committee}</span>` : '<span class="profile-session-committee"></span>'}
+      <span class="profile-session-date">${date}</span>
+      ${score}
+    </div>`;
+  }).join('');
+}
 // ══════════════════════════════════════════════
 //  DATA — GA
 // ══════════════════════════════════════════════
@@ -2775,6 +3141,16 @@ function renderGAGrades(g){
     <button onclick="gaNewPrompt()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:var(--accent);color:#fff;">↻ New Prompt</button>
   `;
   el.classList.add('visible');
+  // save to Supabase
+  saveSession('ga', {
+    committee: document.getElementById('ga-committee-display')?.textContent || '',
+    duration_secs: gaState.speakTime,
+    score_content:    typeof g.content    === 'object' ? g.content.score    : null,
+    score_fillers:    typeof g.fillers    === 'object' ? g.fillers.score    : null,
+    score_confidence: typeof g.confidence === 'object' ? g.confidence.score : null,
+    score_hook:       typeof g.hook       === 'object' ? g.hook.score       : null,
+    overall_score:    g.overall ?? null,
+  });
 }
 
 // ══════════════════════════════════════════════
@@ -3369,7 +3745,20 @@ function renderCrisisGrades(g){
     <button onclick="crisisGenerate()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:#c0392b;color:#fff;">↻ New Prompt</button>
   `;
   el.classList.add('visible');
+  // save to Supabase
+  saveSession('crisis', {
+    committee: document.getElementById('crisis-scenario-display')?.textContent || '',
+    duration_secs: crisisState.speakTime,
+    score_content:    typeof g.content    === 'object' ? g.content.score    : null,
+    score_fillers:    typeof g.fillers    === 'object' ? g.fillers.score    : null,
+    score_confidence: typeof g.confidence === 'object' ? g.confidence.score : null,
+    score_hook:       typeof g.hook       === 'object' ? g.hook.score       : null,
+    overall_score:    g.overall ?? null,
+  });
 }
+
+// ── Boot ──
+window.addEventListener('DOMContentLoaded', initAuth);
 
 </script>
 </body>
