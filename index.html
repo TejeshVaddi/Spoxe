@@ -1011,6 +1011,8 @@ kbd{
       <button class="auth-submit" onclick="handleSignIn()">Sign in</button>
     </div>
     <div id="auth-signup-form" style="display:none;">
+      <input class="auth-input" id="signup-name" type="text" placeholder="Full name" autocomplete="name">
+      <input class="auth-input" id="signup-school" type="text" placeholder="School or organization">
       <input class="auth-input" id="signup-email" type="email" placeholder="Email" autocomplete="email">
       <input class="auth-input" id="signup-password" type="password" placeholder="Password (min 6 chars)" autocomplete="new-password">
       <button class="auth-submit" onclick="handleSignUp()">Create account</button>
@@ -1529,15 +1531,23 @@ async function handleSignIn(){
 
 async function handleSignUp(){
   if(!_sb) return;
-  const email = document.getElementById('signup-email').value.trim();
-  const pw    = document.getElementById('signup-password').value;
-  const err   = document.getElementById('auth-error');
+  const name   = document.getElementById('signup-name').value.trim();
+  const school = document.getElementById('signup-school').value.trim();
+  const email  = document.getElementById('signup-email').value.trim();
+  const pw     = document.getElementById('signup-password').value;
+  const err    = document.getElementById('auth-error');
   err.textContent = '';
+  if(!name || !school){ err.textContent = 'Please fill in your name and school.'; return; }
   if(pw.length < 6){ err.textContent = 'Password must be at least 6 characters.'; return; }
-  const { error } = await _sb.auth.signUp({ email, password: pw });
+  const { data, error } = await _sb.auth.signUp({ email, password: pw });
   if(error){ err.textContent = error.message; return; }
+  // save profile immediately using the new user id
+  if(data?.user){
+    await _sb.from('profiles').upsert({ id: data.user.id, email, name, school });
+    authProfile = { name, school, email };
+  }
   hideAuthModal();
-  document.getElementById('onboarding-modal').classList.add('open');
+  _updateAuthBtn();
 }
 
 async function submitOnboarding(){
