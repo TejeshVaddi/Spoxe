@@ -2193,7 +2193,7 @@ Return ONLY valid JSON, no markdown fences:
   // Try up to 3 times; re-run if the generated title is too similar to session history
   for(let attempt=0; attempt<3; attempt++){
     try {
-      const resp = await fetch('/api/gemini', {
+      const resp = await fetch('/api/generate', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({prompt})
       });
