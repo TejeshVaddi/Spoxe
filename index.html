@@ -2285,9 +2285,9 @@ Return ONLY a JSON object:
   "role_title": "A specific iconic name or title from this exact committee — e.g. 'Arjuna' for Mahabharata, 'Cersei Lannister' for Game of Thrones, 'Elon Musk' for Tesla Board, 'Napoleon Bonaparte' for French Revolution. NEVER repeat a previously used role.",
   "role_desc": "One short phrase max 7 words describing this character's function",
   "scenario_title": "A sharp urgent crisis headline 5-8 words",
-  "scenario_bullets": ["One crisp urgent sentence", "One crisp urgent sentence", "One crisp urgent sentence"]
+  "scenario_bullets": ["One sentence (15-25 words) describing a specific development with enough context to understand what happened and why it matters", "One sentence (15-25 words) on a second concrete complication or stakeholder reaction with specifics", "One sentence (15-25 words) on a third angle — a consequence, constraint, or ticking-clock pressure — that makes this harder to resolve"]
 }
-Rules: role_title MUST be different from every previously used role. Use real names from the source universe. scenario_bullets affect the whole committee. Return ONLY valid JSON no markdown.`;
+Rules: role_title MUST be different from every previously used role. Use real names from the source universe. scenario_bullets must be specific and niche — avoid generic phrases like 'tensions are rising' or 'the situation is escalating'. Each bullet should give the delegate something concrete to work with. Return ONLY valid JSON no markdown.`;
 
     const resp = await fetch('/api/generate', {
       method: 'POST',
