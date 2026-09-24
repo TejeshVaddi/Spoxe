@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'openai/gpt-oss-20b',
+        model: 'qwen/qwen3.8-27b',
         messages: [{ role: 'user', content: prompt }],
         temperature: 1.2,
         max_tokens: 500
