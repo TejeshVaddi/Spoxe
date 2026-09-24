@@ -169,11 +169,6 @@ kbd{
 }
 .grade-results{display:none;}
 .grade-results.visible{display:block;}
-.ga-disfluency{margin-top:14px;padding:14px 16px;background:#f0f4ff;border-radius:10px;font-size:.85rem;line-height:1.6;color:var(--text);}
-.ga-disfluency-title{font-weight:700;font-size:.9rem;margin-bottom:8px;color:var(--accent);}
-.ga-disfluency-section{margin-bottom:10px;}
-.ga-disfluency-label{font-weight:600;margin-bottom:4px;}
-.ga-disfluency-tag{display:inline-block;background:#dce6ff;color:#1a3060;border-radius:5px;padding:2px 8px;margin:2px 3px;font-size:.8rem;}
 .grade-overall{
   text-align:center;padding:20px 0 16px;border-bottom:1.5px solid var(--border);
   margin-bottom:16px;
@@ -695,123 +690,6 @@ kbd{
 }
 .policy-feedback-body{font-size:.92rem;color:#334e68;line-height:1.7;}
 
-/* ── HOME AUTH / STATS ── */
-.home-top-row{display:flex;justify-content:flex-end;width:100%;max-width:800px;margin-bottom:-8px;}
-.home-auth-btn{
-  background:none;border:1.5px solid var(--border);border-radius:20px;
-  padding:6px 16px;font-family:inherit;font-size:.82rem;font-weight:600;
-  color:var(--sub);cursor:pointer;transition:all .15s;
-}
-.home-auth-btn:hover{border-color:var(--accent);color:var(--accent);}
-.home-auth-btn.signed-in{background:var(--accent);color:#fff;border-color:var(--accent);}
-.home-stats-bar{
-  font-size:.78rem;color:var(--sub);letter-spacing:.04em;
-  text-align:center;margin-top:12px;
-}
-
-/* ── MODAL OVERLAY ── */
-.modal-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.45);z-index:1000;
-  align-items:center;justify-content:center;
-}
-.modal-overlay.open{display:flex;}
-.auth-card{
-  background:#fff;border-radius:16px;padding:32px 28px;width:100%;max-width:380px;
-  position:relative;box-shadow:0 8px 48px rgba(0,0,0,.18);
-  font-family:'EB Garamond',serif;
-}
-.auth-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:24px;}
-.auth-tab{
-  flex:1;padding:8px;background:none;border:none;cursor:pointer;
-  font-family:inherit;font-size:.95rem;font-weight:600;color:var(--sub);
-  border-bottom:2.5px solid transparent;margin-bottom:-1.5px;transition:all .15s;
-}
-.auth-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
-.auth-title{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:4px;}
-.auth-subtitle{font-size:.88rem;color:var(--sub);margin-bottom:20px;}
-.auth-input{
-  display:block;width:100%;box-sizing:border-box;
-  padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;
-  font-family:inherit;font-size:.95rem;color:var(--text);
-  margin-bottom:12px;outline:none;transition:border-color .15s;
-}
-.auth-input:focus{border-color:var(--accent);}
-.auth-submit{
-  width:100%;padding:12px;border:none;border-radius:8px;cursor:pointer;
-  background:var(--accent);color:#fff;font-family:inherit;
-  font-size:1rem;font-weight:700;margin-top:4px;transition:background .15s;
-}
-.auth-submit:hover{background:#2943c5;}
-.auth-error{font-size:.82rem;color:#c0392b;min-height:1.1em;margin-bottom:8px;}
-.auth-close{
-  position:absolute;top:14px;right:16px;background:none;border:none;
-  cursor:pointer;font-size:1.1rem;color:var(--sub);line-height:1;
-}
-
-/* ── PROFILE SCREEN ── */
-#profile-screen{background:#f4f6fb;padding:0;}
-.profile-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 24px;border-bottom:1.5px solid #c8d8ee;background:#fff;
-}
-.profile-back{
-  background:none;border:none;cursor:pointer;font-family:inherit;
-  font-size:.9rem;color:var(--sub);padding:6px 10px;border-radius:8px;
-  transition:background .15s;
-}
-.profile-back:hover{background:#e8eaf0;}
-.profile-signout{
-  background:none;border:1.5px solid var(--border);border-radius:8px;
-  padding:6px 14px;font-family:inherit;font-size:.82rem;color:var(--sub);
-  cursor:pointer;transition:all .15s;
-}
-.profile-signout:hover{border-color:#c0392b;color:#c0392b;}
-.profile-body{
-  max-width:680px;margin:0 auto;padding:36px 20px 60px;
-  display:flex;flex-direction:column;gap:20px;
-}
-.profile-user-card{
-  display:flex;align-items:center;gap:16px;
-  background:#fff;border:1.5px solid #c8d8ee;border-radius:var(--radius);
-  padding:22px 24px;
-}
-.profile-avatar{
-  width:52px;height:52px;border-radius:50%;background:#3A5FA0;
-  color:#fff;font-size:1.4rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.profile-name{font-size:1.2rem;font-weight:700;color:var(--text);}
-.profile-school{font-size:.85rem;color:var(--sub);margin-top:2px;}
-.profile-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.profile-stat-card{
-  background:#fff;border:1.5px solid #c8d8ee;border-radius:var(--radius);
-  padding:18px;text-align:center;
-}
-.profile-stat-num{
-  font-family:'EB Garamond',serif;font-size:2rem;font-weight:800;
-  color:#3A5FA0;line-height:1;
-}
-.profile-stat-label{font-size:.72rem;color:var(--sub);margin-top:4px;font-weight:600;letter-spacing:.04em;}
-.profile-section-title{
-  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--sub);
-}
-.profile-session-row{
-  display:flex;align-items:center;gap:8px;padding:10px 0;
-  border-bottom:1px solid var(--border);flex-wrap:wrap;
-}
-.profile-session-badge{
-  font-size:.7rem;font-weight:700;letter-spacing:.04em;
-  padding:3px 8px;border-radius:20px;color:#fff;flex-shrink:0;
-}
-.profile-session-committee{font-size:.8rem;color:var(--sub);flex:1;}
-.profile-session-date{font-size:.78rem;color:var(--sub);margin-left:auto;}
-.profile-session-score{
-  font-family:'EB Garamond',serif;font-size:1rem;font-weight:700;
-  color:#3A5FA0;min-width:36px;text-align:right;
-}
-
 /* ── DEBATE DRILL ── */
 #debate-drill{background:#f4f6fb;padding:0;}
 .debate-header{
@@ -927,7 +805,6 @@ kbd{
 }
 .debate-secondary:hover{border-color:#3A5FA0;background:#eef3fb;}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body>
 
@@ -946,9 +823,6 @@ kbd{
 </div>
 
 <div id="home" class="screen active">
-  <div class="home-top-row">
-    <button id="auth-btn" class="home-auth-btn" onclick="showAuthModal()">Sign in</button>
-  </div>
   <div class="home-title">
     <h1>MUN Speech Drill</h1>
   </div>
@@ -976,79 +850,190 @@ kbd{
       </div>
     </div>
 
-  </div>
-  <div id="home-stats-bar" class="home-stats-bar" style="display:none;"></div>
-</div>
-
-<!-- ═══ AUTH MODAL ═══ -->
-<div id="auth-modal" class="modal-overlay">
-  <div class="auth-card">
-    <button class="auth-close" onclick="hideAuthModal()">✕</button>
-    <div class="auth-tabs">
-      <button id="tab-signin" class="auth-tab active" onclick="switchAuthTab('signin')">Sign in</button>
-      <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">Create account</button>
-    </div>
-    <div id="auth-error" class="auth-error"></div>
-    <div id="auth-signin-form">
-      <input class="auth-input" id="signin-email" type="email" placeholder="Email" autocomplete="email">
-      <input class="auth-input" id="signin-password" type="password" placeholder="Password" autocomplete="current-password">
-      <button class="auth-submit" onclick="handleSignIn()">Sign in</button>
-    </div>
-    <div id="auth-signup-form" style="display:none;">
-      <input class="auth-input" id="signup-name" type="text" placeholder="Full name" autocomplete="name">
-      <input class="auth-input" id="signup-school" type="text" placeholder="School or organization">
-      <input class="auth-input" id="signup-email" type="email" placeholder="Email" autocomplete="email">
-      <input class="auth-input" id="signup-password" type="password" placeholder="Password (min 6 chars)" autocomplete="new-password">
-      <button class="auth-submit" onclick="handleSignUp()">Create account</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ ONBOARDING MODAL ═══ -->
-<div id="onboarding-modal" class="modal-overlay">
-  <div class="auth-card">
-    <div class="auth-title">One more step</div>
-    <div class="auth-subtitle">Tell us about yourself so we can track your progress.</div>
-    <input class="auth-input" id="onboard-name" type="text" placeholder="Full name">
-    <input class="auth-input" id="onboard-school" type="text" placeholder="School or organization">
-    <div id="onboard-error" class="auth-error"></div>
-    <button class="auth-submit" onclick="submitOnboarding()">Let's go →</button>
-  </div>
-</div>
-
-<!-- ═══ PROFILE SCREEN ═══ -->
-<div id="profile-screen" class="screen">
-  <div class="profile-header">
-    <button class="profile-back" onclick="goHome()">← Back</button>
-    <button class="profile-signout" onclick="signOut()">Sign out</button>
-  </div>
-  <div class="profile-body">
-    <div class="profile-user-card">
-      <div class="profile-avatar" id="profile-avatar">?</div>
-      <div>
-        <div class="profile-name" id="profile-name">—</div>
-        <div class="profile-school" id="profile-school">—</div>
+    <!-- Policy Defense Card -->
+    <div class="mode-card policy" onclick="goPolicy()">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="mode-card-text">
+        <h2>Policy Defense</h2>
+        <p>Pitch your solution in 60 seconds, then defend it.</p>
       </div>
     </div>
-    <div class="profile-stats-grid">
-      <div class="profile-stat-card">
-        <div class="profile-stat-num" id="profile-stat-drills">—</div>
-        <div class="profile-stat-label">Drills done</div>
+
+    <!-- Policy Debate Card -->
+    <div class="mode-card debate" onclick="goDebate()">
+      <div class="card-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
-      <div class="profile-stat-card">
-        <div class="profile-stat-num" id="profile-stat-minutes">—</div>
-        <div class="profile-stat-label">Min practiced</div>
-      </div>
-      <div class="profile-stat-card">
-        <div class="profile-stat-num" id="profile-stat-avg">—</div>
-        <div class="profile-stat-label">Avg score</div>
+      <div class="mode-card-text">
+        <h2>Policy Debate</h2>
+        <p>2-for-2-against structured debate on AI-generated working papers.</p>
       </div>
     </div>
-    <div class="profile-section-title">Recent Sessions</div>
-    <div id="profile-sessions-list"></div>
+  </div>
+
+</div>
+
+<!-- ═══ POLICY DEFENSE DRILL ═══ -->
+<div id="policy-drill" class="screen">
+  <div class="policy-header">
+    <button class="policy-back" onclick="goHome()">← Back</button>
+    <div class="policy-badge">
+      <span class="policy-badge-dot"></span>
+      POLICY DEFENSE
+      <span class="policy-sub">· Solution &amp; Q&amp;A drill</span>
+    </div>
+  </div>
+
+  <div class="policy-body">
+    <!-- Difficulty toggle -->
+    <div class="diff-row">
+      <div class="diff-toggle" id="policy-diff-toggle">
+        <button class="diff-btn active" id="policy-diff-easy" onclick="policySetDifficulty('easy')">Easy</button>
+        <button class="diff-btn" id="policy-diff-hard" onclick="policySetDifficulty('hard')">Hard</button>
+      </div>
+    </div>
+
+    <!-- Problem card -->
+    <div class="policy-problem-card" id="policy-problem-card">
+      <div class="policy-problem-label">Policy Challenge</div>
+      <div class="policy-topic-loading" id="policy-topic-loading" style="display:none;">
+        <div class="policy-gen-spinner"></div> Generating challenge...
+      </div>
+      <div class="policy-problem-text" id="policy-problem-text">—</div>
+      <div class="policy-problem-context" id="policy-problem-context"></div>
+    </div>
+
+    <!-- Instruction -->
+    <div class="policy-instruction" id="policy-instruction">
+      Read the challenge above, then tap the mic and explain your proposed solution. Tap again when you're done.
+    </div>
+
+    <!-- Mic -->
+    <div class="policy-mic-row">
+      <button class="policy-mic-btn" id="policy-mic-btn" onclick="policyToggleMic()" disabled title="Toggle microphone">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+      </button>
+    </div>
+    <div class="policy-mic-status" id="policy-mic-status"></div>
+    <div class="policy-mic-transcript" id="policy-mic-transcript"></div>
+
+    <!-- Actions -->
+    <div class="policy-action-row" id="policy-action-row">
+      <button class="policy-primary" id="policy-submit-btn" onclick="policySubmitSpeech()" style="display:none;">Submit → Get Questions</button>
+      <button class="policy-secondary" onclick="policyNewProblem()">↻ New Problem</button>
+    </div>
+
+    <!-- Q&A phase -->
+    <div class="policy-qa-card" id="policy-qa-card">
+      <div class="policy-loading" id="policy-q-loading">
+        <div class="policy-gen-spinner"></div> Generating questions…
+      </div>
+      <div id="policy-qa-content" style="display:none;">
+        <div class="policy-qa-header">
+          <span class="policy-qa-num" id="policy-qa-num">Question 1 of 5</span>
+          <div class="policy-qa-timer" id="policy-qa-timer">0:20</div>
+        </div>
+        <div class="policy-qa-question" id="policy-qa-question"></div>
+        <div class="policy-qa-progress">
+          <div class="policy-qa-bar" id="policy-qa-bar" style="width:100%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div class="policy-feedback-card" id="policy-feedback-card">
+      <div class="policy-feedback-title">Performance Feedback</div>
+      <div class="policy-feedback-body" id="policy-feedback-body"></div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="policy-primary" onclick="policyNewProblem()" style="flex:1;">↻ Try Another Problem</button>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- ═══ POLICY DEBATE DRILL ═══ -->
+<div id="debate-drill" class="screen">
+  <div class="debate-header">
+    <button class="debate-back" onclick="goHome()">← Back</button>
+    <div class="debate-badge">
+      <span class="debate-badge-dot"></span>
+      POLICY DEBATE
+      <span class="debate-sub">· 2-for-2-against</span>
+    </div>
+  </div>
+
+  <div class="debate-body">
+
+    <!-- Time controls -->
+    <div class="debate-controls">
+      <div class="debate-control-block">
+        <div class="debate-control-label">Reading Time</div>
+        <div class="debate-seg" id="debate-read-seg">
+          <button class="debate-seg-btn" onclick="debateSetRead(2)">2 min</button>
+          <button class="debate-seg-btn active" onclick="debateSetRead(3)">3 min</button>
+          <button class="debate-seg-btn" onclick="debateSetRead(4)">4 min</button>
+          <button class="debate-seg-btn" onclick="debateSetRead(5)">5 min</button>
+        </div>
+      </div>
+      <div class="debate-control-block">
+        <div class="debate-control-label">Speaking Time</div>
+        <div class="debate-seg" id="debate-speak-seg">
+          <button class="debate-seg-btn" onclick="debateSetSpeak(30)">30 s</button>
+          <button class="debate-seg-btn active" onclick="debateSetSpeak(45)">45 s</button>
+          <button class="debate-seg-btn" onclick="debateSetSpeak(60)">1 min</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Working paper -->
+    <div class="debate-paper-card" id="debate-paper-card">
+      <div class="debate-paper-label">Working Paper</div>
+      <div class="debate-paper-loading" id="debate-paper-loading">
+        <div class="debate-paper-spinner"></div> Generating working paper…
+      </div>
+      <div class="debate-paper-meta" id="debate-paper-meta" style="display:none;">
+        <div class="debate-paper-committee" id="debate-paper-committee"></div>
+        <div class="debate-paper-topic" id="debate-paper-topic"></div>
+        <div class="debate-paper-sponsors" id="debate-paper-sponsors"></div>
+      </div>
+      <div class="debate-paper-body blurred" id="debate-paper-content"></div>
+      <div class="debate-blur-hint visible" id="debate-blur-hint">Press ▶ Start Reading to reveal the working paper</div>
+    </div>
+
+    <!-- Speaker track (hidden until speaking phase) -->
+    <div class="debate-speaker-track" id="debate-speaker-track" style="display:none;">
+      <div class="debate-speaker-pip" id="debate-pip-0">
+        <div class="debate-pip-label">1st For</div>
+        <div class="debate-pip-name">Speaker 1</div>
+      </div>
+      <div class="debate-speaker-pip" id="debate-pip-1">
+        <div class="debate-pip-label">1st Against</div>
+        <div class="debate-pip-name">Speaker 2</div>
+      </div>
+      <div class="debate-speaker-pip" id="debate-pip-2">
+        <div class="debate-pip-label">2nd For</div>
+        <div class="debate-pip-name">Speaker 3</div>
+      </div>
+      <div class="debate-speaker-pip" id="debate-pip-3">
+        <div class="debate-pip-label">2nd Against</div>
+        <div class="debate-pip-name">Speaker 4</div>
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="debate-timer" id="debate-timer" style="display:none;">3:00</div>
+    <div class="debate-timer-label" id="debate-timer-label" style="display:none;"></div>
+
+    <!-- Actions -->
+    <div class="debate-action-row">
+      <button class="debate-primary" id="debate-start-btn" onclick="debateStart()" disabled>▶ Start Reading</button>
+      <button class="debate-secondary" onclick="debateNewPaper()">↻ New Paper</button>
+    </div>
+
+  </div>
+</div>
 
 <!-- ═══ GA DRILL ═══ -->
 <div id="ga-drill" class="screen">
@@ -1062,8 +1047,31 @@ kbd{
   </div>
 
   <div class="drill-body">
-    <!-- Difficulty only -->
+    <!-- Committee select + difficulty -->
     <div class="controls-row">
+      <div class="control-block" style="flex:2;">
+        <div class="control-label">Select Committee</div>
+        <select class="select-styled" id="ga-committee-select" onchange="gaNewPrompt()">
+          <option value="all">All Committees</option>
+          <option value="DISEC">DISEC – Weapons & Global Security</option>
+          <option value="ECOFIN">ECOFIN – World Economy & Money</option>
+          <option value="FAO">FAO – Food & Hunger</option>
+          <option value="HRC">HRC – Human Rights</option>
+          <option value="IAEA">IAEA – Nuclear Energy & Safety</option>
+          <option value="IMO">IMO – Oceans & Shipping</option>
+          <option value="ITU">ITU – Technology & the Internet</option>
+          <option value="Legal">Legal Committee – International Law</option>
+          <option value="SOCHUM">SOCHUM – Society & Humanitarian Aid</option>
+          <option value="UNESCO">UNESCO – Education, Science & Culture</option>
+          <option value="UNEP">UNEP – Environment & Climate Change</option>
+          <option value="UNHCR">UNHCR – Refugees & Displacement</option>
+          <option value="UNICEF">UNICEF – Children's Rights</option>
+          <option value="UNCSW">UNCSW – Women's Rights & Equality</option>
+          <option value="UNIDO">UNIDO – Industry & Development</option>
+          <option value="WFP">WFP – Fighting World Hunger</option>
+          <option value="WHO">WHO – Global Health</option>
+        </select>
+      </div>
       <div class="control-block" style="flex:none;">
         <div class="control-label">Difficulty</div>
         <div class="diff-toggle" id="ga-diff-toggle">
@@ -1133,14 +1141,16 @@ kbd{
       <button class="btn-secondary ga-secondary" style="flex:none;" onclick="gaNewPrompt()">↻ New Prompt</button>
     </div>
 
-    <!-- Speech Panel -->
+    <!-- Grading Panel -->
     <div class="grade-panel" id="ga-grade-panel">
-      <div class="grade-panel-title">Speech Transcript</div>
+      <div class="grade-panel-title">Speech Recorded — Get Feedback?</div>
       <div class="grade-transcript" id="ga-transcript"></div>
-      <div id="ga-disfluency" class="ga-disfluency" style="display:none;"></div>
-      <div class="grade-actions" style="margin-top:12px;">
-        <button class="grade-skip-btn" onclick="gaSkipGrading()">↻ New Prompt</button>
+      <div class="grade-actions">
+        <button class="grade-submit-btn" id="ga-submit-btn" onclick="gaSubmitGrading()" style="display:block;flex:1;">Get AI Feedback</button>
+        <button class="grade-skip-btn" onclick="gaSkipGrading()">Skip</button>
       </div>
+      <div class="grade-loading" id="ga-grade-loading"><div class="grade-spinner"></div> Grading your speech...</div>
+      <div class="grade-results" id="ga-grade-results"></div>
     </div>
 
     <div class="hint-row">
@@ -1262,192 +1272,6 @@ kbd{
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-//  SUPABASE CONFIG — replace with your project values
-//  Get these from: supabase.com → your project → Settings → API
-// ══════════════════════════════════════════════
-const _SB_URL  = 'https://jqxhabszoaqlwtnrlmke.supabase.co';
-const _SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxeGhhYnN6b2FxbHd0bnJsbWtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NjQ0NDAsImV4cCI6MjEwMjI0MDQ0MH0.lsLCp4Sm2OHh9JAbXtRLirz3_AUEi6RFm_Z_Qfp3pbo';
-const _sb = window.supabase?.createClient(_SB_URL, _SB_ANON);
-
-let authUser    = null;
-let authProfile = null;
-
-// ── Auth init (runs on page load) ──
-async function initAuth(){
-  if(!_sb) return;
-  const { data:{ session } } = await _sb.auth.getSession();
-  if(session){ authUser = session.user; await _loadProfile(); }
-  _updateAuthBtn();
-  loadGlobalStats();
-  _sb.auth.onAuthStateChange(async (_e, s) => {
-    authUser = s?.user || null;
-    if(authUser){ await _loadProfile(); } else { authProfile = null; }
-    _updateAuthBtn();
-  });
-}
-
-async function _loadProfile(){
-  if(!authUser || !_sb) return;
-  const { data } = await _sb.from('profiles').select('*').eq('id', authUser.id).single();
-  authProfile = data;
-}
-
-function _updateAuthBtn(){
-  const btn = document.getElementById('auth-btn');
-  if(!btn) return;
-  if(authUser && authProfile){
-    btn.textContent = authProfile.name.split(' ')[0];
-    btn.className = 'home-auth-btn signed-in';
-    btn.onclick = goProfile;
-  } else {
-    btn.textContent = 'Sign in';
-    btn.className = 'home-auth-btn';
-    btn.onclick = showAuthModal;
-  }
-}
-
-// ── Auth modal ──
-function showAuthModal(){ document.getElementById('auth-modal').classList.add('open'); switchAuthTab('signin'); }
-function hideAuthModal(){ document.getElementById('auth-modal').classList.remove('open'); document.getElementById('auth-error').textContent=''; }
-function switchAuthTab(t){
-  document.getElementById('auth-signin-form').style.display = t==='signin' ? '' : 'none';
-  document.getElementById('auth-signup-form').style.display = t==='signup' ? '' : 'none';
-  document.getElementById('tab-signin').classList.toggle('active', t==='signin');
-  document.getElementById('tab-signup').classList.toggle('active', t==='signup');
-  document.getElementById('auth-error').textContent = '';
-}
-
-async function handleSignIn(){
-  if(!_sb) return;
-  const email = document.getElementById('signin-email').value.trim();
-  const pw    = document.getElementById('signin-password').value;
-  const err   = document.getElementById('auth-error');
-  err.textContent = '';
-  const { error } = await _sb.auth.signInWithPassword({ email, password: pw });
-  if(error){ err.textContent = error.message; return; }
-  hideAuthModal();
-}
-
-async function handleSignUp(){
-  if(!_sb) return;
-  const name   = document.getElementById('signup-name').value.trim();
-  const school = document.getElementById('signup-school').value.trim();
-  const email  = document.getElementById('signup-email').value.trim();
-  const pw     = document.getElementById('signup-password').value;
-  const err    = document.getElementById('auth-error');
-  err.textContent = '';
-  if(!name || !school){ err.textContent = 'Please fill in your name and school.'; return; }
-  if(pw.length < 6){ err.textContent = 'Password must be at least 6 characters.'; return; }
-  const { data, error } = await _sb.auth.signUp({ email, password: pw });
-  if(error){ err.textContent = error.message; return; }
-  // save profile immediately using the new user id
-  if(data?.user){
-    await _sb.from('profiles').upsert({ id: data.user.id, email, name, school });
-    authProfile = { name, school, email };
-  }
-  hideAuthModal();
-  _updateAuthBtn();
-}
-
-async function submitOnboarding(){
-  if(!_sb || !authUser) return;
-  const name   = document.getElementById('onboard-name').value.trim();
-  const school = document.getElementById('onboard-school').value.trim();
-  const err    = document.getElementById('onboard-error');
-  if(!name || !school){ err.textContent = 'Please fill in both fields.'; return; }
-  const { error } = await _sb.from('profiles').upsert({ id: authUser.id, email: authUser.email, name, school });
-  if(error){ err.textContent = error.message; return; }
-  authProfile = { name, school, email: authUser.email };
-  document.getElementById('onboarding-modal').classList.remove('open');
-  _updateAuthBtn();
-}
-
-async function signOut(){
-  if(!_sb) return;
-  await _sb.auth.signOut();
-  authUser = null; authProfile = null;
-  goHome();
-}
-
-// ── Save a drill session ──
-async function saveSession(mode, data){
-  if(!_sb || !authUser) return;
-  await _sb.from('drill_sessions').insert({
-    user_id: authUser.id, mode,
-    committee:        data.committee || null,
-    difficulty:       data.difficulty || null,
-    duration_secs:    data.duration_secs || 0,
-    score_content:    data.score_content ?? null,
-    score_fillers:    data.score_fillers ?? null,
-    score_confidence: data.score_confidence ?? null,
-    score_hook:       data.score_hook ?? null,
-    overall_score:    data.overall_score ?? null,
-  });
-}
-
-// ── Global stats counter ──
-async function loadGlobalStats(){
-  if(!_sb) return;
-  try {
-    const { data } = await _sb.rpc('get_global_stats');
-    if(!data || !data.total_drills) return;
-    const el = document.getElementById('home-stats-bar');
-    if(el){
-      el.textContent = `${Number(data.total_drills).toLocaleString()} drills · ${Number(data.total_minutes).toLocaleString()} minutes · ${data.total_schools} schools`;
-      el.style.display = '';
-    }
-  } catch(e){}
-}
-
-// ── Profile screen ──
-function goProfile(){
-  showScreen('profile-screen');
-  document.body.style.background = '#f4f6fb';
-  _renderProfile();
-}
-
-async function _renderProfile(){
-  if(!authUser || !authProfile) return;
-  document.getElementById('profile-avatar').textContent = authProfile.name.charAt(0).toUpperCase();
-  document.getElementById('profile-name').textContent   = authProfile.name;
-  document.getElementById('profile-school').textContent = authProfile.school;
-
-  const { data: sessions } = await _sb.from('drill_sessions').select('*')
-    .eq('user_id', authUser.id).order('created_at', { ascending: false });
-
-  if(!sessions?.length){
-    document.getElementById('profile-sessions-list').innerHTML =
-      '<p style="color:var(--sub);font-size:.9rem;padding:16px 0;">No drills yet — start practicing!</p>';
-    document.getElementById('profile-stat-drills').textContent  = '0';
-    document.getElementById('profile-stat-minutes').textContent = '0';
-    document.getElementById('profile-stat-avg').textContent     = '—';
-    return;
-  }
-
-  const totalMins = Math.round(sessions.reduce((a,s) => a + (s.duration_secs||0), 0) / 60);
-  const scored    = sessions.filter(s => s.overall_score != null);
-  const avgScore  = scored.length
-    ? Math.round(scored.reduce((a,s) => a + s.overall_score, 0) / scored.length)
-    : null;
-
-  document.getElementById('profile-stat-drills').textContent  = sessions.length;
-  document.getElementById('profile-stat-minutes').textContent = totalMins;
-  document.getElementById('profile-stat-avg').textContent     = avgScore != null ? avgScore + '/100' : '—';
-
-  const modeLabels = { ga:'General Assembly', crisis:'Crisis', policy:'Policy Defense', debate:'Policy Debate' };
-  const modeColors = { ga:'#3A5FA0', crisis:'#4B75C8', policy:'#5B8DEA', debate:'#93B8F2' };
-  document.getElementById('profile-sessions-list').innerHTML = sessions.slice(0,15).map(s => {
-    const date  = new Date(s.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'});
-    const score = s.overall_score != null ? `<span class="profile-session-score">${Math.round(s.overall_score)}</span>` : '';
-    return `<div class="profile-session-row">
-      <span class="profile-session-badge" style="background:${modeColors[s.mode]||'#5B8DEA'}">${modeLabels[s.mode]||s.mode}</span>
-      ${s.committee ? `<span class="profile-session-committee">${s.committee}</span>` : '<span class="profile-session-committee"></span>'}
-      <span class="profile-session-date">${date}</span>
-      ${score}
-    </div>`;
-  }).join('');
-}
 // ══════════════════════════════════════════════
 //  DATA — GA
 // ══════════════════════════════════════════════
@@ -2019,57 +1843,12 @@ const GA_TOPICS = {
 // ══════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════
-// ── Committee + Lens cycling ──────────────────────────────────────────────
-const GA_COMMITTEES = [
-  {id:'DISEC',   name:'Disarmament and International Security Committee (UNGA 1st)'},
-  {id:'ECOFIN',  name:'Economic and Financial Committee (UNGA 2nd)'},
-  {id:'SOCHUM',  name:'Social, Cultural, and Humanitarian Committee (UNGA 3rd)'},
-  {id:'SPECPOL', name:'Special Political and Decolonization Committee (UNGA 4th)'},
-  {id:'ABC',     name:'Administrative and Budgetary Committee (UNGA 5th)'},
-  {id:'GA6',     name:'Legal Committee (UNGA 6th)'},
-  {id:'UNSC',    name:'United Nations Security Council'},
-  {id:'ECOSOC',  name:'Economic and Social Council'},
-  {id:'UNHRC',   name:'United Nations Human Rights Council'},
-  {id:'UNEP',    name:'United Nations Environment Programme'},
-  {id:'UNESCO',  name:'UN Educational, Scientific and Cultural Organization'},
-  {id:'WHO',     name:'World Health Organization'},
-  {id:'UNICEF',  name:'United Nations Children\'s Fund'},
-  {id:'UNWomen', name:'United Nations Entity for Gender Equality and the Empowerment of Women'},
-  {id:'WFP',     name:'World Food Programme'},
-  {id:'ICJ',     name:'International Court of Justice'},
-  {id:'IAEA',    name:'International Atomic Energy Agency'},
-];
-const GA_LENSES = [
-  'Sovereignty and National Interest',
-  'Economic Impact and Feasibility',
-  'Human Rights and Humanitarian Concerns',
-  'Security and Stability',
-  'Precedent and International Law',
-  'Environmental and Sustainability',
-];
-// Session-level cycling state: cycles through all 17 committees before repeating,
-// advances to next lens after each full round of committees.
-let gaCycleCommitteeIdx = 0;
-let gaCycleLensIdx = 0;
-// Session topic history for similarity check (topic titles)
-let gaSessionTopics = [];
-
-function gaNextCommitteeLens(){
-  const committee = GA_COMMITTEES[gaCycleCommitteeIdx];
-  const lens      = GA_LENSES[gaCycleLensIdx];
-  // advance
-  gaCycleCommitteeIdx = (gaCycleCommitteeIdx + 1) % GA_COMMITTEES.length;
-  if(gaCycleCommitteeIdx === 0){
-    gaCycleLensIdx = (gaCycleLensIdx + 1) % GA_LENSES.length;
-  }
-  return {committee, lens};
-}
-
 let gaState = {
-  committee: '', country: '', topic: '', topicDesc: '',
+  committee: 'all', country: '', topic: '', topicDesc: '',
   prepTime: 10, speakTime: 60, blind: false, tab: 'stance',
   phase: 'idle', remaining: 0, interval: null,
   difficulty: 'easy', generating: false,
+  topicHistory: {}  // keyed by committee abbrev, stores last 10 titles
 };
 let crisisState = {
   committee: '', role: '', roleDesc: '', scenario: '', scenarioDesc: '',
@@ -2155,15 +1934,26 @@ async function gaNewPrompt(){
   const gp=document.getElementById('ga-grade-panel'); if(gp) gp.classList.remove('visible');
   gaState.phase='idle';
 
-  // Pick next committee+lens from session cycle
-  const {committee, lens} = gaNextCommitteeLens();
-  gaState.committee = committee.id;
+  const committee = document.getElementById('ga-committee-select').value;
+  gaState.committee = committee;
   gaState.country = GA_COUNTRIES[Math.floor(Math.random()*GA_COUNTRIES.length)];
 
-  // Show country + committee immediately
+  // Resolve committee
+  let resolvedCommittee;
+  if(committee==='all'){
+    const keys = Object.keys(GA_TOPICS);
+    resolvedCommittee = keys[Math.floor(Math.random()*keys.length)];
+  } else {
+    resolvedCommittee = committee;
+  }
+  gaState.resolvedCommittee = resolvedCommittee;
+
+  // Show country immediately
+  const committeeLabels = {"DISEC":"DISEC","ECOFIN":"ECOFIN","FAO":"FAO","HRC":"HRC","IAEA":"IAEA","IMO":"IMO","ITU":"ITU","Legal":"Legal Committee","SOCHUM":"SOCHUM","UNESCO":"UNESCO","UNEP":"UNEP","UNHCR":"UNHCR","UNICEF":"UNICEF","UNCSW":"UNCSW","UNIDO":"UNIDO","WFP":"WFP","WHO":"WHO"};
+  const committeeLabel = committeeLabels[resolvedCommittee] || resolvedCommittee;
   const flag = gaState.country.substring(0,3).toUpperCase();
   document.getElementById('ga-country-display').innerHTML =
-    `<span class="country-flag">${flag}</span>${gaState.country}<span class="committee-badge">${committee.id}</span>`;
+    `<span class="country-flag">${flag}</span>${gaState.country}<span class="committee-badge">${committeeLabel}</span>`;
 
   // Show loading
   gaState.generating = true;
@@ -2178,50 +1968,41 @@ async function gaNewPrompt(){
     ? 'accessible to a high school or middle school student new to MUN — avoid jargon and overly technical concepts'
     : 'challenging, nuanced, and appropriate for an experienced MUN competitor — involve geopolitical complexity, competing interests, or technical depth';
 
-  const avoidClause = gaSessionTopics.length
-    ? `\nDo NOT generate anything conceptually similar to any of these already-used topics this session:\n${gaSessionTopics.map(t=>`- ${t}`).join('\n')}\nThe topic MUST be on a distinctly different specific issue.`
+  const committeeFullNames = {"DISEC":"Disarmament and International Security Committee","ECOFIN":"Economic and Financial Committee","FAO":"Food and Agriculture Organization","HRC":"Human Rights Council","IAEA":"International Atomic Energy Agency","IMO":"International Maritime Organization","ITU":"International Telecommunication Union","Legal":"Sixth Committee (Legal)","SOCHUM":"Social, Humanitarian and Cultural Committee","UNESCO":"UN Educational, Scientific and Cultural Organization","UNEP":"UN Environment Programme","UNHCR":"UN High Commissioner for Refugees","UNICEF":"UN Children's Fund","UNCSW":"Commission on the Status of Women","UNIDO":"UN Industrial Development Organization","WFP":"World Food Programme","WHO":"World Health Organization"};
+  const fullName = committeeFullNames[resolvedCommittee] || resolvedCommittee;
+
+  const recentTitles = (gaState.topicHistory[resolvedCommittee] || []);
+  const avoidClause = recentTitles.length
+    ? `\nDo NOT generate any of these recently used topics:\n${recentTitles.map(t=>`- ${t}`).join('\n')}\nPick a genuinely different angle, region, or issue.`
     : '';
 
-  const prompt =
-    `You are a MUN topic designer. Generate one unique debate topic for ${committee.name} (${committee.id}).
-Lens: "${lens}" — the topic must clearly fit this lens and be specific to this committee's mandate.
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt:
+        `Generate a single unique MUN debate topic for the ${fullName} (${resolvedCommittee}).
 Difficulty: ${gaState.difficulty} — ${diffDesc}.${avoidClause}
-Return ONLY valid JSON, no markdown fences:
-{"title":"<concise topic title, 6-12 words>","description":"<1-2 sentence background, under 60 words>"}`;
-
-  let parsed = null;
-  // Try up to 3 times; re-run if the generated title is too similar to session history
-  for(let attempt=0; attempt<3; attempt++){
-    try {
-      const resp = await fetch('/api/generate', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({prompt})
-      });
-      const data = await resp.json();
-      const text = (data.text||'').replace(/```json|```/g,'').trim();
-      const candidate = JSON.parse(text);
-      // Similarity check: reject if title shares >3 key words with any session topic
-      const candidateWords = new Set(candidate.title.toLowerCase().split(/\W+/).filter(w=>w.length>4));
-      const tooSimilar = gaSessionTopics.some(prev => {
-        const prevWords = prev.toLowerCase().split(/\W+/).filter(w=>w.length>4);
-        const overlap = prevWords.filter(w=>candidateWords.has(w)).length;
-        return overlap >= 3;
-      });
-      if(!tooSimilar || attempt===2){
-        parsed = candidate;
-        break;
-      }
-      // too similar — retry with explicit avoid clause
-    } catch(e){ break; }
-  }
-
-  if(parsed){
+Return ONLY valid JSON (no markdown, no extra text):
+{"title":"<concise topic title, 6-12 words>","description":"<1-2 sentence background explaining why this is a live UN issue, under 60 words>"}`
+      })
+    });
+    const data = await resp.json();
+    const text = (data.text||data.response||'').replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(text);
     gaState.topic = parsed.title;
     gaState.topicDesc = parsed.description;
-    gaSessionTopics.push(parsed.title);
-  } else {
-    gaState.topic = `${committee.id}: ${lens}`;
-    gaState.topicDesc = 'Topic could not be generated. Please try again.';
+    // Record in history (cap at 10 per committee)
+    if(!gaState.topicHistory[resolvedCommittee]) gaState.topicHistory[resolvedCommittee] = [];
+    gaState.topicHistory[resolvedCommittee].push(parsed.title);
+    if(gaState.topicHistory[resolvedCommittee].length > 10) gaState.topicHistory[resolvedCommittee].shift();
+  } catch(e) {
+    // Fallback to local bank, avoiding recent titles
+    const pool = (GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
+      .filter(t => !recentTitles.includes(t[0]));
+    const pick = (pool.length ? pool : GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
+      [Math.floor(Math.random()*((pool.length ? pool : GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM']).length))];
+    gaState.topic = pick[0];
+    gaState.topicDesc = pick[1];
   }
 
   loadEl.classList.remove('visible');
@@ -2677,10 +2458,14 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();
     if(active==='ga-drill') gaStartStop();
     else if(active==='crisis-drill') crisisStartStop();
+    else if(active==='policy-drill') policyToggleMic();
+    else if(active==='debate-drill') debateStart();
   }
   if(e.code==='Enter'&&e.target.tagName!=='INPUT'){
     if(active==='ga-drill') gaNewPrompt();
     else if(active==='crisis-drill') crisisGenerate();
+    else if(active==='policy-drill') policyNewProblem();
+    else if(active==='debate-drill') debateNewPaper();
   }
   if(e.code==='Escape'){
     goHome();
@@ -2776,72 +2561,7 @@ function autoStartRecording(mode){
 
 function showGAGradePanel(){
   const panel = document.getElementById('ga-grade-panel');
-  if(!panel) return;
-  // Populate disfluency analysis from transcript
-  const text = gaTranscript.trim();
-  if(text) renderGADisfluency(text);
-  panel.classList.add('visible');
-  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-function renderGADisfluency(text){
-  const el = document.getElementById('ga-disfluency');
-  if(!el) return;
-
-  // Filler words / phrases
-  const FILLERS = ['um','uh','like','you know','basically','literally','right','so','well','actually',
-    'kind of','sort of','i mean','you see','okay','yeah'];
-  const words = text.toLowerCase().split(/\b/);
-  const fillerCounts = {};
-  FILLERS.forEach(f=>{
-    const re = new RegExp(`\\b${f}\\b`,'gi');
-    const m = text.match(re);
-    if(m && m.length) fillerCounts[f] = m.length;
-  });
-
-  // Repeated phrases (3+ consecutive same word, or same 2-word phrase appearing 3+ times)
-  const tokenized = text.toLowerCase().replace(/[^\w\s]/g,' ').split(/\s+/).filter(Boolean);
-  const repeatedWords = [];
-  // consecutive repeats (e.g. "the the the")
-  for(let i=1;i<tokenized.length;i++){
-    if(tokenized[i]===tokenized[i-1] && tokenized[i].length>2){
-      const already = repeatedWords.find(r=>r.phrase===tokenized[i]&&r.type==='consecutive');
-      if(!already) repeatedWords.push({phrase:tokenized[i], type:'consecutive', count:2});
-    }
-  }
-  // frequent 2-word phrases (3+ occurrences)
-  const bigrams = {};
-  for(let i=0;i<tokenized.length-1;i++){
-    const bg = tokenized[i]+' '+tokenized[i+1];
-    bigrams[bg] = (bigrams[bg]||0)+1;
-  }
-  Object.entries(bigrams).forEach(([bg,count])=>{
-    if(count>=3) repeatedWords.push({phrase:bg, type:'frequent', count});
-  });
-
-  const fillerEntries = Object.entries(fillerCounts).sort((a,b)=>b[1]-a[1]);
-  const hasFillers = fillerEntries.length > 0;
-  const hasRepeats = repeatedWords.length > 0;
-
-  if(!hasFillers && !hasRepeats){
-    el.style.display='none';
-    return;
-  }
-
-  el.style.display='block';
-  el.innerHTML = `
-    <div class="ga-disfluency-title">Disfluency</div>
-    ${hasFillers ? `
-      <div class="ga-disfluency-section">
-        <div class="ga-disfluency-label">Filler words</div>
-        ${fillerEntries.map(([w,c])=>`<span class="ga-disfluency-tag">${w} ×${c}</span>`).join('')}
-      </div>` : ''}
-    ${hasRepeats ? `
-      <div class="ga-disfluency-section">
-        <div class="ga-disfluency-label">Repeated phrases</div>
-        ${repeatedWords.map(r=>`<span class="ga-disfluency-tag">"${r.phrase}" ×${r.count}</span>`).join('')}
-      </div>` : ''}
-  `;
+  if(panel){ panel.classList.add('visible'); panel.scrollIntoView({behavior:'smooth',block:'nearest'}); }
 }
 function showCrisisGradePanel(){
   const panel = document.getElementById('crisis-grade-panel');
@@ -2849,8 +2569,6 @@ function showCrisisGradePanel(){
 }
 
 function gaSkipGrading(){
-  const el = document.getElementById('ga-disfluency');
-  if(el){ el.style.display='none'; el.innerHTML=''; }
   document.getElementById('ga-grade-panel').classList.remove('visible');
   gaNewPrompt();
 }
@@ -2869,8 +2587,9 @@ function gaStartRecording(){
   const transcript = document.getElementById('ga-transcript');
   transcript.classList.remove('visible');
   transcript.textContent = '';
-  const disfl = document.getElementById('ga-disfluency');
-  if(disfl){ disfl.style.display='none'; disfl.innerHTML=''; }
+  document.getElementById('ga-submit-btn').classList.remove('visible');
+  document.getElementById('ga-grade-results').classList.remove('visible');
+  document.getElementById('ga-grade-results').innerHTML = '';
 
   if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
     alert('Speech recognition is not supported in this browser. Please use Chrome.');
@@ -2894,6 +2613,9 @@ function gaStartRecording(){
   gaRecognition.onend = () => {
     btn.classList.remove('recording');
     btn.textContent = '🎙 Record My Speech';
+    if(gaTranscript.trim().length > 10){
+      document.getElementById('ga-submit-btn').classList.add('visible');
+    }
   };
   gaRecognition.start();
   btn.classList.add('recording');
@@ -2973,6 +2695,33 @@ Return ONLY a JSON object:
 overall should be out of 100. Return ONLY valid JSON.`;
 }
 
+async function gaSubmitGrading(){
+  if(!gaTranscript.trim()) return;
+  document.getElementById('ga-submit-btn').classList.remove('visible');
+  document.getElementById('ga-grade-loading').classList.add('visible');
+
+  const country = document.getElementById('ga-country-display').textContent;
+  const topic = document.getElementById('ga-topic-display').textContent;
+  const context = `Country: ${country} | Topic: ${topic}`;
+  const prompt = buildGradingPrompt(gaTranscript, context, gaState.speakTime);
+
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt})
+    });
+    const data = await resp.json();
+    const clean = (data.text||'').replace(/```json|```/g,'').trim();
+    const grades = JSON.parse(clean);
+    document.getElementById('ga-grade-loading').classList.remove('visible');
+    renderGAGrades(grades);
+  } catch(e){
+    document.getElementById('ga-grade-loading').classList.remove('visible');
+    document.getElementById('ga-grade-results').classList.add('visible');
+    document.getElementById('ga-grade-results').innerHTML = '<p style="color:var(--red);font-size:.85rem;">Failed to grade. Please try again.</p>';
+  }
+}
 
 async function crisisSubmitGrading(){
   if(!crisisTranscript.trim()) return;
@@ -3005,6 +2754,600 @@ async function crisisSubmitGrading(){
 function scoreColor(s){ return s>=8?'score-high':s>=6?'score-mid':'score-low'; }
 function crisisScoreColor(s){ return s>=8?'#4ade80':s>=6?'#f59e0b':'#e87070'; }
 
+function renderGAGrades(g){
+  const el = document.getElementById('ga-grade-results');
+  const criteria = [
+    {key:'content', label:'Content'},
+    {key:'fillers', label:'Filler Words'},
+    {key:'hook', label:'Hook'}
+  ];
+  el.innerHTML = `
+    ${g.overall_comment ? `<div style="font-size:.9rem;color:var(--text);font-style:italic;padding:14px 16px;background:#f0f4ff;border-radius:10px;margin-bottom:14px;line-height:1.5;">"${g.overall_comment}"</div>` : ''}
+    <div class="grade-criteria">
+      ${criteria.map(c => {
+        const feedback = typeof g[c.key] === 'object' ? (g[c.key].feedback||'') : (g[c.key]||'');
+        return `<div class="grade-criterion">
+          <div class="grade-criterion-name" style="margin-bottom:6px;">${c.label}</div>
+          <div class="grade-criterion-feedback">${feedback}</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <button onclick="gaNewPrompt()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:var(--accent);color:#fff;">↻ New Prompt</button>
+  `;
+  el.classList.add('visible');
+}
+
+// ══════════════════════════════════════════════
+//  POLICY DEFENSE
+// ══════════════════════════════════════════════
+const POLICY_PROBLEMS = [
+  ["How would you ensure pharmaceutical companies share clinical trial data equitably during a global health emergency?", "Access to data remains unequal between high- and low-income countries even during outbreaks."],
+  ["What mechanism would you propose to hold private military contractors accountable for civilian casualties in conflict zones?", "PMCs operate across jurisdictions and often escape prosecution under existing international law."],
+  ["How can the international community ensure AI systems used in border control don't produce discriminatory outcomes?", "Algorithmic bias has been documented in asylum processing and visa screening tools across multiple states."],
+  ["How would you design a binding framework to ensure deep-sea mining companies restore ocean ecosystems they extract from?", "No enforceable restoration standard exists under current UNCLOS regulations."],
+  ["What approach would you take to ensure data centers disclose their energy consumption and carbon emissions transparently?", "Tech infrastructure accounts for a growing share of global emissions with minimal mandatory reporting."],
+  ["How would you create a global mechanism for sharing vaccine manufacturing capacity between wealthy and developing nations?", "During COVID-19, 70% of early vaccines went to high-income countries representing 16% of the global population."],
+  ["How can the UN enforce a moratorium on autonomous lethal weapons before binding regulation is agreed upon?", "Over 90 countries now develop or deploy AI-assisted weapons systems with no international oversight."],
+  ["What would a fair international framework for taxing digital services provided by multinational tech companies look like?", "Countries lose an estimated $240 billion annually to profit-shifting by digital multinationals."],
+  ["How would you design a system to compensate small island nations for climate-related loss and damage caused by industrialized states?", "The Santiago Network for loss and damage remains underfunded and lacks a legal liability mechanism."],
+  ["How can the international community prevent the weaponization of food aid in conflict zones?", "Aid blockades and diversion have been documented in Yemen, Sudan, and South Sudan with no accountability."],
+  ["What mechanism would ensure that facial recognition technology sold by one country to another cannot be used for political repression?", "End-use monitoring for surveillance technology exports is nearly nonexistent."],
+  ["How would you design a global protocol for governments to share early warning data during emerging pandemic threats?", "The IHR requires notification but lacks enforcement, and several outbreaks were reported late."],
+  ["How can the UN create enforceable standards for living wages in global supply chains without restricting trade?", "Most voluntary supply chain standards have shown little impact on wages at the production level."],
+  ["What approach would you take to prevent satellite megaconstellations from permanently fragmenting low Earth orbit?", "No binding treaty currently limits the number of satellites a state or company can launch."],
+  ["How would you ensure social media platforms operating in countries with press freedom restrictions don't facilitate censorship?", "Platforms routinely comply with government takedown requests in authoritarian states to maintain market access."],
+  ["How can the international community create a fair framework for countries to exit fossil fuel production without economic collapse?", "Petrostates employing millions depend on revenues that no current fund or treaty compensates for."],
+  ["What mechanism would ensure that genetic data collected by commercial biotech companies is not exploited without community consent?", "Indigenous genetic data has been patented without consent under current IP frameworks."],
+  ["How would you build a binding international standard for the humane treatment of migrant workers in Gulf Cooperation Council states?", "The kafala sponsorship system ties workers legally to employers with limited right to leave or complain."],
+  ["How can the UN create accountability for states that deliberately collapse another country's currency through economic warfare?", "Sanctions and financial coercion cause mass civilian harm but exist in a legal grey zone under international law."],
+  ["What framework would you propose for sharing freshwater resources across borders as climate change reduces river flows?", "Over 150 rivers and lakes are shared by two or more countries with no binding allocation agreement."],
+];
+
+let policyState = {
+  problem: '', context: '',
+  difficulty: 'easy', generating: false,
+  transcript: '', micActive: false, recognition: null,
+  questions: [], currentQ: 0, totalQuestions: 0,
+  qaInterval: null
+};
+
+function goPolicy(){
+  showScreen('policy-drill');
+  document.body.style.background = '#f0f6fc';
+  policyInit();
+}
+
+// ── DEBATE STATE ──
+let debateState = {
+  readTime: 3, speakTime: 45,
+  phase: 'idle', // idle | reading | speaking | done
+  remaining: 0, interval: null,
+  speakerIndex: 0,
+  generating: false, topic: '', paper: ''
+};
+
+const DEBATE_SPEAKERS = [
+  {label:'1st For',    side:'for'},
+  {label:'1st Against',side:'against'},
+  {label:'2nd For',    side:'for'},
+  {label:'2nd Against',side:'against'}
+];
+
+function goDebate(){
+  showScreen('debate-drill');
+  document.body.style.background = '#f4f6fb';
+  debateInit();
+}
+
+function debateInit(){
+  debateNewPaper();
+}
+
+function debateSetRead(mins){
+  debateState.readTime = mins;
+  document.querySelectorAll('#debate-read-seg .debate-seg-btn').forEach((b,i)=>{
+    b.classList.toggle('active', [2,3,4,5][i] === mins);
+  });
+}
+
+function debateSetSpeak(secs){
+  debateState.speakTime = secs;
+  document.querySelectorAll('#debate-speak-seg .debate-seg-btn').forEach((b,i)=>{
+    b.classList.toggle('active', [30,45,60][i] === secs);
+  });
+}
+
+async function debateNewPaper(){
+  if(debateState.generating) return;
+  clearInterval(debateState.interval);
+  debateState.phase = 'idle';
+  debateState.speakerIndex = 0;
+
+  // Reset UI
+  document.getElementById('debate-start-btn').disabled = true;
+  document.getElementById('debate-start-btn').textContent = '▶ Start Reading';
+  document.getElementById('debate-timer').style.display = 'none';
+  document.getElementById('debate-timer-label').style.display = 'none';
+  document.getElementById('debate-speaker-track').style.display = 'none';
+  DEBATE_SPEAKERS.forEach((_,i)=>{
+    const pip = document.getElementById(`debate-pip-${i}`);
+    pip.classList.remove('active','done');
+  });
+
+  debateState.generating = true;
+  const loading = document.getElementById('debate-paper-loading');
+  const content = document.getElementById('debate-paper-content');
+  loading.classList.add('visible');
+  content.textContent = '';
+  content.classList.remove('blurred');
+  document.getElementById('debate-paper-meta').style.display = 'none';
+  document.getElementById('debate-blur-hint').classList.remove('visible');
+
+  const prompt = `Generate a Model UN working paper on a real, current global policy topic.
+
+Format it EXACTLY like this — line breaks and commas matter:
+
+WORKING PAPER [WP-1]
+Committee: [appropriate UN committee name]
+Topic: [topic title]
+Sponsors: [3-4 fictional but realistic country names]
+Signatories: [4-5 more country names]
+
+THE [COMMITTEE NAME],
+
+NOTING [preambulatory clause text],
+
+RECOGNIZING [preambulatory clause text],
+
+DEEPLY CONCERNED BY [preambulatory clause text],
+
+RECALLING [preambulatory clause text],
+
+AWARE OF [preambulatory clause text],
+
+HEREBY:
+
+1. CALLS UPON [specific action, 1-2 sentences];
+
+2. URGES [specific action];
+
+3. ENCOURAGES [specific action];
+
+4. REQUESTS [specific action];
+
+5. RECOMMENDS [specific action].
+
+Rules:
+- Each preambulatory clause MUST be on its own line, ending with a comma
+- Use realistic UN language
+- Topic must be genuinely debatable
+- Return only the working paper text, no commentary`;
+
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({prompt})
+    });
+    const data = await resp.json();
+    debateState.paper = (data.text || '').trim();
+  } catch(e) {
+    debateState.paper = `WORKING PAPER [WP-1]
+Committee: Special Committee on Global Economic Policy
+Topic: Addressing the Growing Debt Crisis in Developing Nations
+Sponsors: Brazil, South Africa, Indonesia, Mexico
+Signatories: Argentina, Nigeria, India, Philippines, Kenya
+
+THE SPECIAL COMMITTEE ON GLOBAL ECONOMIC POLICY,
+
+NOTING with concern that over 60% of low-income countries are in or at high risk of debt distress,
+
+RECOGNIZING that inequitable loan conditions from international creditors disproportionately burden developing economies,
+
+DEEPLY CONCERNED BY the reduction of public spending on healthcare and education resulting from debt servicing obligations,
+
+RECALLING General Assembly Resolution 69/319 on a multilateral legal framework for sovereign debt restructuring,
+
+HEREBY:
+
+1. CALLS UPON the International Monetary Fund and World Bank to implement automatic debt-service suspensions for countries experiencing climate-related disasters;
+
+2. URGES creditor nations to adopt transparent, standardized loan terms that prohibit punitive interest rate escalation clauses;
+
+3. ENCOURAGES the establishment of a UN-facilitated multilateral debt arbitration panel with equal representation from debtor and creditor nations;
+
+4. REQUESTS that the Secretary-General convene an annual Sovereign Debt Review Forum open to all member states;
+
+5. RECOMMENDS that member states explore debt-for-development swap agreements as an alternative to conventional debt restructuring.`;
+  }
+
+  loading.classList.remove('visible');
+
+  // Parse committee, topic, sponsors from header lines
+  const lines = debateState.paper.split('\n');
+  let committee = '', topic = '', sponsors = '', bodyStart = 0;
+  for(let i = 0; i < lines.length; i++){
+    const l = lines[i];
+    if(l.startsWith('Committee:')) committee = l.replace('Committee:','').trim();
+    else if(l.startsWith('Topic:')) topic = l.replace('Topic:','').trim();
+    else if(l.startsWith('Sponsors:')) sponsors = l.replace('Sponsors:','').trim();
+    else if(l.startsWith('THE ') && l.endsWith(',')){
+      bodyStart = i; break;
+    }
+  }
+  const bodyText = lines.slice(bodyStart).join('\n').trim();
+
+  // Populate meta header
+  if(committee || topic){
+    document.getElementById('debate-paper-committee').textContent = committee || 'UN Committee';
+    document.getElementById('debate-paper-topic').textContent = topic || debateState.paper.split('\n')[0];
+    document.getElementById('debate-paper-sponsors').textContent = sponsors ? 'Sponsors: ' + sponsors : '';
+    document.getElementById('debate-paper-meta').style.display = '';
+  }
+  content.textContent = bodyText || debateState.paper;
+  content.classList.add('blurred');
+  document.getElementById('debate-blur-hint').classList.add('visible');
+
+  debateState.generating = false;
+  document.getElementById('debate-start-btn').disabled = false;
+}
+
+function debateStart(){
+  const btn = document.getElementById('debate-start-btn');
+  if(debateState.phase === 'idle'){
+    debateState.phase = 'reading';
+    debateState.remaining = debateState.readTime * 60;
+    document.getElementById('debate-paper-content').classList.remove('blurred');
+    document.getElementById('debate-blur-hint').classList.remove('visible');
+    document.getElementById('debate-timer').style.display = '';
+    document.getElementById('debate-timer-label').style.display = '';
+    document.getElementById('debate-timer-label').textContent = 'Reading time — study the working paper';
+    debateUpdateTimer();
+    btn.textContent = '⏸ Pause';
+    debateState.interval = setInterval(debateTick, 1000);
+  } else if(debateState.phase === 'reading'){
+    clearInterval(debateState.interval);
+    debateState.phase = 'paused-reading';
+    btn.textContent = '▶ Resume';
+  } else if(debateState.phase === 'paused-reading'){
+    debateState.phase = 'reading';
+    btn.textContent = '⏸ Pause';
+    debateState.interval = setInterval(debateTick, 1000);
+  } else if(debateState.phase === 'speaking'){
+    clearInterval(debateState.interval);
+    debateState.phase = 'paused-speaking';
+    btn.textContent = '▶ Resume';
+  } else if(debateState.phase === 'paused-speaking'){
+    debateState.phase = 'speaking';
+    btn.textContent = '⏸ Pause';
+    debateState.interval = setInterval(debateTick, 1000);
+  }
+}
+
+function debateTick(){
+  debateState.remaining--;
+  debateUpdateTimer();
+  if(debateState.remaining <= 0){
+    clearInterval(debateState.interval);
+    if(debateState.phase === 'reading'){
+      debateBeginSpeaking();
+    } else if(debateState.phase === 'speaking'){
+      debateNextSpeaker();
+    }
+  }
+}
+
+function debateUpdateTimer(){
+  const el = document.getElementById('debate-timer');
+  const m = Math.floor(debateState.remaining / 60);
+  const s = debateState.remaining % 60;
+  el.textContent = `${m}:${String(s).padStart(2,'0')}`;
+  const warn = debateState.phase === 'reading' ? debateState.readTime * 60 * .15 : debateState.speakTime * .2;
+  el.className = 'debate-timer' + (debateState.remaining <= 0 ? ' done-time' : debateState.remaining <= warn ? ' warning' : '');
+}
+
+function debateBeginSpeaking(){
+  debateState.phase = 'speaking';
+  debateState.speakerIndex = 0;
+  document.getElementById('debate-speaker-track').style.display = 'flex';
+  document.getElementById('debate-paper-card').style.display = 'none';
+  debateState.remaining = debateState.speakTime;
+  debateUpdateTimer();
+  debateHighlightSpeaker(0);
+  document.getElementById('debate-timer-label').textContent = `${DEBATE_SPEAKERS[0].label} — ${debateState.speakTime}s`;
+  document.getElementById('debate-start-btn').textContent = '⏸ Pause';
+  debateState.interval = setInterval(debateTick, 1000);
+}
+
+function debateNextSpeaker(){
+  document.getElementById(`debate-pip-${debateState.speakerIndex}`).classList.remove('active');
+  document.getElementById(`debate-pip-${debateState.speakerIndex}`).classList.add('done');
+  debateState.speakerIndex++;
+  if(debateState.speakerIndex >= DEBATE_SPEAKERS.length){
+    debateDone();
+    return;
+  }
+  debateState.remaining = debateState.speakTime;
+  debateUpdateTimer();
+  debateHighlightSpeaker(debateState.speakerIndex);
+  document.getElementById('debate-timer-label').textContent = `${DEBATE_SPEAKERS[debateState.speakerIndex].label} — ${debateState.speakTime}s`;
+  debateState.interval = setInterval(debateTick, 1000);
+}
+
+function debateHighlightSpeaker(i){
+  DEBATE_SPEAKERS.forEach((_,j)=>{
+    const pip = document.getElementById(`debate-pip-${j}`);
+    pip.classList.toggle('active', j === i);
+  });
+}
+
+function debateDone(){
+  debateState.phase = 'done';
+  document.getElementById('debate-timer').className = 'debate-timer done-time';
+  document.getElementById('debate-timer').textContent = '0:00';
+  document.getElementById('debate-timer-label').textContent = 'Debate complete';
+  document.getElementById('debate-start-btn').textContent = '↻ New Paper';
+  document.getElementById('debate-start-btn').disabled = false;
+  document.getElementById('debate-start-btn').onclick = () => {
+    document.getElementById('debate-paper-card').style.display = '';
+    document.getElementById('debate-start-btn').onclick = debateStart;
+    debateNewPaper();
+  };
+}
+
+function policyInit(){
+  policyNewProblem();
+}
+
+function policySetDifficulty(d){
+  policyState.difficulty = d;
+  document.getElementById('policy-diff-easy').classList.toggle('active', d==='easy');
+  document.getElementById('policy-diff-hard').classList.toggle('active', d==='hard');
+  policyNewProblem();
+}
+
+async function policyNewProblem(){
+  if(policyState.generating) return;
+  clearInterval(policyState.qaInterval);
+  policyState.transcript = '';
+  policyState.questions = [];
+  policyState.currentQ = 0;
+  policyState.totalQuestions = 0;
+  // Stop any active mic
+  if(policyState.micActive) policyStopMic();
+
+  // Reset UI
+  document.getElementById('policy-mic-btn').disabled = true;
+  document.getElementById('policy-mic-btn').classList.remove('recording');
+  document.getElementById('policy-mic-status').textContent = '';
+  document.getElementById('policy-mic-status').className = 'policy-mic-status';
+  document.getElementById('policy-mic-transcript').textContent = '';
+  document.getElementById('policy-mic-transcript').classList.remove('visible');
+  document.getElementById('policy-submit-btn').style.display = 'none';
+  document.getElementById('policy-action-row').style.display = '';
+  document.getElementById('policy-instruction').style.display = 'none';
+  document.getElementById('policy-qa-card').classList.remove('visible');
+  document.getElementById('policy-qa-content').style.display = 'none';
+  document.getElementById('policy-feedback-card').classList.remove('visible');
+
+  // Show loading
+  policyState.generating = true;
+  const loadEl = document.getElementById('policy-topic-loading');
+  const textEl = document.getElementById('policy-problem-text');
+  const ctxEl  = document.getElementById('policy-problem-context');
+  loadEl.style.display = 'flex';
+  textEl.textContent = '';
+  ctxEl.textContent  = '';
+
+  const diffDesc = policyState.difficulty === 'easy'
+    ? 'accessible and clear for a high school student new to MUN — avoid jargon, use a concrete real-world scenario'
+    : 'complex and nuanced, appropriate for an experienced MUN competitor — involve competing stakeholder interests, trade-offs, or systemic constraints';
+
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt:
+        `Generate a single unique policy challenge prompt for a MUN Policy Defense drill.
+Difficulty: ${policyState.difficulty} — ${diffDesc}.
+The prompt should ask the delegate "How would you..." or "What mechanism would you propose to..." and relate to a real global policy problem.
+Return ONLY valid JSON (no markdown, no extra text):
+{"problem":"<the challenge question, 15-30 words>","context":"<1-sentence real-world context explaining why this is unsolved, under 25 words>"}`
+      })
+    });
+    const data = await resp.json();
+    const text = (data.text||data.response||'').replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(text);
+    policyState.problem = parsed.problem;
+    policyState.context = parsed.context;
+  } catch(e) {
+    const pick = POLICY_PROBLEMS[Math.floor(Math.random()*POLICY_PROBLEMS.length)];
+    policyState.problem = pick[0];
+    policyState.context = pick[1];
+  }
+
+  loadEl.style.display = 'none';
+  textEl.textContent = policyState.problem;
+  ctxEl.textContent  = policyState.context;
+  policyState.generating = false;
+  document.getElementById('policy-mic-btn').disabled = false;
+  document.getElementById('policy-instruction').style.display = '';
+}
+
+function policyToggleMic(){
+  if(policyState.micActive) policyStopMic();
+  else policyStartMic();
+}
+
+function policyStartMic(){
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRec){ alert('Speech recognition requires Chrome or Edge.'); return; }
+  const rec = new SpeechRec();
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.lang = 'en-US';
+  policyState.recognition = rec;
+  policyState.transcript = '';
+  let finalText = '';
+  rec.onresult = (e) => {
+    let interim = '';
+    finalText = '';
+    for(let i = 0; i < e.results.length; i++){
+      if(e.results[i].isFinal) finalText += e.results[i][0].transcript + ' ';
+      else interim += e.results[i][0].transcript;
+    }
+    policyState.transcript = finalText;
+    const el = document.getElementById('policy-mic-transcript');
+    el.textContent = finalText + interim;
+    el.classList.add('visible');
+  };
+  rec.onend = () => { if(policyState.micActive) rec.start(); };
+  rec.onerror = (e) => { if(e.error !== 'no-speech') console.warn('SpeechRec error', e.error); };
+  rec.start();
+  policyState.micActive = true;
+  document.getElementById('policy-mic-btn').classList.add('recording');
+  const status = document.getElementById('policy-mic-status');
+  status.textContent = 'Recording…';
+  status.className = 'policy-mic-status live';
+  document.getElementById('policy-submit-btn').style.display = 'none';
+}
+
+function policyStopMic(){
+  policyState.micActive = false;
+  if(policyState.recognition){
+    policyState.recognition.onend = null;
+    policyState.recognition.stop();
+    policyState.recognition = null;
+  }
+  document.getElementById('policy-mic-btn').classList.remove('recording');
+  const status = document.getElementById('policy-mic-status');
+  status.textContent = 'Tap mic to re-record, or submit below';
+  status.className = 'policy-mic-status';
+  if(policyState.transcript.trim()){
+    document.getElementById('policy-submit-btn').style.display = '';
+  }
+}
+
+function policySubmitSpeech(){
+  document.getElementById('policy-action-row').style.display = 'none';
+  document.getElementById('policy-instruction').style.display = 'none';
+  policyGenerateQuestions();
+}
+
+async function policyGenerateQuestions(){
+  const qaCard = document.getElementById('policy-qa-card');
+  qaCard.classList.add('visible');
+  qaCard.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('policy-q-loading').classList.add('visible');
+  document.getElementById('policy-qa-content').style.display = 'none';
+
+  const transcript = policyState.transcript.trim() || '(no transcript captured)';
+  const prompt = `You are a sharp MUN committee chair. A delegate was given this policy challenge:
+"${policyState.problem}"
+
+The delegate's spoken explanation of their proposed solution:
+"${transcript}"
+
+Generate exactly 5 follow-up questions to probe their solution. The questions must:
+- Be specific to what the delegate said (or the challenge if transcript is thin)
+- Target different angles: feasibility, funding, enforcement, unintended consequences, stakeholder buy-in
+- Be concise, pointed, and realistic — the kind a real chair or fellow delegate would ask
+- NOT be generic filler like "Can you elaborate?"
+
+Return ONLY a JSON array of 5 strings. No markdown.`;
+
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({prompt})
+    });
+    const data = await resp.json();
+    const clean = (data.text||'').replace(/```json|```/g,'').trim();
+    policyState.questions = JSON.parse(clean);
+  } catch(e){
+    policyState.questions = [
+      'How would you fund this proposal given that most member states face domestic budget constraints?',
+      'Which international body would have enforcement authority, and what happens if a state refuses to comply?',
+      'How does your solution address concerns from developing nations who may bear disproportionate costs?',
+      'What are the two most likely unintended consequences of your approach, and how would you mitigate them?',
+      'How long would full implementation realistically take, and what interim measures would protect affected populations?'
+    ];
+  }
+
+  document.getElementById('policy-q-loading').classList.remove('visible');
+  policyState.totalQuestions = policyState.questions.length;
+  policyState.currentQ = 0;
+  document.getElementById('policy-qa-content').style.display = '';
+  policyShowQuestion();
+}
+
+function policyShowQuestion(){
+  const i = policyState.currentQ;
+  document.getElementById('policy-qa-num').textContent = `Question ${i+1} of ${policyState.totalQuestions}`;
+  document.getElementById('policy-qa-question').textContent = policyState.questions[i];
+  document.getElementById('policy-qa-timer').textContent = '0:20';
+  document.getElementById('policy-qa-timer').className = 'policy-qa-timer';
+  document.getElementById('policy-qa-bar').style.transition = 'none';
+  document.getElementById('policy-qa-bar').style.width = '100%';
+  requestAnimationFrame(() => {
+    document.getElementById('policy-qa-bar').style.transition = 'width 1s linear';
+  });
+  let rem = 20;
+  clearInterval(policyState.qaInterval);
+  policyState.qaInterval = setInterval(() => {
+    rem--;
+    const timerEl = document.getElementById('policy-qa-timer');
+    timerEl.textContent = `0:${String(rem).padStart(2,'0')}`;
+    document.getElementById('policy-qa-bar').style.width = (rem / 20 * 100) + '%';
+    if(rem <= 5) timerEl.className = 'policy-qa-timer warning';
+    if(rem <= 0){
+      clearInterval(policyState.qaInterval);
+      timerEl.className = 'policy-qa-timer done';
+      setTimeout(policyAdvanceQuestion, 700);
+    }
+  }, 1000);
+}
+
+function policyAdvanceQuestion(){
+  policyState.currentQ++;
+  if(policyState.currentQ < policyState.totalQuestions){
+    policyShowQuestion();
+  } else {
+    policyShowFeedback();
+  }
+}
+
+async function policyShowFeedback(){
+  document.getElementById('policy-qa-card').classList.remove('visible');
+  const feedbackCard = document.getElementById('policy-feedback-card');
+  feedbackCard.classList.add('visible');
+  feedbackCard.scrollIntoView({behavior:'smooth', block:'nearest'});
+  const body = document.getElementById('policy-feedback-body');
+  body.innerHTML = '<div style="display:flex;align-items:center;gap:8px;color:#5a7a95;font-size:.85rem;"><div class="policy-gen-spinner"></div> Generating feedback…</div>';
+
+  const prompt = `You are a MUN judge giving concise feedback after a Policy Defense drill.
+
+Policy challenge: "${policyState.problem}"
+Delegate's spoken solution: "${policyState.transcript.trim() || '(no transcript)'}"
+Follow-up questions faced: ${JSON.stringify(policyState.questions)}
+
+Write 2-4 sentences of honest, specific feedback covering:
+1. What their solution did well (based on the transcript)
+2. The biggest weakness to address
+3. One concrete tip for next time
+
+Be direct, encouraging, and specific. Write in flowing prose — no bullet points.`;
+
+  try {
+    const resp = await fetch('/api/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({prompt})
+    });
+    const data = await resp.json();
+    body.textContent = data.text || 'Great effort defending your position under pressure!';
+  } catch(e) {
+    body.textContent = 'Great effort defending your position under pressure! Review the follow-up questions to identify your weakest angles.';
+  }
+}
+
 function renderCrisisGrades(g){
   const el = document.getElementById('crisis-grade-results');
   const criteria = [
@@ -3026,20 +3369,7 @@ function renderCrisisGrades(g){
     <button onclick="crisisGenerate()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:#c0392b;color:#fff;">↻ New Prompt</button>
   `;
   el.classList.add('visible');
-  // save to Supabase
-  saveSession('crisis', {
-    committee: document.getElementById('crisis-scenario-display')?.textContent || '',
-    duration_secs: crisisState.speakTime,
-    score_content:    typeof g.content    === 'object' ? g.content.score    : null,
-    score_fillers:    typeof g.fillers    === 'object' ? g.fillers.score    : null,
-    score_confidence: typeof g.confidence === 'object' ? g.confidence.score : null,
-    score_hook:       typeof g.hook       === 'object' ? g.hook.score       : null,
-    overall_score:    g.overall ?? null,
-  });
 }
-
-// ── Boot ──
-window.addEventListener('DOMContentLoaded', initAuth);
 
 </script>
 </body>
