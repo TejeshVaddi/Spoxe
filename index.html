@@ -352,6 +352,8 @@ kbd{
 .info-card-desc{font-size:.85rem;color:var(--sub);margin-top:6px;line-height:1.5;}
 
 .committee-badge{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.05em;background:#f0f3ff;color:#2952e3;border-radius:5px;padding:2px 8px;margin-left:10px;vertical-align:middle;}
+.ga-committee-panel{display:inline-flex;align-items:center;gap:6px;background:#e8eeff;border:1.5px solid #c4cef8;border-radius:8px;padding:5px 12px;margin-top:10px;font-size:.8rem;font-weight:700;color:#2952e3;letter-spacing:.04em;}
+.ga-committee-panel .cp-label{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5a6abf;margin-right:2px;}
 .country-flag{
   display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.05em;
   background:var(--accent-light);color:var(--accent);border-radius:5px;
@@ -933,12 +935,14 @@ kbd{
       <div id="policy-qa-content" style="display:none;">
         <div class="policy-qa-header">
           <span class="policy-qa-num" id="policy-qa-num">Question 1 of 5</span>
-          <div class="policy-qa-timer" id="policy-qa-timer">0:20</div>
         </div>
         <div class="policy-qa-question" id="policy-qa-question"></div>
-        <div class="policy-qa-progress">
-          <div class="policy-qa-bar" id="policy-qa-bar" style="width:100%"></div>
+        <div class="policy-mic-row" style="margin-top:14px;">
+          <button class="policy-mic-btn" id="policy-qa-mic-btn" onclick="policyQaMicToggle()" title="Record your answer">🎤</button>
         </div>
+        <div class="policy-mic-status" id="policy-qa-mic-status">Tap mic to answer</div>
+        <div class="policy-mic-transcript" id="policy-qa-mic-transcript"></div>
+        <button class="policy-primary" id="policy-qa-next-btn" onclick="policyAdvanceQuestion()" style="display:none;margin-top:14px;width:100%;">Next Question →</button>
       </div>
     </div>
 
@@ -1087,6 +1091,7 @@ kbd{
       <div class="ga-topic-loading" id="ga-topic-loading"><div class="ga-topic-spinner"></div> Generating topic...</div>
       <div class="info-card-main" id="ga-topic-display">—</div>
       <div class="info-card-desc" id="ga-topic-desc"></div>
+      <div id="ga-committee-panel" style="display:none;"><div class="ga-committee-panel"><span class="cp-label">Committee</span><span id="ga-committee-name"></span></div></div>
     </div>
 
     <!-- Phase Steps -->
@@ -1930,7 +1935,9 @@ async function gaNewPrompt(){
   const committeeLabel = committeeLabels[resolvedCommittee] || resolvedCommittee;
   const flag = gaState.country.substring(0,3).toUpperCase();
   document.getElementById('ga-country-display').innerHTML =
-    `<span class="country-flag">${flag}</span>${gaState.country}<span class="committee-badge">${committeeLabel}</span>`;
+    `<span class="country-flag">${flag}</span>${gaState.country}`;
+  document.getElementById('ga-committee-name').textContent = committeeLabel;
+  document.getElementById('ga-committee-panel').style.display = '';
 
   // Show loading
   gaState.generating = true;
@@ -2784,8 +2791,8 @@ let policyState = {
   problem: '', context: '',
   difficulty: 'easy', generating: false,
   transcript: '', micActive: false, recognition: null,
-  questions: [], currentQ: 0, totalQuestions: 0,
-  qaInterval: null
+  questions: [], qaAnswers: [], currentQ: 0, totalQuestions: 0,
+  qaInterval: null, qaRecognition: null
 };
 
 function goPolicy(){
@@ -3085,8 +3092,10 @@ function policySetDifficulty(d){
 async function policyNewProblem(){
   if(policyState.generating) return;
   clearInterval(policyState.qaInterval);
+  if(policyState.qaRecognition){ try{ policyState.qaRecognition.stop(); }catch(e){} policyState.qaRecognition = null; }
   policyState.transcript = '';
   policyState.questions = [];
+  policyState.qaAnswers = [];
   policyState.currentQ = 0;
   policyState.totalQuestions = 0;
   // Stop any active mic
@@ -3258,32 +3267,77 @@ Return ONLY a JSON array of 5 strings. No markdown.`;
 
 function policyShowQuestion(){
   const i = policyState.currentQ;
+  const isLast = (i + 1 >= policyState.totalQuestions);
   document.getElementById('policy-qa-num').textContent = `Question ${i+1} of ${policyState.totalQuestions}`;
   document.getElementById('policy-qa-question').textContent = policyState.questions[i];
-  document.getElementById('policy-qa-timer').textContent = '0:20';
-  document.getElementById('policy-qa-timer').className = 'policy-qa-timer';
-  document.getElementById('policy-qa-bar').style.transition = 'none';
-  document.getElementById('policy-qa-bar').style.width = '100%';
-  requestAnimationFrame(() => {
-    document.getElementById('policy-qa-bar').style.transition = 'width 1s linear';
-  });
-  let rem = 20;
-  clearInterval(policyState.qaInterval);
-  policyState.qaInterval = setInterval(() => {
-    rem--;
-    const timerEl = document.getElementById('policy-qa-timer');
-    timerEl.textContent = `0:${String(rem).padStart(2,'0')}`;
-    document.getElementById('policy-qa-bar').style.width = (rem / 20 * 100) + '%';
-    if(rem <= 5) timerEl.className = 'policy-qa-timer warning';
-    if(rem <= 0){
-      clearInterval(policyState.qaInterval);
-      timerEl.className = 'policy-qa-timer done';
-      setTimeout(policyAdvanceQuestion, 700);
-    }
-  }, 1000);
+  // Reset mic state for this question
+  const micBtn = document.getElementById('policy-qa-mic-btn');
+  micBtn.classList.remove('recording');
+  micBtn.disabled = false;
+  document.getElementById('policy-qa-mic-status').textContent = 'Tap mic to answer';
+  document.getElementById('policy-qa-mic-status').className = 'policy-mic-status';
+  document.getElementById('policy-qa-mic-transcript').textContent = '';
+  document.getElementById('policy-qa-mic-transcript').classList.remove('visible');
+  const nextBtn = document.getElementById('policy-qa-next-btn');
+  nextBtn.style.display = 'none';
+  nextBtn.textContent = isLast ? 'See Feedback →' : 'Next Question →';
+  if(policyState.qaRecognition){ try{ policyState.qaRecognition.stop(); }catch(e){} policyState.qaRecognition = null; }
+}
+
+function policyQaMicToggle(){
+  const micBtn = document.getElementById('policy-qa-mic-btn');
+  if(micBtn.classList.contains('recording')){
+    // Stop
+    if(policyState.qaRecognition){ try{ policyState.qaRecognition.stop(); }catch(e){} }
+    micBtn.classList.remove('recording');
+    document.getElementById('policy-qa-mic-status').textContent = '';
+    document.getElementById('policy-qa-mic-status').className = 'policy-mic-status';
+    document.getElementById('policy-qa-next-btn').style.display = '';
+  } else {
+    // Start
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(!SR){ alert('Speech recognition not supported in this browser.'); return; }
+    const rec = new SR();
+    policyState.qaRecognition = rec;
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.lang = 'en-US';
+    const transcriptEl = document.getElementById('policy-qa-mic-transcript');
+    const statusEl = document.getElementById('policy-qa-mic-status');
+    let final = '';
+    rec.onresult = e => {
+      let interim = '';
+      for(let i = e.resultIndex; i < e.results.length; i++){
+        if(e.results[i].isFinal) final += e.results[i][0].transcript + ' ';
+        else interim = e.results[i][0].transcript;
+      }
+      transcriptEl.textContent = (final + interim).trim();
+      transcriptEl.classList.add('visible');
+    };
+    rec.onerror = () => {
+      micBtn.classList.remove('recording');
+      statusEl.textContent = 'Mic error — tap to retry';
+      statusEl.className = 'policy-mic-status';
+    };
+    rec.onend = () => {
+      if(micBtn.classList.contains('recording')){
+        micBtn.classList.remove('recording');
+        statusEl.textContent = '';
+        statusEl.className = 'policy-mic-status';
+        document.getElementById('policy-qa-next-btn').style.display = '';
+      }
+    };
+    rec.start();
+    micBtn.classList.add('recording');
+    statusEl.textContent = 'Recording…';
+    statusEl.className = 'policy-mic-status live';
+  }
 }
 
 function policyAdvanceQuestion(){
+  if(policyState.qaRecognition){ try{ policyState.qaRecognition.stop(); }catch(e){} policyState.qaRecognition = null; }
+  const answerText = (document.getElementById('policy-qa-mic-transcript').textContent || '').trim();
+  policyState.qaAnswers[policyState.currentQ] = answerText;
   policyState.currentQ++;
   if(policyState.currentQ < policyState.totalQuestions){
     policyShowQuestion();
@@ -3300,18 +3354,20 @@ async function policyShowFeedback(){
   const body = document.getElementById('policy-feedback-body');
   body.innerHTML = '<div style="display:flex;align-items:center;gap:8px;color:#5a7a95;font-size:.85rem;"><div class="policy-gen-spinner"></div> Generating feedback…</div>';
 
-  const prompt = `You are a MUN judge giving concise feedback after a Policy Defense drill.
+  const qaPairs = policyState.questions.map((q, i) =>
+    `Q${i+1}: ${q}\nAnswer: ${policyState.qaAnswers[i] || '(no answer recorded)'}`
+  ).join('\n\n');
+
+  const prompt = `You are a sharp MUN committee chair giving feedback after a Q&A drill.
 
 Policy challenge: "${policyState.problem}"
-Delegate's spoken solution: "${policyState.transcript.trim() || '(no transcript)'}"
-Follow-up questions faced: ${JSON.stringify(policyState.questions)}
+Delegate's original solution: "${policyState.transcript.trim() || '(no transcript)'}"
 
-Write 2-4 sentences of honest, specific feedback covering:
-1. What their solution did well (based on the transcript)
-2. The biggest weakness to address
-3. One concrete tip for next time
+The delegate answered 5 follow-up questions. For EACH question, give 1-2 sentences of specific, honest feedback on their answer — what they did well and what to improve. Be direct and concrete.
 
-Be direct, encouraging, and specific. Write in flowing prose — no bullet points.`;
+${qaPairs}
+
+Return ONLY a JSON array of 5 feedback strings, one per question, in order. No markdown.`;
 
   try {
     const resp = await fetch('/api/generate', {
@@ -3319,9 +3375,29 @@ Be direct, encouraging, and specific. Write in flowing prose — no bullet point
       body: JSON.stringify({prompt})
     });
     const data = await resp.json();
-    body.textContent = data.text || 'Great effort defending your position under pressure!';
+    let feedbacks;
+    try {
+      feedbacks = JSON.parse((data.text||'').replace(/```json|```/g,'').trim());
+    } catch(e2) {
+      feedbacks = null;
+    }
+    if(Array.isArray(feedbacks) && feedbacks.length === 5){
+      body.innerHTML = policyState.questions.map((q, i) => `
+        <div style="margin-bottom:16px;padding:12px 14px;background:#f4f8ff;border-radius:10px;border-left:3px solid #0073b7;">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#0073b7;margin-bottom:4px;">Q${i+1}</div>
+          <div style="font-size:.85rem;font-weight:600;color:#1a2a3a;margin-bottom:6px;">${q}</div>
+          <div style="font-size:.85rem;color:#3a5a75;line-height:1.5;">${feedbacks[i]}</div>
+        </div>`).join('');
+    } else {
+      body.textContent = data.text || 'Great effort on all five questions!';
+    }
   } catch(e) {
-    body.textContent = 'Great effort defending your position under pressure! Review the follow-up questions to identify your weakest angles.';
+    body.innerHTML = policyState.questions.map((q, i) => `
+      <div style="margin-bottom:12px;padding:10px 12px;background:#f4f8ff;border-radius:9px;border-left:3px solid #0073b7;">
+        <div style="font-size:.72rem;font-weight:700;color:#0073b7;margin-bottom:3px;">Q${i+1}</div>
+        <div style="font-size:.84rem;color:#1a2a3a;margin-bottom:4px;">${q}</div>
+        <div style="font-size:.84rem;color:#3a5a75;">Review how you responded to this angle.</div>
+      </div>`).join('');
   }
 }
 
