@@ -827,9 +827,9 @@ kbd{
     <h1>MUN Speech Drill</h1>
   </div>
 
-  <div class="mode-grid">
+  <div class="mode-grid" style="display:flex;flex-direction:row;gap:20px;">
     <!-- GA Card -->
-    <div class="mode-card ga" onclick="goGA()">
+    <div class="mode-card ga" onclick="goGA()" style="flex:1;">
       <div class="card-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
@@ -840,7 +840,7 @@ kbd{
     </div>
 
     <!-- Crisis Card -->
-    <div class="mode-card crisis" onclick="goCrisis()">
+    <div class="mode-card crisis" onclick="goCrisis()" style="flex:1;">
       <div class="card-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
@@ -849,190 +849,8 @@ kbd{
         <p>AI-generated roles and scenarios for any committee.</p>
       </div>
     </div>
-
-    <!-- Policy Defense Card -->
-    <div class="mode-card policy" onclick="goPolicy()">
-      <div class="card-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <div class="mode-card-text">
-        <h2>Policy Defense</h2>
-        <p>Pitch your solution in 60 seconds, then defend it.</p>
-      </div>
-    </div>
-
-    <!-- Policy Debate Card -->
-    <div class="mode-card debate" onclick="goDebate()">
-      <div class="card-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <div class="mode-card-text">
-        <h2>Policy Debate</h2>
-        <p>2-for-2-against structured debate on AI-generated working papers.</p>
-      </div>
-    </div>
   </div>
 
-</div>
-
-<!-- ═══ POLICY DEFENSE DRILL ═══ -->
-<div id="policy-drill" class="screen">
-  <div class="policy-header">
-    <button class="policy-back" onclick="goHome()">← Back</button>
-    <div class="policy-badge">
-      <span class="policy-badge-dot"></span>
-      POLICY DEFENSE
-      <span class="policy-sub">· Solution &amp; Q&amp;A drill</span>
-    </div>
-  </div>
-
-  <div class="policy-body">
-    <!-- Difficulty toggle -->
-    <div class="diff-row">
-      <div class="diff-toggle" id="policy-diff-toggle">
-        <button class="diff-btn active" id="policy-diff-easy" onclick="policySetDifficulty('easy')">Easy</button>
-        <button class="diff-btn" id="policy-diff-hard" onclick="policySetDifficulty('hard')">Hard</button>
-      </div>
-    </div>
-
-    <!-- Problem card -->
-    <div class="policy-problem-card" id="policy-problem-card">
-      <div class="policy-problem-label">Policy Challenge</div>
-      <div class="policy-topic-loading" id="policy-topic-loading" style="display:none;">
-        <div class="policy-gen-spinner"></div> Generating challenge...
-      </div>
-      <div class="policy-problem-text" id="policy-problem-text">—</div>
-      <div class="policy-problem-context" id="policy-problem-context"></div>
-    </div>
-
-    <!-- Instruction -->
-    <div class="policy-instruction" id="policy-instruction">
-      Read the challenge above, then tap the mic and explain your proposed solution. Tap again when you're done.
-    </div>
-
-    <!-- Mic -->
-    <div class="policy-mic-row">
-      <button class="policy-mic-btn" id="policy-mic-btn" onclick="policyToggleMic()" disabled title="Toggle microphone">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
-      </button>
-    </div>
-    <div class="policy-mic-status" id="policy-mic-status"></div>
-    <div class="policy-mic-transcript" id="policy-mic-transcript"></div>
-
-    <!-- Actions -->
-    <div class="policy-action-row" id="policy-action-row">
-      <button class="policy-primary" id="policy-submit-btn" onclick="policySubmitSpeech()" style="display:none;">Submit → Get Questions</button>
-      <button class="policy-secondary" onclick="policyNewProblem()">↻ New Problem</button>
-    </div>
-
-    <!-- Q&A phase -->
-    <div class="policy-qa-card" id="policy-qa-card">
-      <div class="policy-loading" id="policy-q-loading">
-        <div class="policy-gen-spinner"></div> Generating questions…
-      </div>
-      <div id="policy-qa-content" style="display:none;">
-        <div class="policy-qa-header">
-          <span class="policy-qa-num" id="policy-qa-num">Question 1 of 5</span>
-          <div class="policy-qa-timer" id="policy-qa-timer">0:20</div>
-        </div>
-        <div class="policy-qa-question" id="policy-qa-question"></div>
-        <div class="policy-qa-progress">
-          <div class="policy-qa-bar" id="policy-qa-bar" style="width:100%"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Feedback -->
-    <div class="policy-feedback-card" id="policy-feedback-card">
-      <div class="policy-feedback-title">Performance Feedback</div>
-      <div class="policy-feedback-body" id="policy-feedback-body"></div>
-      <div style="display:flex;gap:12px;margin-top:20px;">
-        <button class="policy-primary" onclick="policyNewProblem()" style="flex:1;">↻ Try Another Problem</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ POLICY DEBATE DRILL ═══ -->
-<div id="debate-drill" class="screen">
-  <div class="debate-header">
-    <button class="debate-back" onclick="goHome()">← Back</button>
-    <div class="debate-badge">
-      <span class="debate-badge-dot"></span>
-      POLICY DEBATE
-      <span class="debate-sub">· 2-for-2-against</span>
-    </div>
-  </div>
-
-  <div class="debate-body">
-
-    <!-- Time controls -->
-    <div class="debate-controls">
-      <div class="debate-control-block">
-        <div class="debate-control-label">Reading Time</div>
-        <div class="debate-seg" id="debate-read-seg">
-          <button class="debate-seg-btn" onclick="debateSetRead(2)">2 min</button>
-          <button class="debate-seg-btn active" onclick="debateSetRead(3)">3 min</button>
-          <button class="debate-seg-btn" onclick="debateSetRead(4)">4 min</button>
-          <button class="debate-seg-btn" onclick="debateSetRead(5)">5 min</button>
-        </div>
-      </div>
-      <div class="debate-control-block">
-        <div class="debate-control-label">Speaking Time</div>
-        <div class="debate-seg" id="debate-speak-seg">
-          <button class="debate-seg-btn" onclick="debateSetSpeak(30)">30 s</button>
-          <button class="debate-seg-btn active" onclick="debateSetSpeak(45)">45 s</button>
-          <button class="debate-seg-btn" onclick="debateSetSpeak(60)">1 min</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Working paper -->
-    <div class="debate-paper-card" id="debate-paper-card">
-      <div class="debate-paper-label">Working Paper</div>
-      <div class="debate-paper-loading" id="debate-paper-loading">
-        <div class="debate-paper-spinner"></div> Generating working paper…
-      </div>
-      <div class="debate-paper-meta" id="debate-paper-meta" style="display:none;">
-        <div class="debate-paper-committee" id="debate-paper-committee"></div>
-        <div class="debate-paper-topic" id="debate-paper-topic"></div>
-        <div class="debate-paper-sponsors" id="debate-paper-sponsors"></div>
-      </div>
-      <div class="debate-paper-body blurred" id="debate-paper-content"></div>
-      <div class="debate-blur-hint visible" id="debate-blur-hint">Press ▶ Start Reading to reveal the working paper</div>
-    </div>
-
-    <!-- Speaker track (hidden until speaking phase) -->
-    <div class="debate-speaker-track" id="debate-speaker-track" style="display:none;">
-      <div class="debate-speaker-pip" id="debate-pip-0">
-        <div class="debate-pip-label">1st For</div>
-        <div class="debate-pip-name">Speaker 1</div>
-      </div>
-      <div class="debate-speaker-pip" id="debate-pip-1">
-        <div class="debate-pip-label">1st Against</div>
-        <div class="debate-pip-name">Speaker 2</div>
-      </div>
-      <div class="debate-speaker-pip" id="debate-pip-2">
-        <div class="debate-pip-label">2nd For</div>
-        <div class="debate-pip-name">Speaker 3</div>
-      </div>
-      <div class="debate-speaker-pip" id="debate-pip-3">
-        <div class="debate-pip-label">2nd Against</div>
-        <div class="debate-pip-name">Speaker 4</div>
-      </div>
-    </div>
-
-    <!-- Timer -->
-    <div class="debate-timer" id="debate-timer" style="display:none;">3:00</div>
-    <div class="debate-timer-label" id="debate-timer-label" style="display:none;"></div>
-
-    <!-- Actions -->
-    <div class="debate-action-row">
-      <button class="debate-primary" id="debate-start-btn" onclick="debateStart()" disabled>▶ Start Reading</button>
-      <button class="debate-secondary" onclick="debateNewPaper()">↻ New Paper</button>
-    </div>
-
-  </div>
 </div>
 
 <!-- ═══ GA DRILL ═══ -->
@@ -1047,31 +865,8 @@ kbd{
   </div>
 
   <div class="drill-body">
-    <!-- Committee select + difficulty -->
+    <!-- Difficulty -->
     <div class="controls-row">
-      <div class="control-block" style="flex:2;">
-        <div class="control-label">Select Committee</div>
-        <select class="select-styled" id="ga-committee-select" onchange="gaNewPrompt()">
-          <option value="all">All Committees</option>
-          <option value="DISEC">DISEC – Weapons & Global Security</option>
-          <option value="ECOFIN">ECOFIN – World Economy & Money</option>
-          <option value="FAO">FAO – Food & Hunger</option>
-          <option value="HRC">HRC – Human Rights</option>
-          <option value="IAEA">IAEA – Nuclear Energy & Safety</option>
-          <option value="IMO">IMO – Oceans & Shipping</option>
-          <option value="ITU">ITU – Technology & the Internet</option>
-          <option value="Legal">Legal Committee – International Law</option>
-          <option value="SOCHUM">SOCHUM – Society & Humanitarian Aid</option>
-          <option value="UNESCO">UNESCO – Education, Science & Culture</option>
-          <option value="UNEP">UNEP – Environment & Climate Change</option>
-          <option value="UNHCR">UNHCR – Refugees & Displacement</option>
-          <option value="UNICEF">UNICEF – Children's Rights</option>
-          <option value="UNCSW">UNCSW – Women's Rights & Equality</option>
-          <option value="UNIDO">UNIDO – Industry & Development</option>
-          <option value="WFP">WFP – Fighting World Hunger</option>
-          <option value="WHO">WHO – Global Health</option>
-        </select>
-      </div>
       <div class="control-block" style="flex:none;">
         <div class="control-label">Difficulty</div>
         <div class="diff-toggle" id="ga-diff-toggle">
