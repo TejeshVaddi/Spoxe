@@ -856,7 +856,7 @@ kbd{
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </div>
       <div class="mode-card-text">
-        <h2>Policy Defense</h2>
+        <h2>Q&A and Presentation</h2>
         <p>Pitch your solution in 60 seconds, then defend it.</p>
       </div>
     </div>
@@ -867,7 +867,7 @@ kbd{
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
       <div class="mode-card-text">
-        <h2>Policy Debate</h2>
+        <h2>2 for 2 Against</h2>
         <p>2-for-2-against structured debate on AI-generated working papers.</p>
       </div>
     </div>
@@ -881,7 +881,7 @@ kbd{
     <button class="policy-back" onclick="goHome()">← Back</button>
     <div class="policy-badge">
       <span class="policy-badge-dot"></span>
-      POLICY DEFENSE
+      Q&A AND PRESENTATION
       <span class="policy-sub">· Solution &amp; Q&amp;A drill</span>
     </div>
   </div>
@@ -959,7 +959,7 @@ kbd{
     <button class="debate-back" onclick="goHome()">← Back</button>
     <div class="debate-badge">
       <span class="debate-badge-dot"></span>
-      POLICY DEBATE
+      2 FOR 2 AGAINST
       <span class="debate-sub">· 2-for-2-against</span>
     </div>
   </div>
@@ -1047,31 +1047,8 @@ kbd{
   </div>
 
   <div class="drill-body">
-    <!-- Committee select + difficulty -->
+    <!-- Difficulty -->
     <div class="controls-row">
-      <div class="control-block" style="flex:2;">
-        <div class="control-label">Select Committee</div>
-        <select class="select-styled" id="ga-committee-select" onchange="gaNewPrompt()">
-          <option value="all">All Committees</option>
-          <option value="DISEC">DISEC – Weapons & Global Security</option>
-          <option value="ECOFIN">ECOFIN – World Economy & Money</option>
-          <option value="FAO">FAO – Food & Hunger</option>
-          <option value="HRC">HRC – Human Rights</option>
-          <option value="IAEA">IAEA – Nuclear Energy & Safety</option>
-          <option value="IMO">IMO – Oceans & Shipping</option>
-          <option value="ITU">ITU – Technology & the Internet</option>
-          <option value="Legal">Legal Committee – International Law</option>
-          <option value="SOCHUM">SOCHUM – Society & Humanitarian Aid</option>
-          <option value="UNESCO">UNESCO – Education, Science & Culture</option>
-          <option value="UNEP">UNEP – Environment & Climate Change</option>
-          <option value="UNHCR">UNHCR – Refugees & Displacement</option>
-          <option value="UNICEF">UNICEF – Children's Rights</option>
-          <option value="UNCSW">UNCSW – Women's Rights & Equality</option>
-          <option value="UNIDO">UNIDO – Industry & Development</option>
-          <option value="WFP">WFP – Fighting World Hunger</option>
-          <option value="WHO">WHO – Global Health</option>
-        </select>
-      </div>
       <div class="control-block" style="flex:none;">
         <div class="control-label">Difficulty</div>
         <div class="diff-toggle" id="ga-diff-toggle">
@@ -1934,7 +1911,7 @@ async function gaNewPrompt(){
   const gp=document.getElementById('ga-grade-panel'); if(gp) gp.classList.remove('visible');
   gaState.phase='idle';
 
-  const committee = document.getElementById('ga-committee-select').value;
+  const committee = 'all';
   gaState.committee = committee;
   gaState.country = GA_COUNTRIES[Math.floor(Math.random()*GA_COUNTRIES.length)];
 
