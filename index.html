@@ -169,6 +169,11 @@ kbd{
 }
 .grade-results{display:none;}
 .grade-results.visible{display:block;}
+.ga-disfluency{margin-top:14px;padding:14px 16px;background:#f0f4ff;border-radius:10px;font-size:.85rem;line-height:1.6;color:var(--text);}
+.ga-disfluency-title{font-weight:700;font-size:.9rem;margin-bottom:8px;color:var(--accent);}
+.ga-disfluency-section{margin-bottom:10px;}
+.ga-disfluency-label{font-weight:600;margin-bottom:4px;}
+.ga-disfluency-tag{display:inline-block;background:#dce6ff;color:#1a3060;border-radius:5px;padding:2px 8px;margin:2px 3px;font-size:.8rem;}
 .grade-overall{
   text-align:center;padding:20px 0 16px;border-bottom:1.5px solid var(--border);
   margin-bottom:16px;
@@ -971,27 +976,6 @@ kbd{
       </div>
     </div>
 
-    <!-- Policy Defense Card -->
-    <div class="mode-card policy" onclick="goPolicy()">
-      <div class="card-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <div class="mode-card-text">
-        <h2>Policy Defense</h2>
-        <p>Pitch your solution in 60 seconds, then defend it.</p>
-      </div>
-    </div>
-
-    <!-- Policy Debate Card -->
-    <div class="mode-card debate" onclick="goDebate()">
-      <div class="card-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <div class="mode-card-text">
-        <h2>Policy Debate</h2>
-        <p>2-for-2-against structured debate on AI-generated working papers.</p>
-      </div>
-    </div>
   </div>
   <div id="home-stats-bar" class="home-stats-bar" style="display:none;"></div>
 </div>
@@ -1237,31 +1221,8 @@ kbd{
   </div>
 
   <div class="drill-body">
-    <!-- Committee select + difficulty -->
+    <!-- Difficulty only -->
     <div class="controls-row">
-      <div class="control-block" style="flex:2;">
-        <div class="control-label">Select Committee</div>
-        <select class="select-styled" id="ga-committee-select" onchange="gaNewPrompt()">
-          <option value="all">All Committees</option>
-          <option value="DISEC">DISEC – Weapons & Global Security</option>
-          <option value="ECOFIN">ECOFIN – World Economy & Money</option>
-          <option value="FAO">FAO – Food & Hunger</option>
-          <option value="HRC">HRC – Human Rights</option>
-          <option value="IAEA">IAEA – Nuclear Energy & Safety</option>
-          <option value="IMO">IMO – Oceans & Shipping</option>
-          <option value="ITU">ITU – Technology & the Internet</option>
-          <option value="Legal">Legal Committee – International Law</option>
-          <option value="SOCHUM">SOCHUM – Society & Humanitarian Aid</option>
-          <option value="UNESCO">UNESCO – Education, Science & Culture</option>
-          <option value="UNEP">UNEP – Environment & Climate Change</option>
-          <option value="UNHCR">UNHCR – Refugees & Displacement</option>
-          <option value="UNICEF">UNICEF – Children's Rights</option>
-          <option value="UNCSW">UNCSW – Women's Rights & Equality</option>
-          <option value="UNIDO">UNIDO – Industry & Development</option>
-          <option value="WFP">WFP – Fighting World Hunger</option>
-          <option value="WHO">WHO – Global Health</option>
-        </select>
-      </div>
       <div class="control-block" style="flex:none;">
         <div class="control-label">Difficulty</div>
         <div class="diff-toggle" id="ga-diff-toggle">
@@ -1331,16 +1292,14 @@ kbd{
       <button class="btn-secondary ga-secondary" style="flex:none;" onclick="gaNewPrompt()">↻ New Prompt</button>
     </div>
 
-    <!-- Grading Panel -->
+    <!-- Speech Panel -->
     <div class="grade-panel" id="ga-grade-panel">
-      <div class="grade-panel-title">Speech Recorded — Get Feedback?</div>
+      <div class="grade-panel-title">Speech Transcript</div>
       <div class="grade-transcript" id="ga-transcript"></div>
-      <div class="grade-actions">
-        <button class="grade-submit-btn" id="ga-submit-btn" onclick="gaSubmitGrading()" style="display:block;flex:1;">Get AI Feedback</button>
-        <button class="grade-skip-btn" onclick="gaSkipGrading()">Skip</button>
+      <div id="ga-disfluency" class="ga-disfluency" style="display:none;"></div>
+      <div class="grade-actions" style="margin-top:12px;">
+        <button class="grade-skip-btn" onclick="gaSkipGrading()">↻ New Prompt</button>
       </div>
-      <div class="grade-loading" id="ga-grade-loading"><div class="grade-spinner"></div> Grading your speech...</div>
-      <div class="grade-results" id="ga-grade-results"></div>
     </div>
 
     <div class="hint-row">
@@ -2219,12 +2178,57 @@ const GA_TOPICS = {
 // ══════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════
+// ── Committee + Lens cycling ──────────────────────────────────────────────
+const GA_COMMITTEES = [
+  {id:'DISEC',   name:'Disarmament and International Security Committee (UNGA 1st)'},
+  {id:'ECOFIN',  name:'Economic and Financial Committee (UNGA 2nd)'},
+  {id:'SOCHUM',  name:'Social, Cultural, and Humanitarian Committee (UNGA 3rd)'},
+  {id:'SPECPOL', name:'Special Political and Decolonization Committee (UNGA 4th)'},
+  {id:'ABC',     name:'Administrative and Budgetary Committee (UNGA 5th)'},
+  {id:'GA6',     name:'Legal Committee (UNGA 6th)'},
+  {id:'UNSC',    name:'United Nations Security Council'},
+  {id:'ECOSOC',  name:'Economic and Social Council'},
+  {id:'UNHRC',   name:'United Nations Human Rights Council'},
+  {id:'UNEP',    name:'United Nations Environment Programme'},
+  {id:'UNESCO',  name:'UN Educational, Scientific and Cultural Organization'},
+  {id:'WHO',     name:'World Health Organization'},
+  {id:'UNICEF',  name:'United Nations Children\'s Fund'},
+  {id:'UNWomen', name:'United Nations Entity for Gender Equality and the Empowerment of Women'},
+  {id:'WFP',     name:'World Food Programme'},
+  {id:'ICJ',     name:'International Court of Justice'},
+  {id:'IAEA',    name:'International Atomic Energy Agency'},
+];
+const GA_LENSES = [
+  'Sovereignty and National Interest',
+  'Economic Impact and Feasibility',
+  'Human Rights and Humanitarian Concerns',
+  'Security and Stability',
+  'Precedent and International Law',
+  'Environmental and Sustainability',
+];
+// Session-level cycling state: cycles through all 17 committees before repeating,
+// advances to next lens after each full round of committees.
+let gaCycleCommitteeIdx = 0;
+let gaCycleLensIdx = 0;
+// Session topic history for similarity check (topic titles)
+let gaSessionTopics = [];
+
+function gaNextCommitteeLens(){
+  const committee = GA_COMMITTEES[gaCycleCommitteeIdx];
+  const lens      = GA_LENSES[gaCycleLensIdx];
+  // advance
+  gaCycleCommitteeIdx = (gaCycleCommitteeIdx + 1) % GA_COMMITTEES.length;
+  if(gaCycleCommitteeIdx === 0){
+    gaCycleLensIdx = (gaCycleLensIdx + 1) % GA_LENSES.length;
+  }
+  return {committee, lens};
+}
+
 let gaState = {
-  committee: 'all', country: '', topic: '', topicDesc: '',
+  committee: '', country: '', topic: '', topicDesc: '',
   prepTime: 10, speakTime: 60, blind: false, tab: 'stance',
   phase: 'idle', remaining: 0, interval: null,
   difficulty: 'easy', generating: false,
-  topicHistory: {}  // keyed by committee abbrev, stores last 10 titles
 };
 let crisisState = {
   committee: '', role: '', roleDesc: '', scenario: '', scenarioDesc: '',
@@ -2310,26 +2314,15 @@ async function gaNewPrompt(){
   const gp=document.getElementById('ga-grade-panel'); if(gp) gp.classList.remove('visible');
   gaState.phase='idle';
 
-  const committee = document.getElementById('ga-committee-select').value;
-  gaState.committee = committee;
+  // Pick next committee+lens from session cycle
+  const {committee, lens} = gaNextCommitteeLens();
+  gaState.committee = committee.id;
   gaState.country = GA_COUNTRIES[Math.floor(Math.random()*GA_COUNTRIES.length)];
 
-  // Resolve committee
-  let resolvedCommittee;
-  if(committee==='all'){
-    const keys = Object.keys(GA_TOPICS);
-    resolvedCommittee = keys[Math.floor(Math.random()*keys.length)];
-  } else {
-    resolvedCommittee = committee;
-  }
-  gaState.resolvedCommittee = resolvedCommittee;
-
-  // Show country immediately
-  const committeeLabels = {"DISEC":"DISEC","ECOFIN":"ECOFIN","FAO":"FAO","HRC":"HRC","IAEA":"IAEA","IMO":"IMO","ITU":"ITU","Legal":"Legal Committee","SOCHUM":"SOCHUM","UNESCO":"UNESCO","UNEP":"UNEP","UNHCR":"UNHCR","UNICEF":"UNICEF","UNCSW":"UNCSW","UNIDO":"UNIDO","WFP":"WFP","WHO":"WHO"};
-  const committeeLabel = committeeLabels[resolvedCommittee] || resolvedCommittee;
+  // Show country + committee immediately
   const flag = gaState.country.substring(0,3).toUpperCase();
   document.getElementById('ga-country-display').innerHTML =
-    `<span class="country-flag">${flag}</span>${gaState.country}<span class="committee-badge">${committeeLabel}</span>`;
+    `<span class="country-flag">${flag}</span>${gaState.country}<span class="committee-badge">${committee.id}</span>`;
 
   // Show loading
   gaState.generating = true;
@@ -2344,41 +2337,50 @@ async function gaNewPrompt(){
     ? 'accessible to a high school or middle school student new to MUN — avoid jargon and overly technical concepts'
     : 'challenging, nuanced, and appropriate for an experienced MUN competitor — involve geopolitical complexity, competing interests, or technical depth';
 
-  const committeeFullNames = {"DISEC":"Disarmament and International Security Committee","ECOFIN":"Economic and Financial Committee","FAO":"Food and Agriculture Organization","HRC":"Human Rights Council","IAEA":"International Atomic Energy Agency","IMO":"International Maritime Organization","ITU":"International Telecommunication Union","Legal":"Sixth Committee (Legal)","SOCHUM":"Social, Humanitarian and Cultural Committee","UNESCO":"UN Educational, Scientific and Cultural Organization","UNEP":"UN Environment Programme","UNHCR":"UN High Commissioner for Refugees","UNICEF":"UN Children's Fund","UNCSW":"Commission on the Status of Women","UNIDO":"UN Industrial Development Organization","WFP":"World Food Programme","WHO":"World Health Organization"};
-  const fullName = committeeFullNames[resolvedCommittee] || resolvedCommittee;
-
-  const recentTitles = (gaState.topicHistory[resolvedCommittee] || []);
-  const avoidClause = recentTitles.length
-    ? `\nDo NOT generate any of these recently used topics:\n${recentTitles.map(t=>`- ${t}`).join('\n')}\nPick a genuinely different angle, region, or issue.`
+  const avoidClause = gaSessionTopics.length
+    ? `\nDo NOT generate anything conceptually similar to any of these already-used topics this session:\n${gaSessionTopics.map(t=>`- ${t}`).join('\n')}\nThe topic MUST be on a distinctly different specific issue.`
     : '';
 
-  try {
-    const resp = await fetch('/api/generate', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ prompt:
-        `Generate a single unique MUN debate topic for the ${fullName} (${resolvedCommittee}).
+  const prompt =
+    `You are a MUN topic designer. Generate one unique debate topic for ${committee.name} (${committee.id}).
+Lens: "${lens}" — the topic must clearly fit this lens and be specific to this committee's mandate.
 Difficulty: ${gaState.difficulty} — ${diffDesc}.${avoidClause}
-Return ONLY valid JSON (no markdown, no extra text):
-{"title":"<concise topic title, 6-12 words>","description":"<1-2 sentence background explaining why this is a live UN issue, under 60 words>"}`
-      })
-    });
-    const data = await resp.json();
-    const text = (data.text||data.response||'').replace(/```json|```/g,'').trim();
-    const parsed = JSON.parse(text);
+Return ONLY valid JSON, no markdown fences:
+{"title":"<concise topic title, 6-12 words>","description":"<1-2 sentence background, under 60 words>"}`;
+
+  let parsed = null;
+  // Try up to 3 times; re-run if the generated title is too similar to session history
+  for(let attempt=0; attempt<3; attempt++){
+    try {
+      const resp = await fetch('/api/gemini', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({prompt})
+      });
+      const data = await resp.json();
+      const text = (data.text||'').replace(/```json|```/g,'').trim();
+      const candidate = JSON.parse(text);
+      // Similarity check: reject if title shares >3 key words with any session topic
+      const candidateWords = new Set(candidate.title.toLowerCase().split(/\W+/).filter(w=>w.length>4));
+      const tooSimilar = gaSessionTopics.some(prev => {
+        const prevWords = prev.toLowerCase().split(/\W+/).filter(w=>w.length>4);
+        const overlap = prevWords.filter(w=>candidateWords.has(w)).length;
+        return overlap >= 3;
+      });
+      if(!tooSimilar || attempt===2){
+        parsed = candidate;
+        break;
+      }
+      // too similar — retry with explicit avoid clause
+    } catch(e){ break; }
+  }
+
+  if(parsed){
     gaState.topic = parsed.title;
     gaState.topicDesc = parsed.description;
-    // Record in history (cap at 10 per committee)
-    if(!gaState.topicHistory[resolvedCommittee]) gaState.topicHistory[resolvedCommittee] = [];
-    gaState.topicHistory[resolvedCommittee].push(parsed.title);
-    if(gaState.topicHistory[resolvedCommittee].length > 10) gaState.topicHistory[resolvedCommittee].shift();
-  } catch(e) {
-    // Fallback to local bank, avoiding recent titles
-    const pool = (GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
-      .filter(t => !recentTitles.includes(t[0]));
-    const pick = (pool.length ? pool : GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
-      [Math.floor(Math.random()*((pool.length ? pool : GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM']).length))];
-    gaState.topic = pick[0];
-    gaState.topicDesc = pick[1];
+    gaSessionTopics.push(parsed.title);
+  } else {
+    gaState.topic = `${committee.id}: ${lens}`;
+    gaState.topicDesc = 'Topic could not be generated. Please try again.';
   }
 
   loadEl.classList.remove('visible');
@@ -2937,7 +2939,72 @@ function autoStartRecording(mode){
 
 function showGAGradePanel(){
   const panel = document.getElementById('ga-grade-panel');
-  if(panel){ panel.classList.add('visible'); panel.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  if(!panel) return;
+  // Populate disfluency analysis from transcript
+  const text = gaTranscript.trim();
+  if(text) renderGADisfluency(text);
+  panel.classList.add('visible');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderGADisfluency(text){
+  const el = document.getElementById('ga-disfluency');
+  if(!el) return;
+
+  // Filler words / phrases
+  const FILLERS = ['um','uh','like','you know','basically','literally','right','so','well','actually',
+    'kind of','sort of','i mean','you see','okay','yeah'];
+  const words = text.toLowerCase().split(/\b/);
+  const fillerCounts = {};
+  FILLERS.forEach(f=>{
+    const re = new RegExp(`\\b${f}\\b`,'gi');
+    const m = text.match(re);
+    if(m && m.length) fillerCounts[f] = m.length;
+  });
+
+  // Repeated phrases (3+ consecutive same word, or same 2-word phrase appearing 3+ times)
+  const tokenized = text.toLowerCase().replace(/[^\w\s]/g,' ').split(/\s+/).filter(Boolean);
+  const repeatedWords = [];
+  // consecutive repeats (e.g. "the the the")
+  for(let i=1;i<tokenized.length;i++){
+    if(tokenized[i]===tokenized[i-1] && tokenized[i].length>2){
+      const already = repeatedWords.find(r=>r.phrase===tokenized[i]&&r.type==='consecutive');
+      if(!already) repeatedWords.push({phrase:tokenized[i], type:'consecutive', count:2});
+    }
+  }
+  // frequent 2-word phrases (3+ occurrences)
+  const bigrams = {};
+  for(let i=0;i<tokenized.length-1;i++){
+    const bg = tokenized[i]+' '+tokenized[i+1];
+    bigrams[bg] = (bigrams[bg]||0)+1;
+  }
+  Object.entries(bigrams).forEach(([bg,count])=>{
+    if(count>=3) repeatedWords.push({phrase:bg, type:'frequent', count});
+  });
+
+  const fillerEntries = Object.entries(fillerCounts).sort((a,b)=>b[1]-a[1]);
+  const hasFillers = fillerEntries.length > 0;
+  const hasRepeats = repeatedWords.length > 0;
+
+  if(!hasFillers && !hasRepeats){
+    el.style.display='none';
+    return;
+  }
+
+  el.style.display='block';
+  el.innerHTML = `
+    <div class="ga-disfluency-title">Disfluency</div>
+    ${hasFillers ? `
+      <div class="ga-disfluency-section">
+        <div class="ga-disfluency-label">Filler words</div>
+        ${fillerEntries.map(([w,c])=>`<span class="ga-disfluency-tag">${w} ×${c}</span>`).join('')}
+      </div>` : ''}
+    ${hasRepeats ? `
+      <div class="ga-disfluency-section">
+        <div class="ga-disfluency-label">Repeated phrases</div>
+        ${repeatedWords.map(r=>`<span class="ga-disfluency-tag">"${r.phrase}" ×${r.count}</span>`).join('')}
+      </div>` : ''}
+  `;
 }
 function showCrisisGradePanel(){
   const panel = document.getElementById('crisis-grade-panel');
@@ -2945,6 +3012,8 @@ function showCrisisGradePanel(){
 }
 
 function gaSkipGrading(){
+  const el = document.getElementById('ga-disfluency');
+  if(el){ el.style.display='none'; el.innerHTML=''; }
   document.getElementById('ga-grade-panel').classList.remove('visible');
   gaNewPrompt();
 }
@@ -2963,9 +3032,8 @@ function gaStartRecording(){
   const transcript = document.getElementById('ga-transcript');
   transcript.classList.remove('visible');
   transcript.textContent = '';
-  document.getElementById('ga-submit-btn').classList.remove('visible');
-  document.getElementById('ga-grade-results').classList.remove('visible');
-  document.getElementById('ga-grade-results').innerHTML = '';
+  const disfl = document.getElementById('ga-disfluency');
+  if(disfl){ disfl.style.display='none'; disfl.innerHTML=''; }
 
   if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
     alert('Speech recognition is not supported in this browser. Please use Chrome.');
@@ -2989,9 +3057,6 @@ function gaStartRecording(){
   gaRecognition.onend = () => {
     btn.classList.remove('recording');
     btn.textContent = '🎙 Record My Speech';
-    if(gaTranscript.trim().length > 10){
-      document.getElementById('ga-submit-btn').classList.add('visible');
-    }
   };
   gaRecognition.start();
   btn.classList.add('recording');
@@ -3071,33 +3136,6 @@ Return ONLY a JSON object:
 overall should be out of 100. Return ONLY valid JSON.`;
 }
 
-async function gaSubmitGrading(){
-  if(!gaTranscript.trim()) return;
-  document.getElementById('ga-submit-btn').classList.remove('visible');
-  document.getElementById('ga-grade-loading').classList.add('visible');
-
-  const country = document.getElementById('ga-country-display').textContent;
-  const topic = document.getElementById('ga-topic-display').textContent;
-  const context = `Country: ${country} | Topic: ${topic}`;
-  const prompt = buildGradingPrompt(gaTranscript, context, gaState.speakTime);
-
-  try {
-    const resp = await fetch('/api/generate', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt})
-    });
-    const data = await resp.json();
-    const clean = (data.text||'').replace(/```json|```/g,'').trim();
-    const grades = JSON.parse(clean);
-    document.getElementById('ga-grade-loading').classList.remove('visible');
-    renderGAGrades(grades);
-  } catch(e){
-    document.getElementById('ga-grade-loading').classList.remove('visible');
-    document.getElementById('ga-grade-results').classList.add('visible');
-    document.getElementById('ga-grade-results').innerHTML = '<p style="color:var(--red);font-size:.85rem;">Failed to grade. Please try again.</p>';
-  }
-}
 
 async function crisisSubmitGrading(){
   if(!crisisTranscript.trim()) return;
@@ -3129,39 +3167,6 @@ async function crisisSubmitGrading(){
 
 function scoreColor(s){ return s>=8?'score-high':s>=6?'score-mid':'score-low'; }
 function crisisScoreColor(s){ return s>=8?'#4ade80':s>=6?'#f59e0b':'#e87070'; }
-
-function renderGAGrades(g){
-  const el = document.getElementById('ga-grade-results');
-  const criteria = [
-    {key:'content', label:'Content'},
-    {key:'fillers', label:'Filler Words'},
-    {key:'hook', label:'Hook'}
-  ];
-  el.innerHTML = `
-    ${g.overall_comment ? `<div style="font-size:.9rem;color:var(--text);font-style:italic;padding:14px 16px;background:#f0f4ff;border-radius:10px;margin-bottom:14px;line-height:1.5;">"${g.overall_comment}"</div>` : ''}
-    <div class="grade-criteria">
-      ${criteria.map(c => {
-        const feedback = typeof g[c.key] === 'object' ? (g[c.key].feedback||'') : (g[c.key]||'');
-        return `<div class="grade-criterion">
-          <div class="grade-criterion-name" style="margin-bottom:6px;">${c.label}</div>
-          <div class="grade-criterion-feedback">${feedback}</div>
-        </div>`;
-      }).join('')}
-    </div>
-    <button onclick="gaNewPrompt()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:var(--accent);color:#fff;">↻ New Prompt</button>
-  `;
-  el.classList.add('visible');
-  // save to Supabase
-  saveSession('ga', {
-    committee: document.getElementById('ga-committee-display')?.textContent || '',
-    duration_secs: gaState.speakTime,
-    score_content:    typeof g.content    === 'object' ? g.content.score    : null,
-    score_fillers:    typeof g.fillers    === 'object' ? g.fillers.score    : null,
-    score_confidence: typeof g.confidence === 'object' ? g.confidence.score : null,
-    score_hook:       typeof g.hook       === 'object' ? g.hook.score       : null,
-    overall_score:    g.overall ?? null,
-  });
-}
 
 // ══════════════════════════════════════════════
 //  POLICY DEFENSE
