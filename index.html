@@ -1806,12 +1806,23 @@ const GA_TOPICS = {
 // ══════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════
+const GA_DOMAINS = [
+  'environmental — climate, ecosystems, pollution, oceans, biodiversity',
+  'economic — trade, sanctions, debt, finance, development, poverty',
+  'political — governance, elections, sovereignty, state collapse, diplomacy',
+  'security & warfare — armed conflict, weapons, terrorism, peacekeeping',
+  'technology — AI, cyber, digital infrastructure, space, biotech',
+  'humanitarian & social — displacement, refugees, health, famine, education',
+  'cultural & identity — indigenous rights, heritage, media, religion, language',
+  'legal & institutional — international law, treaties, accountability, reform'
+];
 let gaState = {
   committee: 'all', country: '', topic: '', topicDesc: '',
   prepTime: 10, speakTime: 60, blind: false, tab: 'stance',
   phase: 'idle', remaining: 0, interval: null,
   difficulty: 'easy', generating: false,
-  topicHistory: {}  // keyed by committee abbrev, stores last 10 titles
+  topicHistory: {},  // keyed by committee abbrev, stores last 10 titles
+  domainIndex: 0    // cycles through GA_DOMAINS per generate
 };
 let crisisState = {
   committee: '', role: '', roleDesc: '', scenario: '', scenarioDesc: '',
@@ -1945,17 +1956,23 @@ async function gaNewPrompt(){
     ? `\nAvoid these recent topics AND any topic sharing their core keywords (${recentKeywords.join(', ')}):\n${recentTitles.map(t=>`- ${t}`).join('\n')}`
     : '';
 
+  // Cycle through domains so topics never cluster in one category
+  const requiredDomain = GA_DOMAINS[gaState.domainIndex % GA_DOMAINS.length];
+  gaState.domainIndex++;
+
   try {
     const resp = await fetch('/api/generate', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({ prompt:
         `Generate ONE pressing, real-world MUN topic for the ${fullName} (${resolvedCommittee}).
 
+REQUIRED DOMAIN for this topic: ${requiredDomain}
+The topic MUST fall squarely in this domain — do not drift into humanitarian/social unless that is the required domain.
+
 FORMAT (strictly follow): [impact verb] [problem] [specific geographic/contextual detail]
-- Impact verb examples: Addressing, Mitigating, Combating, Eliminating, Preventing, Countering, Dismantling, Regulating, Halting, Reforming (pick the most fitting, do not reuse verbs across sessions)
+- Impact verb examples: Addressing, Mitigating, Combating, Eliminating, Preventing, Countering, Dismantling, Regulating, Halting, Reforming, Ending, Blocking — pick the most fitting
 - Total title: 8–12 words maximum
-- Must be an URGENT, actively-debated global crisis — not an abstract issue. Think: active conflicts, imminent threats, collapsing systems, mass displacement, impending deadlines.
-- Specific: name a region, population, technology, or mechanism — never generic
+- Must be URGENT and actively happening — name a real region, country, technology, or treaty
 - Difficulty: ${gaState.difficulty} — ${diffDesc}.${avoidClause}
 
 Return ONLY valid JSON, no markdown:
@@ -1971,6 +1988,7 @@ Return ONLY valid JSON, no markdown:
     if(!gaState.topicHistory[resolvedCommittee]) gaState.topicHistory[resolvedCommittee] = [];
     gaState.topicHistory[resolvedCommittee].push(parsed.title);
     if(gaState.topicHistory[resolvedCommittee].length > 10) gaState.topicHistory[resolvedCommittee].shift();
+    gaState.lastDomain = requiredDomain;
   } catch(e) {
     // Fallback to local bank, avoiding recent titles
     const pool = (GA_TOPICS[resolvedCommittee] || GA_TOPICS['SOCHUM'])
