@@ -122,128 +122,6 @@ kbd{
 
 
 /* ─── GRADING PANEL ─── */
-.grade-panel{
-  width:100%;background:#fff;border:1.5px solid var(--border);
-  border-radius:var(--radius);padding:24px 26px;display:none;
-}
-.grade-panel.visible{display:block;}
-.grade-panel-title{
-  font-family:'EB Garamond',serif;font-size:1.1rem;font-weight:600;
-  color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px;
-}
-.grade-actions{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
-.grade-record-btn{
-  display:flex;align-items:center;gap:7px;padding:11px 20px;border-radius:10px;
-  border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;
-  background:var(--accent);color:#fff;transition:all .15s;
-}
-.grade-record-btn:hover{background:#1e3fc4;}
-.grade-record-btn.recording{background:#dc2626;animation:pulse-record 1s ease-in-out infinite;}
-.grade-record-btn:disabled{background:var(--border);color:var(--sub);cursor:not-allowed;}
-.grade-skip-btn{
-  display:flex;align-items:center;gap:7px;padding:11px 18px;border-radius:10px;
-  border:1.5px solid var(--border);cursor:pointer;font-family:inherit;
-  font-weight:500;font-size:.875rem;background:#fff;color:var(--sub);transition:all .15s;
-}
-.grade-skip-btn:hover{border-color:var(--accent);color:var(--accent);}
-.grade-transcript{
-  background:#f8f7f4;border:1.5px solid var(--border);border-radius:9px;
-  padding:12px 14px;font-size:.85rem;color:var(--sub);min-height:60px;
-  line-height:1.6;margin-bottom:14px;display:none;
-}
-.grade-transcript.visible{display:block;}
-.grade-submit-btn{
-  width:100%;padding:12px;border-radius:10px;border:none;cursor:pointer;
-  font-family:'EB Garamond',serif;font-weight:600;font-size:.95rem;
-  background:var(--accent);color:#fff;transition:all .15s;display:none;
-}
-.grade-submit-btn.visible{display:block;}
-.grade-submit-btn:hover{background:#1e3fc4;}
-.grade-loading{
-  display:none;align-items:center;gap:10px;color:var(--sub);font-size:.875rem;padding:8px 0;
-}
-.grade-loading.visible{display:flex;}
-.grade-spinner{
-  width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);
-  border-radius:50%;animation:spin .7s linear infinite;
-}
-.grade-results{display:none;}
-.grade-results.visible{display:block;}
-.grade-overall{
-  text-align:center;padding:20px 0 16px;border-bottom:1.5px solid var(--border);
-  margin-bottom:16px;
-}
-.grade-overall-score{
-  font-family:'EB Garamond',serif;font-size:3.5rem;font-weight:700;
-  line-height:1;
-}
-.grade-overall-label{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin-top:4px;}
-.grade-criteria{display:flex;flex-direction:column;gap:12px;}
-.grade-criterion{background:#f8f7f4;border-radius:10px;padding:14px 16px;}
-.grade-criterion-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.grade-criterion-name{font-weight:600;font-size:.875rem;color:var(--text);}
-.grade-criterion-score{font-family:'EB Garamond',serif;font-weight:700;font-size:1.1rem;}
-.grade-criterion-feedback{font-size:.82rem;color:var(--sub);line-height:1.5;}
-.grade-bar{height:4px;border-radius:2px;background:var(--border);margin-top:8px;}
-.grade-bar-fill{height:100%;border-radius:2px;background:var(--accent);transition:width .6s ease;}
-.score-high{color:#059669;}
-.score-mid{color:#f59e0b;}
-.score-low{color:#dc2626;}
-
-/* Crisis grading */
-.crisis-grade-panel{
-  width:100%;background:#141414;border:1px solid #222;
-  border-radius:var(--radius);padding:24px 26px;display:none;
-}
-.crisis-grade-panel.visible{display:block;}
-.crisis-grade-title{
-  font-family:'EB Garamond',serif;font-size:1.1rem;font-weight:600;
-  color:#f0eeeb;margin-bottom:16px;
-}
-.crisis-grade-actions{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
-.crisis-grade-record-btn{
-  display:flex;align-items:center;gap:7px;padding:11px 20px;border-radius:10px;
-  border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;
-  background:#c0392b;color:#fff;transition:all .15s;
-}
-.crisis-grade-record-btn:hover{background:#a93226;}
-.crisis-grade-record-btn.recording{background:#dc2626;animation:pulse-record 1s ease-in-out infinite;}
-.crisis-grade-record-btn:disabled{background:#2a2a2a;color:#555;cursor:not-allowed;}
-.crisis-grade-skip-btn{
-  padding:11px 18px;border-radius:10px;border:1px solid #2a2a2a;cursor:pointer;
-  font-family:inherit;font-weight:500;font-size:.875rem;background:#1a1a1a;
-  color:#888;transition:all .15s;
-}
-.crisis-grade-skip-btn:hover{border-color:#c0392b;color:#e87070;}
-.crisis-grade-transcript{
-  background:#1a1a1a;border:1px solid #2a2a2a;border-radius:9px;
-  padding:12px 14px;font-size:.85rem;color:#888;min-height:60px;
-  line-height:1.6;margin-bottom:14px;display:none;
-}
-.crisis-grade-transcript.visible{display:block;}
-.crisis-grade-submit{
-  width:100%;padding:12px;border-radius:10px;border:none;cursor:pointer;
-  font-family:'EB Garamond',serif;font-weight:600;font-size:.95rem;
-  background:#c0392b;color:#fff;transition:all .15s;display:none;
-}
-.crisis-grade-submit.visible{display:block;}
-.crisis-grade-submit:hover{background:#a93226;}
-.crisis-grade-loading{display:none;align-items:center;gap:10px;color:#555;font-size:.875rem;padding:8px 0;}
-.crisis-grade-loading.visible{display:flex;}
-.crisis-grade-spinner{width:16px;height:16px;border:2px solid #222;border-top-color:#c0392b;border-radius:50%;animation:spin .7s linear infinite;}
-.crisis-grade-results{display:none;}
-.crisis-grade-results.visible{display:block;}
-.crisis-grade-overall{text-align:center;padding:20px 0 16px;border-bottom:1px solid #222;margin-bottom:16px;}
-.crisis-grade-overall-score{font-family:'EB Garamond',serif;font-size:3.5rem;font-weight:700;line-height:1;color:#f0eeeb;}
-.crisis-grade-overall-label{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-top:4px;}
-.crisis-grade-criteria{display:flex;flex-direction:column;gap:12px;}
-.crisis-grade-criterion{background:#1a1a1a;border-radius:10px;padding:14px 16px;}
-.crisis-grade-criterion-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.crisis-grade-criterion-name{font-weight:600;font-size:.875rem;color:#f0eeeb;}
-.crisis-grade-criterion-score{font-family:'EB Garamond',serif;font-weight:700;font-size:1.1rem;}
-.crisis-grade-criterion-feedback{font-size:.82rem;color:#888;line-height:1.5;}
-.crisis-grade-bar{height:4px;border-radius:2px;background:#2a2a2a;margin-top:8px;}
-.crisis-grade-bar-fill{height:100%;border-radius:2px;background:#c0392b;transition:width .6s ease;}
 
 @keyframes pulse-record{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4);}50%{box-shadow:0 0 0 8px rgba(220,38,38,0);}}
 
@@ -946,10 +824,9 @@ kbd{
       </div>
     </div>
 
-    <!-- Feedback -->
+    <!-- Done -->
     <div class="policy-feedback-card" id="policy-feedback-card">
-      <div class="policy-feedback-title">Performance Feedback</div>
-      <div class="policy-feedback-body" id="policy-feedback-body"></div>
+      <div class="policy-feedback-title">Drill Complete</div>
       <div style="display:flex;gap:12px;margin-top:20px;">
         <button class="policy-primary" onclick="policyNewProblem()" style="flex:1;">↻ Try Another Problem</button>
       </div>
@@ -1124,16 +1001,6 @@ kbd{
     </div>
 
     <!-- Grading Panel -->
-    <div class="grade-panel" id="ga-grade-panel">
-      <div class="grade-panel-title">Speech Recorded — Get Feedback?</div>
-      <div class="grade-transcript" id="ga-transcript"></div>
-      <div class="grade-actions">
-        <button class="grade-submit-btn" id="ga-submit-btn" onclick="gaSubmitGrading()" style="display:block;flex:1;">Get AI Feedback</button>
-        <button class="grade-skip-btn" onclick="gaSkipGrading()">Skip</button>
-      </div>
-      <div class="grade-loading" id="ga-grade-loading"><div class="grade-spinner"></div> Grading your speech...</div>
-      <div class="grade-results" id="ga-grade-results"></div>
-    </div>
 
     <div class="hint-row">
       <span class="hint"><kbd>Space</kbd> start/pause</span>
@@ -1232,16 +1099,6 @@ kbd{
     </div>
 
     <!-- Crisis Grading Panel -->
-    <div class="crisis-grade-panel" id="crisis-grade-panel">
-      <div class="crisis-grade-title">Speech Recorded — Get Feedback?</div>
-      <div class="crisis-grade-transcript" id="crisis-transcript"></div>
-      <div class="crisis-grade-actions">
-        <button class="crisis-grade-submit" id="crisis-submit-btn" onclick="crisisSubmitGrading()" style="display:block;flex:1;">Get AI Feedback</button>
-        <button class="crisis-grade-skip-btn" onclick="crisisSkipGrading()">Skip</button>
-      </div>
-      <div class="crisis-grade-loading" id="crisis-grade-loading"><div class="crisis-grade-spinner"></div> Grading your speech...</div>
-      <div class="crisis-grade-results" id="crisis-grade-results"></div>
-    </div>
 
     <div class="crisis-hint-row">
       <span class="crisis-hint"><kbd style="background:#1a1a1a;border-color:#333;color:#888;border-radius:5px;padding:2px 7px;font-size:.75rem;">Space</kbd> pause</span>
@@ -1905,7 +1762,6 @@ function gaSetDifficulty(d){
 async function gaNewPrompt(){
   if(gaState.generating) return;
   clearInterval(gaState.interval);
-  const gp=document.getElementById('ga-grade-panel'); if(gp) gp.classList.remove('visible');
   gaState.phase='idle';
 
   const committee = 'all';
@@ -2180,7 +2036,6 @@ function gaTickSpeak(){
     const ss=document.getElementById('ps-speak');
     if(ss) ss.classList.remove('active-phase','speak-phase');
     if(gaRecognition){ try{ gaRecognition.stop(); }catch(e){} }
-    if(micPermissionGranted) showGAGradePanel();
   }
 }
 
@@ -2432,7 +2287,6 @@ function crisisTickSpeak(){
     if(lbl) lbl.textContent="Time's Up!";
     document.getElementById('crisis-start-btn').textContent='↻ New Prompt';
     if(crisisRecognition){ try{ crisisRecognition.stop(); }catch(e){} }
-    if(micPermissionGranted) showCrisisGradePanel();
   }
 }
 
@@ -2553,223 +2407,7 @@ function autoStartRecording(mode){
   try{ rec.start(); }catch(e){}
 }
 
-function showGAGradePanel(){
-  const panel = document.getElementById('ga-grade-panel');
-  if(panel){ panel.classList.add('visible'); panel.scrollIntoView({behavior:'smooth',block:'nearest'}); }
-}
-function showCrisisGradePanel(){
-  const panel = document.getElementById('crisis-grade-panel');
-  if(panel){ panel.classList.add('visible'); panel.scrollIntoView({behavior:'smooth',block:'nearest'}); }
-}
 
-function gaSkipGrading(){
-  document.getElementById('ga-grade-panel').classList.remove('visible');
-  gaNewPrompt();
-}
-function crisisSkipGrading(){
-  document.getElementById('crisis-grade-panel').classList.remove('visible');
-  crisisGenerate();
-}
-
-function gaStartRecording(){
-  const btn = document.getElementById('ga-record-btn');
-  if(gaRecognition && btn.classList.contains('recording')){
-    gaRecognition.stop();
-    return;
-  }
-  gaTranscript = '';
-  const transcript = document.getElementById('ga-transcript');
-  transcript.classList.remove('visible');
-  transcript.textContent = '';
-  document.getElementById('ga-submit-btn').classList.remove('visible');
-  document.getElementById('ga-grade-results').classList.remove('visible');
-  document.getElementById('ga-grade-results').innerHTML = '';
-
-  if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
-    alert('Speech recognition is not supported in this browser. Please use Chrome.');
-    return;
-  }
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  gaRecognition = new SR();
-  gaRecognition.continuous = true;
-  gaRecognition.interimResults = true;
-  gaRecognition.lang = 'en-US';
-
-  gaRecognition.onresult = (e) => {
-    let interim = '';
-    for(let i = e.resultIndex; i < e.results.length; i++){
-      if(e.results[i].isFinal) gaTranscript += e.results[i][0].transcript + ' ';
-      else interim += e.results[i][0].transcript;
-    }
-    transcript.textContent = gaTranscript + interim;
-    transcript.classList.add('visible');
-  };
-  gaRecognition.onend = () => {
-    btn.classList.remove('recording');
-    btn.textContent = '🎙 Record My Speech';
-    if(gaTranscript.trim().length > 10){
-      document.getElementById('ga-submit-btn').classList.add('visible');
-    }
-  };
-  gaRecognition.start();
-  btn.classList.add('recording');
-  btn.textContent = '⏹ Stop Recording';
-}
-
-function crisisStartRecording(){
-  const btn = document.getElementById('crisis-record-btn');
-  if(crisisRecognition && btn.classList.contains('recording')){
-    crisisRecognition.stop();
-    return;
-  }
-  crisisTranscript = '';
-  const transcript = document.getElementById('crisis-transcript');
-  transcript.classList.remove('visible');
-  transcript.textContent = '';
-  document.getElementById('crisis-submit-btn').classList.remove('visible');
-  document.getElementById('crisis-grade-results').classList.remove('visible');
-  document.getElementById('crisis-grade-results').innerHTML = '';
-
-  if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
-    alert('Speech recognition not supported. Please use Chrome.');
-    return;
-  }
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  crisisRecognition = new SR();
-  crisisRecognition.continuous = true;
-  crisisRecognition.interimResults = true;
-  crisisRecognition.lang = 'en-US';
-
-  crisisRecognition.onresult = (e) => {
-    let interim = '';
-    for(let i = e.resultIndex; i < e.results.length; i++){
-      if(e.results[i].isFinal) crisisTranscript += e.results[i][0].transcript + ' ';
-      else interim += e.results[i][0].transcript;
-    }
-    transcript.textContent = crisisTranscript + interim;
-    transcript.classList.add('visible');
-  };
-  crisisRecognition.onend = () => {
-    btn.classList.remove('recording');
-    btn.textContent = '🎙 Record My Speech';
-    if(crisisTranscript.trim().length > 10){
-      document.getElementById('crisis-submit-btn').classList.add('visible');
-    }
-  };
-  crisisRecognition.start();
-  btn.classList.add('recording');
-  btn.textContent = '⏹ Stop Recording';
-}
-
-function buildGradingPrompt(transcript, context){
-  return `You are an expert MUN speech coach. Grade this speech transcript based on the rubric below.
-
-CONTEXT: ${context}
-
-SPEECH TRANSCRIPT:
-"${transcript}"
-
-RUBRIC — grade each criterion out of 10:
-
-1. CONTENT (out of 10): Is it all fluff or does it have genuine, substantive content? Does it offer strong, specific solutions? Count any vague platitudes against the score.
-2. FILLER WORDS (out of 10): ONLY count "um", "uh", and "like" used as a filler (NOT when used correctly e.g. "I would like to" or "like a solution"). Be generous — a few fillers is totally normal. 10 = zero fillers. Subtract 1 point per 3 fillers found. Even 5-6 fillers should still be a 7+. Only go below 5 if fillers are very frequent and distracting. List the fillers you found.
-3. CONFIDENCE (out of 10): Based on word choice, sentence structure, use of hedging language ("I think maybe", "perhaps we could possibly"), directness, and assertiveness. Does the speaker sound like they own the room?
-4. HOOK (out of 10): Judge only the OPENING of the speech. Does it grab attention? Is it creative, bold, or interesting? Can be slightly provocative or funny — just not too undiplomatic. A bland "Thank you chair, my country believes..." is a 3/10.
-
-Return ONLY a JSON object:
-{
-  "content": {"score": 7, "feedback": "One specific sentence of feedback"},
-  "fillers": {"score": 8, "feedback": "Found 3 filler words: 'um' (x2), 'like' (x1)"},
-  "confidence": {"score": 6, "feedback": "One specific sentence of feedback"},
-  "hook": {"score": 9, "feedback": "One specific sentence of feedback"},
-  "overall": 75,
-  "overall_comment": "One sentence overall takeaway"
-}
-
-overall should be out of 100. Return ONLY valid JSON.`;
-}
-
-async function gaSubmitGrading(){
-  if(!gaTranscript.trim()) return;
-  document.getElementById('ga-submit-btn').classList.remove('visible');
-  document.getElementById('ga-grade-loading').classList.add('visible');
-
-  const country = document.getElementById('ga-country-display').textContent;
-  const topic = document.getElementById('ga-topic-display').textContent;
-  const context = `Country: ${country} | Topic: ${topic}`;
-  const prompt = buildGradingPrompt(gaTranscript, context, gaState.speakTime);
-
-  try {
-    const resp = await fetch('/api/generate', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt})
-    });
-    const data = await resp.json();
-    const clean = (data.text||'').replace(/```json|```/g,'').trim();
-    const grades = JSON.parse(clean);
-    document.getElementById('ga-grade-loading').classList.remove('visible');
-    renderGAGrades(grades);
-  } catch(e){
-    document.getElementById('ga-grade-loading').classList.remove('visible');
-    document.getElementById('ga-grade-results').classList.add('visible');
-    document.getElementById('ga-grade-results').innerHTML = '<p style="color:var(--red);font-size:.85rem;">Failed to grade. Please try again.</p>';
-  }
-}
-
-async function crisisSubmitGrading(){
-  if(!crisisTranscript.trim()) return;
-  document.getElementById('crisis-submit-btn').classList.remove('visible');
-  document.getElementById('crisis-grade-loading').classList.add('visible');
-
-  const role = document.getElementById('crisis-role-display').textContent;
-  const scenario = document.getElementById('crisis-scenario-display').textContent;
-  const context = `Role: ${role} | Scenario: ${scenario}`;
-  const prompt = buildGradingPrompt(crisisTranscript, context, crisisState.speakTime);
-
-  try {
-    const resp = await fetch('/api/generate', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt})
-    });
-    const data = await resp.json();
-    const clean = (data.text||'').replace(/```json|```/g,'').trim();
-    const grades = JSON.parse(clean);
-    document.getElementById('crisis-grade-loading').classList.remove('visible');
-    renderCrisisGrades(grades);
-  } catch(e){
-    document.getElementById('crisis-grade-loading').classList.remove('visible');
-    document.getElementById('crisis-grade-results').classList.add('visible');
-    document.getElementById('crisis-grade-results').innerHTML = '<p style="color:#e87070;font-size:.85rem;">Failed to grade. Please try again.</p>';
-  }
-}
-
-function scoreColor(s){ return s>=8?'score-high':s>=6?'score-mid':'score-low'; }
-function crisisScoreColor(s){ return s>=8?'#4ade80':s>=6?'#f59e0b':'#e87070'; }
-
-function renderGAGrades(g){
-  const el = document.getElementById('ga-grade-results');
-  const criteria = [
-    {key:'content', label:'Content'},
-    {key:'fillers', label:'Filler Words'},
-    {key:'hook', label:'Hook'}
-  ];
-  el.innerHTML = `
-    ${g.overall_comment ? `<div style="font-size:.9rem;color:var(--text);font-style:italic;padding:14px 16px;background:#f0f4ff;border-radius:10px;margin-bottom:14px;line-height:1.5;">"${g.overall_comment}"</div>` : ''}
-    <div class="grade-criteria">
-      ${criteria.map(c => {
-        const feedback = typeof g[c.key] === 'object' ? (g[c.key].feedback||'') : (g[c.key]||'');
-        return `<div class="grade-criterion">
-          <div class="grade-criterion-name" style="margin-bottom:6px;">${c.label}</div>
-          <div class="grade-criterion-feedback">${feedback}</div>
-        </div>`;
-      }).join('')}
-    </div>
-    <button onclick="gaNewPrompt()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:var(--accent);color:#fff;">↻ New Prompt</button>
-  `;
-  el.classList.add('visible');
-}
 
 // ══════════════════════════════════════════════
 //  POLICY DEFENSE
@@ -3356,82 +2994,11 @@ function policyAdvanceQuestion(){
   }
 }
 
-async function policyShowFeedback(){
+function policyShowFeedback(){
   document.getElementById('policy-qa-card').classList.remove('visible');
   const feedbackCard = document.getElementById('policy-feedback-card');
   feedbackCard.classList.add('visible');
   feedbackCard.scrollIntoView({behavior:'smooth', block:'nearest'});
-  const body = document.getElementById('policy-feedback-body');
-  body.innerHTML = '<div style="display:flex;align-items:center;gap:8px;color:#5a7a95;font-size:.85rem;"><div class="policy-gen-spinner"></div> Generating feedback…</div>';
-
-  const qaPairs = policyState.questions.map((q, i) =>
-    `Q${i+1}: ${q}\nAnswer: ${policyState.qaAnswers[i] || '(no answer recorded)'}`
-  ).join('\n\n');
-
-  const prompt = `You are a sharp MUN committee chair giving feedback after a Q&A drill.
-
-Policy challenge: "${policyState.problem}"
-Delegate's original solution: "${policyState.transcript.trim() || '(no transcript)'}"
-
-The delegate answered 5 follow-up questions. For EACH question, give 1-2 sentences of specific, honest feedback on their answer — what they did well and what to improve. Be direct and concrete.
-
-${qaPairs}
-
-Return ONLY a JSON array of 5 feedback strings, one per question, in order. No markdown.`;
-
-  try {
-    const resp = await fetch('/api/generate', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({prompt})
-    });
-    const data = await resp.json();
-    let feedbacks;
-    try {
-      feedbacks = JSON.parse((data.text||'').replace(/```json|```/g,'').trim());
-    } catch(e2) {
-      feedbacks = null;
-    }
-    if(Array.isArray(feedbacks) && feedbacks.length === 5){
-      body.innerHTML = policyState.questions.map((q, i) => `
-        <div style="margin-bottom:16px;padding:12px 14px;background:#f4f8ff;border-radius:10px;border-left:3px solid #0073b7;">
-          <div style="font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#0073b7;margin-bottom:4px;">Q${i+1}</div>
-          <div style="font-size:.85rem;font-weight:600;color:#1a2a3a;margin-bottom:6px;">${q}</div>
-          <div style="font-size:.85rem;color:#3a5a75;line-height:1.5;">${feedbacks[i]}</div>
-        </div>`).join('');
-    } else {
-      body.textContent = data.text || 'Great effort on all five questions!';
-    }
-  } catch(e) {
-    body.innerHTML = policyState.questions.map((q, i) => `
-      <div style="margin-bottom:12px;padding:10px 12px;background:#f4f8ff;border-radius:9px;border-left:3px solid #0073b7;">
-        <div style="font-size:.72rem;font-weight:700;color:#0073b7;margin-bottom:3px;">Q${i+1}</div>
-        <div style="font-size:.84rem;color:#1a2a3a;margin-bottom:4px;">${q}</div>
-        <div style="font-size:.84rem;color:#3a5a75;">Review how you responded to this angle.</div>
-      </div>`).join('');
-  }
-}
-
-function renderCrisisGrades(g){
-  const el = document.getElementById('crisis-grade-results');
-  const criteria = [
-    {key:'content', label:'Content'},
-    {key:'fillers', label:'Filler Words'},
-    {key:'hook', label:'Hook'}
-  ];
-  el.innerHTML = `
-    ${g.overall_comment ? `<div style="font-size:.9rem;color:#f0eeeb;font-style:italic;padding:14px 16px;background:#1e1a2e;border-radius:10px;margin-bottom:14px;line-height:1.5;">"${g.overall_comment}"</div>` : ''}
-    <div class="crisis-grade-criteria">
-      ${criteria.map(c => {
-        const feedback = typeof g[c.key] === 'object' ? (g[c.key].feedback||'') : (g[c.key]||'');
-        return `<div class="crisis-grade-criterion">
-          <div class="crisis-grade-criterion-name" style="margin-bottom:6px;">${c.label}</div>
-          <div class="crisis-grade-criterion-feedback">${feedback}</div>
-        </div>`;
-      }).join('')}
-    </div>
-    <button onclick="crisisGenerate()" style="margin-top:16px;width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.875rem;background:#c0392b;color:#fff;">↻ New Prompt</button>
-  `;
-  el.classList.add('visible');
 }
 
 </script>
