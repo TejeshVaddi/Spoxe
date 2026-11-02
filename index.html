@@ -689,18 +689,6 @@ kbd{
 <body>
 
 <!-- ═══ HOME ═══ -->
-<div id="mic-banner" style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-  background:#1a1916;color:#f5f4f0;border-radius:12px;padding:14px 20px;
-  font-size:.85rem;font-family:'EB Garamond',serif;z-index:999;
-  box-shadow:0 4px 24px rgba(0,0,0,.3);max-width:420px;text-align:center;line-height:1.5;">
-  <strong>Allow microphone access</strong> for AI speech feedback after each drill.<br>
-  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
-    <button onclick="grantMic()" style="padding:7px 18px;border-radius:8px;border:none;cursor:pointer;
-      background:#2952e3;color:#fff;font-family:inherit;font-weight:600;font-size:.82rem;">Allow</button>
-    <button onclick="denyMic()" style="padding:7px 18px;border-radius:8px;border:1px solid #333;
-      cursor:pointer;background:transparent;color:#aaa;font-family:inherit;font-size:.82rem;">No thanks</button>
-  </div>
-</div>
 
 <div id="home" class="screen active">
   <div class="home-title">
@@ -1994,8 +1982,7 @@ function gaStartSpeak(){
   const el=document.getElementById('ga-timer');
   const lbl=document.getElementById('ga-timer-label');
   if(el){ el.textContent=formatTime(gaState.speakTime); el.className='timer-display speak'; }
-  if(lbl) lbl.textContent = micPermissionGranted ? 'Speaking — 🎙 Recording' : 'Speaking';
-  autoStartRecording('ga');
+  if(lbl) lbl.textContent = 'Speaking';
   gaState.interval=setInterval(gaTickSpeak,1000);
 }
 
@@ -2256,8 +2243,7 @@ function crisisStartBuffer(){
       crisisState.phase='speak';
       crisisState.remaining=crisisState.speakTime;
       if(el){ el.textContent=formatTime(crisisState.speakTime); el.className='crisis-timer speak'; }
-      if(lbl) lbl.textContent= micPermissionGranted ? 'Speaking — 🎙 Recording' : 'Speaking';
-      autoStartRecording('crisis');
+      if(lbl) lbl.textContent= 'Speaking';
       crisisState.interval=setInterval(crisisTickSpeak,1000);
     }
   },1000);
@@ -2333,79 +2319,7 @@ lsDel('gemini_api_key');
 // ══════════════════════════════════════════════
 let gaRecognition = null;
 let crisisRecognition = null;
-let gaTranscript = '';
-let crisisTranscript = '';
 
-let micPermissionGranted = false;
-
-function showMicBanner(){
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
-  // Check if already granted
-  if(navigator.permissions){
-    navigator.permissions.query({name:'microphone'}).then(result=>{
-      if(result.state==='granted'){ micPermissionGranted=true; }
-      else if(result.state==='prompt'){ document.getElementById('mic-banner').style.display='block'; }
-      // if denied, don't show banner
-    }).catch(()=>{ document.getElementById('mic-banner').style.display='block'; });
-  } else {
-    document.getElementById('mic-banner').style.display='block';
-  }
-}
-
-function grantMic(){
-  document.getElementById('mic-banner').style.display='none';
-  navigator.mediaDevices.getUserMedia({audio:true})
-    .then(stream=>{ micPermissionGranted=true; stream.getTracks().forEach(t=>t.stop()); })
-    .catch(()=>{ micPermissionGranted=false; });
-}
-
-function denyMic(){
-  document.getElementById('mic-banner').style.display='none';
-  micPermissionGranted=false;
-}
-
-// Show banner when page loads
-window.addEventListener('load', ()=>{ setTimeout(showMicBanner, 800); });
-
-function autoStartRecording(mode){
-  if(!micPermissionGranted) return;
-  if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return;
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const rec = new SR();
-  rec.continuous = true;
-  rec.interimResults = true;
-  rec.lang = 'en-US';
-  if(mode==='ga'){
-    gaTranscript='';
-    gaRecognition=rec;
-    const t=document.getElementById('ga-transcript');
-    if(t){ t.textContent=''; t.classList.remove('visible'); }
-    rec.onresult=(e)=>{
-      let interim='';
-      for(let i=e.resultIndex;i<e.results.length;i++){
-        if(e.results[i].isFinal) gaTranscript+=e.results[i][0].transcript+' ';
-        else interim+=e.results[i][0].transcript;
-      }
-      if(t){ t.textContent=gaTranscript+interim; t.classList.add('visible'); }
-    };
-    rec.onerror=()=>{};
-  } else {
-    crisisTranscript='';
-    crisisRecognition=rec;
-    const t=document.getElementById('crisis-transcript');
-    if(t){ t.textContent=''; t.classList.remove('visible'); }
-    rec.onresult=(e)=>{
-      let interim='';
-      for(let i=e.resultIndex;i<e.results.length;i++){
-        if(e.results[i].isFinal) crisisTranscript+=e.results[i][0].transcript+' ';
-        else interim+=e.results[i][0].transcript;
-      }
-      if(t){ t.textContent=crisisTranscript+interim; t.classList.add('visible'); }
-    };
-    rec.onerror=()=>{};
-  }
-  try{ rec.start(); }catch(e){}
-}
 
 
 
